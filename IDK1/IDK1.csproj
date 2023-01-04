@@ -12,4 +12,12 @@
     <PackageReference Include="SQLite" Version="3.13.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\Productivity\.net\IDK\IDK1\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\Productivity\.net\IDK\IDK1\.editorconfig" />
+  </ItemGroup>
+
 </Project>
