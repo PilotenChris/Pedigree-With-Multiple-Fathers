@@ -57,7 +57,5 @@ namespace IDK1
             sqlite_cmd.CommandText = Createsql3;
             sqlite_cmd.ExecuteNonQuery();
         }
-
-        // test
     }
 }
