@@ -36,7 +36,7 @@
             this.b_Update = new System.Windows.Forms.Button();
             this.b_Delete = new System.Windows.Forms.Button();
             this.b_Print = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.b_ToggleView = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
@@ -67,6 +67,8 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 39);
             this.splitContainer1.Name = "splitContainer1";
@@ -77,6 +79,7 @@
             this.splitContainer1.Size = new System.Drawing.Size(604, 495);
             this.splitContainer1.SplitterDistance = 122;
             this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // splitContainer2
             // 
@@ -93,7 +96,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.button5);
+            this.splitContainer2.Panel2.Controls.Add(this.b_ToggleView);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(604, 30);
             this.splitContainer2.SplitterDistance = 363;
@@ -150,15 +153,15 @@
             this.b_Print.Text = "Print";
             this.b_Print.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // b_ToggleView
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(136, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(98, 23);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.b_ToggleView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_ToggleView.Location = new System.Drawing.Point(136, 3);
+            this.b_ToggleView.Name = "b_ToggleView";
+            this.b_ToggleView.Size = new System.Drawing.Size(98, 23);
+            this.b_ToggleView.TabIndex = 0;
+            this.b_ToggleView.Text = "button5";
+            this.b_ToggleView.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -194,6 +197,6 @@
         private Button b_Update;
         private Button b_Delete;
         private Button b_Print;
-        private Button button5;
+        private Button b_ToggleView;
     }
 }

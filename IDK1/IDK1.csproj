@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Remove="D:\Productivity\.net\IDK\IDK1\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="D:\Productivity\.net\IDK\IDK1\.editorconfig" />
+    <Folder Include="FUserControl\" />
   </ItemGroup>
 
 </Project>

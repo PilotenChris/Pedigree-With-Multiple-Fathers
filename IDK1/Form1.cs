@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 namespace IDK1
 {
     public partial class Form1 : Form
@@ -6,6 +7,8 @@ namespace IDK1
         {
             InitializeComponent();
         }
+
+      
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -29,10 +32,15 @@ namespace IDK1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Console.WriteLine("TESTING");
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
 
         }
