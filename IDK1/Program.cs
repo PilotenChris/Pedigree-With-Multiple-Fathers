@@ -8,7 +8,7 @@ namespace IDK1
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        private static string path = @"PedigreeIDKv1.db";
+        private static string path = @"PedigreeDB.db";
         [STAThread]
         static void Main()
         {
