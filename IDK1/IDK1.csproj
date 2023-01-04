@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SQLite" Version="3.13.0" />
+  </ItemGroup>
+
 </Project>
