@@ -8,7 +8,7 @@ namespace IDK1
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        private static string path = @"PedigreeDB.db";
+        private static readonly string path = @"PedigreeDB.db";
         [STAThread]
         static void Main()
         {
@@ -19,7 +19,7 @@ namespace IDK1
 
             
             if (!File.Exists(path)) {
-                //Debug.WriteLine("Feil");
+                // Creates the database if it doesn't exist
                 SQLiteConnection sqlite_conn;
                 sqlite_conn = CreateConnection();
                 CreateTable(sqlite_conn);
