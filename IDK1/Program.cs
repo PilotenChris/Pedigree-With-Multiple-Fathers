@@ -8,7 +8,6 @@ namespace IDK1
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        private static readonly string path = @"PedigreeDB.db";
         [STAThread]
         static void Main()
         {
@@ -18,29 +17,16 @@ namespace IDK1
             Application.Run(new Form1());
 
             
-            if (!File.Exists(path)) {
+            if (!File.Exists(SQLMethods.dbpath)) {
                 // Creates the database if it doesn't exist
                 SQLiteConnection sqlite_conn;
-                sqlite_conn = CreateConnection();
+                sqlite_conn = SQLMethods.CreateConnection();
                 CreateTable(sqlite_conn);
                 InsertData(sqlite_conn);
             }
         }
 
-        static SQLiteConnection CreateConnection() {
-            SQLiteConnection sqlite_conn;
-            // Create a new database connection:
-            sqlite_conn = new SQLiteConnection("Data Source="+path+";foreign keys=true;Version=3;New=True;Compress=True;");
-
-            // Open the connection:
-            try {
-                sqlite_conn.Open();
-            } 
-            catch (Exception ex) {
-                Debug.WriteLine("Connection to database " + path + " failed. \n" + ex.ToString());
-            }
-            return sqlite_conn;
-        }
+        
 
         static void CreateTable(SQLiteConnection conn) {
             SQLiteCommand sqlite_cmd;
