@@ -23,6 +23,7 @@ namespace IDK1
                 SQLiteConnection sqlite_conn;
                 sqlite_conn = CreateConnection();
                 CreateTable(sqlite_conn);
+                InsertData(sqlite_conn);
             }
         }
 
@@ -43,18 +44,27 @@ namespace IDK1
 
         static void CreateTable(SQLiteConnection conn) {
             SQLiteCommand sqlite_cmd;
-            string Createsql = "CREATE TABLE IF NOT EXISTS Color(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Color VARCHAR(24) NOT NULL)";
-            string Createsql1 = "CREATE TABLE IF NOT EXISTS Sex(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Sex VARCHAR(10) NOT NULL)";
-            string Createsql2 = "CREATE TABLE IF NOT EXISTS Entity(ID VARCHAR(10) NOT NULL, Birth DATE NOT NULL, Sex INTEGER NOT NULL, Death DATE, Color INTEGER NOT NULL, PRIMARY KEY(ID), FOREIGN KEY (Color) REFERENCES Color(ID), FOREIGN KEY (Sex) REFERENCES Sex(ID))";
-            string Createsql3 = "CREATE TABLE IF NOT EXISTS Parent(ChildID VARCHAR(10) NOT NULL, ParentID VARCHAR(10), Known INTEGER NOT NULL, PRIMARY KEY(ChildID, ParentID), FOREIGN KEY (ChildID) REFERENCES Entity(ID), FOREIGN KEY (ParentID) REFERENCES Entity(ID))";
+            string Sql = "CREATE TABLE IF NOT EXISTS Color(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Color VARCHAR(24) NOT NULL)";
+            string Sql1 = "CREATE TABLE IF NOT EXISTS Sex(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Sex VARCHAR(10) NOT NULL)";
+            string Sql2 = "CREATE TABLE IF NOT EXISTS Entity(ID VARCHAR(10) NOT NULL, Birth DATE NOT NULL, Sex INTEGER NOT NULL, Death DATE, Color INTEGER NOT NULL, PRIMARY KEY(ID), FOREIGN KEY (Color) REFERENCES Color(ID), FOREIGN KEY (Sex) REFERENCES Sex(ID))";
+            string Sql3 = "CREATE TABLE IF NOT EXISTS Parent(ChildID VARCHAR(10) NOT NULL, ParentID VARCHAR(10), Known INTEGER NOT NULL, PRIMARY KEY(ChildID, ParentID), FOREIGN KEY (ChildID) REFERENCES Entity(ID), FOREIGN KEY (ParentID) REFERENCES Entity(ID))";
             sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = Createsql;
+            sqlite_cmd.CommandText = Sql;
             sqlite_cmd.ExecuteNonQuery();
-            sqlite_cmd.CommandText = Createsql1;
+            sqlite_cmd.CommandText = Sql1;
             sqlite_cmd.ExecuteNonQuery();
-            sqlite_cmd.CommandText = Createsql2;
+            sqlite_cmd.CommandText = Sql2;
             sqlite_cmd.ExecuteNonQuery();
-            sqlite_cmd.CommandText = Createsql3;
+            sqlite_cmd.CommandText = Sql3;
+            sqlite_cmd.ExecuteNonQuery();
+        }
+
+        static void InsertData(SQLiteConnection conn) {
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = conn.CreateCommand();
+            sqlite_cmd.CommandText = "INSERT INTO Sex (Sex) VALUES ('Unknown'),('Male'),('Female');";
+            sqlite_cmd.ExecuteNonQuery();
+            sqlite_cmd.CommandText = "INSERT INTO Color (Color) VALUES ('Light Blue'),('Light Yellow'),('Light Green'),('Light Grey'),('Light Orange');";
             sqlite_cmd.ExecuteNonQuery();
         }
     }
