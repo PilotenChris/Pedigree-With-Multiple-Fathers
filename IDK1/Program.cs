@@ -59,7 +59,7 @@ namespace IDK1
             sqlite_cmd.ExecuteNonQuery();
         }
 
-        static void InsertData(SQLiteConnection conn) {
+        public static void InsertData(SQLiteConnection conn) {
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = "INSERT INTO Sex (Sex) VALUES ('Unknown'),('Male'),('Female');";
