@@ -1,4 +1,7 @@
+using System.ServiceProcess;
 using System.Windows.Forms;
+using IDK1.FUserControl;
+
 namespace IDK1
 {
     public partial class Form1 : Form
@@ -6,42 +9,21 @@ namespace IDK1
         public Form1()
         {
             InitializeComponent();
+            UC_ATP_Insert(new UC_Insert());
+        }
+        public void UC_ATP_Insert(UserControl userControl)
+        {
+            var scpc = splitContainer1.Panel1.Controls;
+            userControl.Dock = DockStyle.Fill;
+            scpc.Clear();
+            scpc.Add(userControl);
+            userControl.BringToFront();
         }
 
-      
-
-        private void label1_Click(object sender, EventArgs e)
+        private void b_Insert_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine("TESTING");
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
+            UC_Insert uc = new UC_Insert();
+            UC_ATP_Insert(uc);
 
         }
     }

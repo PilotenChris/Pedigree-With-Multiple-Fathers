@@ -15,19 +15,4 @@ public partial class UC_Insert : UserControl
     {
         InitializeComponent();
     }
-
-    private void TB_ID_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void textBox6_TextChanged(object sender, EventArgs e)
-    {
-
-    }
 }
