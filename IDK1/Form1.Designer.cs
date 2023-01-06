@@ -76,12 +76,14 @@
             this.splitContainer1.Size = new System.Drawing.Size(604, 623);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // splitContainer2
             // 
             this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(3, 3);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -93,7 +95,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.b_ToggleView);
             this.splitContainer2.Size = new System.Drawing.Size(604, 30);
-            this.splitContainer2.SplitterDistance = 363;
+            this.splitContainer2.SplitterDistance = 396;
             this.splitContainer2.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -106,7 +108,7 @@
             this.flowLayoutPanel1.Controls.Add(this.b_Print);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(360, 26);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(393, 26);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // b_Insert
@@ -150,7 +152,7 @@
             // b_ToggleView
             // 
             this.b_ToggleView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.b_ToggleView.Location = new System.Drawing.Point(136, 3);
+            this.b_ToggleView.Location = new System.Drawing.Point(103, 3);
             this.b_ToggleView.Name = "b_ToggleView";
             this.b_ToggleView.Size = new System.Drawing.Size(98, 23);
             this.b_ToggleView.TabIndex = 0;

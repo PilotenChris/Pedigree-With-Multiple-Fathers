@@ -26,5 +26,14 @@ namespace IDK1
             UC_ATP_Insert(uc);
 
         }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (splitContainer1.SplitterDistance < 250)
+            {
+                splitContainer1.SplitterDistance = 250;
+            }
+            
+        }
     }
 }
