@@ -392,7 +392,8 @@ partial class UC_Insert
             // 
             // b_InsertData
             // 
-            this.b_InsertData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_InsertData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.b_InsertData.ForeColor = System.Drawing.Color.Black;
             this.b_InsertData.Location = new System.Drawing.Point(3, 351);
             this.b_InsertData.Name = "b_InsertData";
@@ -433,6 +434,7 @@ partial class UC_Insert
             // 
             // splitContainer2
             // 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer2.Location = new System.Drawing.Point(75, 274);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -458,7 +460,7 @@ partial class UC_Insert
             this.ForeColor = System.Drawing.Color.White;
             this.MinimumSize = new System.Drawing.Size(239, 0);
             this.Name = "UC_Insert";
-            this.Size = new System.Drawing.Size(239, 676);
+            this.Size = new System.Drawing.Size(239, 639);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel7.ResumeLayout(false);

@@ -14,16 +14,15 @@ namespace IDK1
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
-
-            
-            if (!File.Exists(SQLMethods.dbpath)) {
+            if (!File.Exists(SQLMethods.dbpath))
+            {
                 // Creates the database if it doesn't exist
                 SQLiteConnection sqlite_conn = SQLMethods.CreateConnection();
                 CreateTable(sqlite_conn);
                 InsertData(sqlite_conn);
                 sqlite_conn.Close();
             }
+            Application.Run(new Form1());
             //Debug.WriteLine(string.Join(",",(string[])SQLMethods.GetSexData().ToArray(typeof(string))));
         }
 
