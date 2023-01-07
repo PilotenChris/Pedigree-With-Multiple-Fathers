@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.ServiceProcess;
 using System.Windows.Forms;
 using IDK1.FUserControl;
@@ -18,13 +19,14 @@ namespace IDK1
             scpc.Clear();
             scpc.Add(userControl);
             userControl.BringToFront();
+            userControl.Focus();
         }
 
         private void b_Insert_Click(object sender, EventArgs e)
         {
             UC_Insert uc = new UC_Insert();
             UC_ATP_Insert(uc);
-
+            
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)

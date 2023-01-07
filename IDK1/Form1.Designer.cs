@@ -75,7 +75,8 @@
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Size = new System.Drawing.Size(604, 623);
             this.splitContainer1.SplitterDistance = 250;
-            this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.TabIndex = 99999;
+            this.splitContainer1.TabStop = false;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // splitContainer2
