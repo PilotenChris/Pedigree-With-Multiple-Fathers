@@ -35,8 +35,9 @@ namespace IDK1
             // Define the SQL statements to create four tables: "Color", "Sex", "Entity", and "Parent"
             string Sql = "CREATE TABLE IF NOT EXISTS Color(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Color VARCHAR(24) NOT NULL)";
             string Sql1 = "CREATE TABLE IF NOT EXISTS Sex(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Sex VARCHAR(10) NOT NULL)";
-            string Sql2 = "CREATE TABLE IF NOT EXISTS Entity(ID VARCHAR(10) NOT NULL, Birth DATE NOT NULL, Sex INTEGER NOT NULL, Death DATE, Color INTEGER NOT NULL, PRIMARY KEY(ID), FOREIGN KEY (Color) REFERENCES Color(ID), FOREIGN KEY (Sex) REFERENCES Sex(ID))";
+            string Sql2 = "CREATE TABLE IF NOT EXISTS Entity(ID VARCHAR(10) NOT NULL, Birth DATE NOT NULL, Sex INTEGER NOT NULL, Color INTEGER NOT NULL, PRIMARY KEY(ID), FOREIGN KEY (Color) REFERENCES Color(ID), FOREIGN KEY (Sex) REFERENCES Sex(ID))";
             string Sql3 = "CREATE TABLE IF NOT EXISTS Parent(ChildID VARCHAR(10) NOT NULL, ParentID VARCHAR(10), Known INTEGER NOT NULL, PRIMARY KEY(ChildID, ParentID), FOREIGN KEY (ChildID) REFERENCES Entity(ID), FOREIGN KEY (ParentID) REFERENCES Entity(ID))";
+            string Sql4 = "CREATE TABLE IF NOT EXISTS Death(ID VARCHAR(10) NOT NULL, Death DATE NOT NULL, PRIMARY KEY(ID), FOREIGN KEY(ID) REFERENCES Entity(ID))";
             
             // Execute each of the SQL statements
             sqlite_cmd.CommandText = Sql;
@@ -46,6 +47,8 @@ namespace IDK1
             sqlite_cmd.CommandText = Sql2;
             sqlite_cmd.ExecuteNonQuery();
             sqlite_cmd.CommandText = Sql3;
+            sqlite_cmd.ExecuteNonQuery();
+            sqlite_cmd.CommandText = Sql4;
             sqlite_cmd.ExecuteNonQuery();
         }
 
