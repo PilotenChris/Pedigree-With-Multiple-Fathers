@@ -115,6 +115,7 @@ internal class SQLMethods
     }
 
     public static ArrayList GetDatabase() {
+        return null;
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
 
@@ -139,6 +140,6 @@ internal class SQLMethods
         // Close the database connection
         sqlite_conn.Close();
 
-        return null;
+        //return null;
     }
 }
