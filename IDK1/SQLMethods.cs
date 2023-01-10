@@ -88,7 +88,7 @@ internal class SQLMethods
 
     }
 
-    public static void InsertDeathData(string ID, string Date, int Sex, int Color) {
+    public static void InsertDeathData(string ID, string Date) {
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
@@ -99,13 +99,13 @@ internal class SQLMethods
 
     }
 
-    public static void InsertParentData(string CID, string PID, int Known) {
+    public static void InsertParentData(string CID, string PID) {
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
         // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Parent (ChildID, ParentID, Known) VALUES ('" + CID + "'),('" + PID + "'),('" + Known + "');";
+        sqlite_cmd.CommandText = "INSERT INTO Parent (ChildID, ParentID) VALUES ('" + CID + "'),('" + PID + "');";
         sqlite_cmd.ExecuteNonQuery();
 
     }
