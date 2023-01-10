@@ -121,7 +121,7 @@ public partial class UC_Insert : UserControl
             //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
 
             SQLMethods.InsertEntityData(ID, BirthDate, SexId, ColorId);
-            if (string.IsNullOrEmpty(textBox3.Text))
+            if (!string.IsNullOrEmpty(textBox3.Text))
             {
                 SQLMethods.InsertDeathData(ID, DeathDate);
             }
