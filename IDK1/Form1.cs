@@ -11,6 +11,7 @@ namespace IDK1
         {
             InitializeComponent();
             UC_ATP_Insert(new UC_Insert());
+            updateColor(0);
         }
         public void UC_ATP_Insert(UserControl userControl)
         {
@@ -26,7 +27,33 @@ namespace IDK1
         {
             UC_Insert uc = new UC_Insert();
             UC_ATP_Insert(uc);
-            
+            updateColor(0);
+        }
+
+        private void b_Update_Click(object sender, EventArgs e)
+        {
+            UC_Update uc = new UC_Update();
+            UC_ATP_Insert(uc);
+            updateColor(1);
+        }
+
+        private void b_Delete_Click(object sender, EventArgs e)
+        {
+
+            updateColor(2);
+        }
+        
+        private void updateColor(int butId)
+        {
+            Button[] buttons= {b_Insert,b_Update,b_Delete};
+            foreach(Button button in buttons)
+            {
+                button.ForeColor = Color.White;
+                button.Font = new Font(button.Font, FontStyle.Regular);
+
+            }
+            buttons[butId].ForeColor = Color.FromArgb(200, 179, 214);
+            buttons[butId].Font = new Font(buttons[butId].Font, FontStyle.Underline);
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
@@ -37,5 +64,7 @@ namespace IDK1
             }
             
         }
+
+        
     }
 }

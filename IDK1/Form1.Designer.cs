@@ -57,12 +57,12 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer2, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 665);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 672);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer1
@@ -73,7 +73,7 @@
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(3, 39);
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Size = new System.Drawing.Size(604, 623);
+            this.splitContainer1.Size = new System.Drawing.Size(604, 630);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 99999;
             this.splitContainer1.TabStop = false;
@@ -114,7 +114,10 @@
             // 
             // b_Insert
             // 
+            this.b_Insert.FlatAppearance.BorderSize = 0;
+            this.b_Insert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_Insert.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.b_Insert.ForeColor = System.Drawing.Color.White;
             this.b_Insert.Location = new System.Drawing.Point(3, 3);
             this.b_Insert.Name = "b_Insert";
             this.b_Insert.Size = new System.Drawing.Size(75, 23);
@@ -125,24 +128,35 @@
             // 
             // b_Update
             // 
+            this.b_Update.FlatAppearance.BorderSize = 0;
+            this.b_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_Update.ForeColor = System.Drawing.Color.White;
             this.b_Update.Location = new System.Drawing.Point(84, 3);
             this.b_Update.Name = "b_Update";
             this.b_Update.Size = new System.Drawing.Size(75, 23);
             this.b_Update.TabIndex = 1;
             this.b_Update.Text = "Update";
             this.b_Update.UseVisualStyleBackColor = true;
+            this.b_Update.Click += new System.EventHandler(this.b_Update_Click);
             // 
             // b_Delete
             // 
+            this.b_Delete.FlatAppearance.BorderSize = 0;
+            this.b_Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_Delete.ForeColor = System.Drawing.Color.White;
             this.b_Delete.Location = new System.Drawing.Point(165, 3);
             this.b_Delete.Name = "b_Delete";
             this.b_Delete.Size = new System.Drawing.Size(75, 23);
             this.b_Delete.TabIndex = 2;
             this.b_Delete.Text = "Delete";
             this.b_Delete.UseVisualStyleBackColor = true;
+            this.b_Delete.Click += new System.EventHandler(this.b_Delete_Click);
             // 
             // b_Print
             // 
+            this.b_Print.FlatAppearance.BorderSize = 0;
+            this.b_Print.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_Print.ForeColor = System.Drawing.Color.White;
             this.b_Print.Location = new System.Drawing.Point(246, 3);
             this.b_Print.Name = "b_Print";
             this.b_Print.Size = new System.Drawing.Size(75, 23);
