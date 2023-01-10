@@ -57,6 +57,7 @@ partial class UC_Insert
             this.L_ID = new System.Windows.Forms.Label();
             this.b_InsertData = new System.Windows.Forms.Button();
             this.L_ErrorMessageField = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -73,6 +74,7 @@ partial class UC_Insert
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -458,18 +460,30 @@ partial class UC_Insert
             // 
             // L_ErrorMessageField
             // 
-            this.L_ErrorMessageField.AutoSize = true;
-            this.L_ErrorMessageField.Location = new System.Drawing.Point(3, 377);
+            this.L_ErrorMessageField.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.L_ErrorMessageField.Location = new System.Drawing.Point(3, 0);
             this.L_ErrorMessageField.Name = "L_ErrorMessageField";
-            this.L_ErrorMessageField.Size = new System.Drawing.Size(0, 15);
+            this.L_ErrorMessageField.Size = new System.Drawing.Size(227, 100);
             this.L_ErrorMessageField.TabIndex = 3;
+            // 
+            // panel8
+            // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel8.Controls.Add(this.L_ErrorMessageField);
+            this.panel8.Location = new System.Drawing.Point(3, 385);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(233, 100);
+            this.panel8.TabIndex = 4;
             // 
             // UC_Insert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.L_ErrorMessageField);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.b_InsertData);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.Color.White;
@@ -498,8 +512,8 @@ partial class UC_Insert
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel8.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
     }
 
@@ -534,4 +548,5 @@ partial class UC_Insert
     private Button b_DeleteFather;
     private SplitContainer splitContainer2;
     private Label L_ErrorMessageField;
+    private Panel panel8;
 }

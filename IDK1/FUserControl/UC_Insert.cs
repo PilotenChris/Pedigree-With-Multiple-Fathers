@@ -1,8 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Globalization;
 using System.Windows.Forms;
-
+#pragma warning disable IDE0007 // Use implicit type
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 namespace IDK1.FUserControl;
 public partial class UC_Insert : UserControl
 {
@@ -18,11 +21,12 @@ public partial class UC_Insert : UserControl
         var sexData = SQLMethods.GetSexData();
 
         // Add data to combo boxes and select default + centering text
-        
+
         comboBox1.Items.AddRange(colorData.ToArray());
         comboBox1.SelectedIndex = 0;
         comboBox1.DrawMode = DrawMode.OwnerDrawFixed;
-        comboBox1.DrawItem += comboBox2_DrawItem;
+        comboBox1.DrawItem += comboBox1_DrawItem;
+
 
         comboBox2.Items.AddRange(sexData.ToArray());
         comboBox2.SelectedIndex = 0;
@@ -34,7 +38,12 @@ public partial class UC_Insert : UserControl
     // Event handler for Father Add button
     private void button1_Click(object sender, EventArgs e)
     {
-        checkIfTheMFFieldIsValid(textBox6, "m", "f", label6);
+        if (ValidateString(textBox6.Text, label6, textBox6))
+        {
+            listBox1.Items.Add(textBox6.Text);
+            textBox6.Clear();
+        }
+        
     }
 
     private void b_DeleteFather_Click(object sender, EventArgs e)
@@ -62,14 +71,57 @@ public partial class UC_Insert : UserControl
     {
         TB_ID.Focus();
         //Validate Parent fields
-        if (checkIfTheMFFieldIsValid(textBox5, "f", "m", label5) && //F
-            checkIfTheMFFieldIsValid(textBox6, "m", "f", label6) && //M
+        if (ValidateString(TB_ID.Text, L_ID, TB_ID, false) && // ID
+            ValidateString(textBox5.Text, label5, textBox5, false) && //F
+            ValidateString(textBox6.Text, label6, textBox6, true) && //M
             IsValidDate(textBox2.Text, textBox2) && // Birth date
-            IsValidDate(textBox3.Text, textBox3) && // Death date
-            IsValidID(TB_ID)) 
+            IsValidDate(textBox3.Text, textBox3, true) // Death date
+            )
         {
             ErrorMessage("Success");
-            resetFields();
+            //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
+            string ID;
+            string Sex = comboBox2.Text;
+            string BirthDate = textBox2.Text;
+            string DeathDate = textBox3.Text;
+            string Color = comboBox1.Text;
+            string Mother;
+            ArrayList Father = new ArrayList();
+            
+            if (char.IsNumber(TB_ID.Text[0]))ID = comboBox2.Text[0] + TB_ID.Text;
+            else ID = TB_ID.Text;
+
+            if (char.IsNumber(textBox5.Text[0])) Mother = "M" + textBox5.Text;
+            else Mother = textBox5.Text;
+
+            HashSet<string> Father = new HashSet<string>();
+
+            if (textBox6.Text.Length > 0)
+            {
+                if (textBox6.Text.StartsWith("M"))
+                {
+                    Father.Add("M" + textBox6.Text);
+                }
+                else
+                {
+                    Father.Add(textBox6.Text);
+                }
+            }
+            foreach (string item in listBox1.Items)
+            {
+                if (!item.StartsWith("M"))
+                {
+                    Father.Add("M" + item);
+                }
+                else
+                {
+                    Father.Add(item);
+                }
+            }
+
+            Father.AddRange(Father);
+
+            //resetFields();
         }
     }
 
@@ -101,7 +153,7 @@ public partial class UC_Insert : UserControl
         }
     }
 
-    private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
+    private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
     {
         // Get the item text
         string text = comboBox1.GetItemText(comboBox1.Items[e.Index]);
@@ -124,40 +176,43 @@ public partial class UC_Insert : UserControl
         // Draw the item text
         TextRenderer.DrawText(e.Graphics, text, font, bounds, textColor, flags);
     }
-
-    private bool IsValidID(TextBox box)
+    private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
     {
-        // Check if the first character is 'F', 'M', or a digit
-        var str = box.Text;
-        if (!(char.IsLetter(str[0]) && (str[0] == 'F' || str[0] == 'M')) && !char.IsDigit(str[0]))
-        {
-            box.Focus();
-            ErrorMessage("The first character can only be F/M or a number");
-            return false;
-        }
+        // Get the item text
+        string text = comboBox2.GetItemText(comboBox2.Items[e.Index]);
 
-        // Check if the rest of the characters are digits
-        for (int i = 1; i < str.Length; i++)
-        {
-            if (!char.IsDigit(str[i]))
-            {
-                ErrorMessage("The following characters after F/M/[NUMBER] can only be numbers");
-                return false;              
-            }
-        }
-        return true;
+        // Get the bounds of the item
+        Rectangle bounds = e.Bounds;
+
+        // Get the font for the item
+        Font font = e.Font;
+
+        Color textColor = (e.State & DrawItemState.Selected) == DrawItemState.Selected ? Color.Black : e.ForeColor;
+
+        // Set the SmoothingMode and InterpolationMode properties of the Graphics object
+        e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+        e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+        // Get the TextFormatFlags for the item
+        TextFormatFlags flags = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
+
+        // Draw the item text
+        TextRenderer.DrawText(e.Graphics, text, font, bounds, textColor, flags);
     }
 
-    private bool IsValidDate(string input, TextBox box)
+    private bool IsValidDate(string input, TextBox box, bool bEmpty = false)
     {
         // Use DateTime.TryParseExact method to validate the format of the input string
-        if(!DateTime.TryParseExact(input, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+#pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
+        if (!DateTime.TryParseExact(input, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
         {
+            if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
-            ErrorMessage($"{input} is not a valid date");
+            ErrorMessage($"{input} is not a valid date.");
             return false;
         }
-        else return true; 
+        else return true;
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
     }
 
     private System.Windows.Forms.Timer timer1 = new();
@@ -166,7 +221,7 @@ public partial class UC_Insert : UserControl
     private void ErrorMessage(string message)
     {
         L_ErrorMessageField.Text = message;
-        
+        if (timer1.Enabled) timer1.Dispose();
         timer1.Tick += new EventHandler(RemoveErrorMessage);
         timer1.Interval = 5000;
         timer1.Start();
@@ -179,56 +234,47 @@ public partial class UC_Insert : UserControl
         L_ErrorMessageField.Text = string.Empty;
     }
 
-    private bool checkIfTheMFFieldIsValid(TextBox box, string valid, string invalid, Label label)
+    private bool ValidateString(string str, Label lab, TextBox box, bool BEmpty = false)
     {
-        // Do nothing if text box is empty
-        if (box.Text == string.Empty)
+        // Check if string is empty or not allowed to be empty
+        if (string.IsNullOrEmpty(str) && !BEmpty)
+        {
+            box.Focus();
+            ErrorMessage("The input at '" + lab.Text + "' cannot be empty");
+            return false;
+        }
+        // Check if string is empty and allowed to be empty
+        else if (string.IsNullOrEmpty(str))
         {
             return true;
         }
-        // Add uppercase valid string + box.text to list box and clear text box if text consists only of digits
-        else if (box.Text.ToString().All(char.IsDigit))
+        // Check if first character is valid
+        if (str[0] != 'F' && str[0] != 'M' && str[0] != 'U' && !char.IsNumber(str[0]))
         {
-            if (box == textBox6)
+            box.Focus();
+            ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (F, M, or U) or a number.");
+            return false;
+        }
+        // Check if string has a number if first character is valid
+        if (!(str[0] != 'F' && str[0] != 'M' && str[0] != 'U'))
+        {
+            if (str.Length <= 1)
             {
-                listBox1.Items.Add(valid.ToUpper() + box.Text);
-                box.Text = string.Empty;
-                listbox1Update();
+                box.Focus();
+                ErrorMessage(lab.Text + " Field must have a number.");
+                return false;
             }
-            return true;
         }
-        // Add text to list box and clear text box if first character is uppercase valid string
-        else if (box.Text[0].ToString().ToUpper() == valid.ToUpper())
+        // Check if all characters after the first are numeric
+        for (int i = 1; i < str.Length; i++)
         {
-            if (box == textBox6 && box.Text.Substring(1).All(char.IsDigit))
+            if (!char.IsNumber(str[i]))
             {
-                listBox1.Items.Add(box.Text);
-                box.Text = string.Empty;
-                listbox1Update();
+                box.Focus();
+                ErrorMessage("The characters following the first one in this field must be numeric: " + lab.Text);
+                return false;
             }
-            return true;
         }
-        // Set focus on text box and call ErrorMessage with invalid string message if first character is uppercase invalid string
-        else if (box.Text[0].ToString().ToUpper() == invalid.ToUpper())
-        {
-            box.Focus();
-            ErrorMessage(invalid + " is not a valid character for the field: " + label);
-            return false;
-        }
-        // Set focus on text box and call ErrorMessage with characters after M/F message if text does not consist of only digits
-        else if (!box.Text.All(char.IsDigit))
-        {
-            box.Focus();
-            ErrorMessage("The characters after M/F may only be numbers");
-            return false;
-        }
-        // Set focus on text box and call ErrorMessage with general invalid field message if none of the above conditions are met
-        else
-        {
-            box.Focus();
-            ErrorMessage("This field is not valid.");
-            return false;
-        }
+        return true;
     }
-
 }
