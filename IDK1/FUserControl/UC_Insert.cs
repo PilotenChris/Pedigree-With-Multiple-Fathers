@@ -79,22 +79,20 @@ public partial class UC_Insert : UserControl
             )
         {
             ErrorMessage("Success");
-            //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
+            
             string ID;
             string Sex = comboBox2.Text;
             string BirthDate = textBox2.Text;
             string DeathDate = textBox3.Text;
             string Color = comboBox1.Text;
             string Mother;
-            ArrayList Father = new ArrayList();
-            
+            HashSet<string> Father = new HashSet<string>();
+
             if (char.IsNumber(TB_ID.Text[0]))ID = comboBox2.Text[0] + TB_ID.Text;
             else ID = TB_ID.Text;
 
-            if (char.IsNumber(textBox5.Text[0])) Mother = "M" + textBox5.Text;
+            if (char.IsNumber(textBox5.Text[0])) Mother = "F" + textBox5.Text;
             else Mother = textBox5.Text;
-
-            HashSet<string> Father = new HashSet<string>();
 
             if (textBox6.Text.Length > 0)
             {
@@ -119,9 +117,9 @@ public partial class UC_Insert : UserControl
                 }
             }
 
-            Father.AddRange(Father);
+            //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
 
-            //resetFields();
+            resetFields();
         }
     }
 
