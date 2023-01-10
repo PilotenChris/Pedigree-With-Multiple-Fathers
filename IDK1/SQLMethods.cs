@@ -83,7 +83,7 @@ internal class SQLMethods
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
         // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Entity (ID, Birth, Sex, Color) VALUES ('"+ ID +"'),('"+ Date +"'),('"+ Sex +"'),('"+ Color +"');";
+        sqlite_cmd.CommandText = "INSERT INTO Entity (ID, Birth, Sex, Color) VALUES ('"+ ID +"','"+ Date +"','"+ Sex +"','"+ Color +"');";
         sqlite_cmd.ExecuteNonQuery();
 
     }
