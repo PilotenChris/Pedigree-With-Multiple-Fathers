@@ -7,8 +7,7 @@ namespace IDK1;
 internal class SQLMethods
 {
     public static readonly string dbpath = @"PedigreeDB.db";
-    public static SQLiteConnection CreateConnection()
-    {
+    public static SQLiteConnection CreateConnection() {
         // Create a new database connection:
         SQLiteConnection sqlite_conn = new SQLiteConnection("Data Source=" + dbpath + ";foreign keys=true;Version=3;New=True;Compress=True;");
         
@@ -78,8 +77,7 @@ internal class SQLMethods
         return colorData;
     }
 
-    public static void InsertEntityData(string ID, string Date, int Sex, int Color)
-    {
+    public static void InsertEntityData(string ID, string Date, int Sex, int Color) {
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
@@ -90,8 +88,7 @@ internal class SQLMethods
 
     }
 
-    public static void InsertDeathData(string ID, string Date, int Sex, int Color)
-    {
+    public static void InsertDeathData(string ID, string Date, int Sex, int Color) {
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
@@ -102,8 +99,7 @@ internal class SQLMethods
 
     }
 
-    public static void InsertParentData(string CID, string PID, int Known)
-    {
+    public static void InsertParentData(string CID, string PID, int Known) {
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
