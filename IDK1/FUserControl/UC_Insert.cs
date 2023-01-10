@@ -72,7 +72,7 @@ public partial class UC_Insert : UserControl
         TB_ID.Focus();
         //Validate Parent fields
         if (ValidateString(TB_ID.Text, L_ID, TB_ID, false) && // ID
-            ValidateString(textBox5.Text, label5, textBox5, false) && //F
+            ValidateString(textBox5.Text, label5, textBox5, true) && //F
             ValidateString(textBox6.Text, label6, textBox6, true) && //M
             IsValidDate(textBox2.Text, textBox2) && // Birth date
             IsValidDate(textBox3.Text, textBox3, true) // Death date
@@ -81,43 +81,58 @@ public partial class UC_Insert : UserControl
             ErrorMessage("Success");
             
             string ID;
-            string Sex = comboBox2.Text;
+            int SexId = comboBox2.SelectedIndex + 1;
             string BirthDate = textBox2.Text;
             string DeathDate = textBox3.Text;
-            string Color = comboBox1.Text;
-            string Mother;
-            HashSet<string> Father = new HashSet<string>();
+            int ColorId = comboBox1.SelectedIndex + 1;
+            string MotherId = "";
+            HashSet<string> FatherIds = new HashSet<string>();
 
             if (char.IsNumber(TB_ID.Text[0]))ID = comboBox2.Text[0] + TB_ID.Text;
             else ID = TB_ID.Text;
 
-            if (char.IsNumber(textBox5.Text[0])) Mother = "F" + textBox5.Text;
-            else Mother = textBox5.Text;
-
+            if (!string.IsNullOrEmpty(textBox5.Text))
+            {
+                if (char.IsNumber(textBox5.Text[0])) MotherId = "F" + textBox5.Text;
+                else MotherId = textBox5.Text;
+            }
             if (textBox6.Text.Length > 0)
             {
                 if (textBox6.Text.StartsWith("M"))
                 {
-                    Father.Add("M" + textBox6.Text);
+                    FatherIds.Add("M" + textBox6.Text);
                 }
                 else
                 {
-                    Father.Add(textBox6.Text);
+                    FatherIds.Add(textBox6.Text);
                 }
             }
             foreach (string item in listBox1.Items)
             {
                 if (!item.StartsWith("M"))
                 {
-                    Father.Add("M" + item);
+                    FatherIds.Add("M" + item);
                 }
                 else
                 {
-                    Father.Add(item);
+                    FatherIds.Add(item);
                 }
             }
-
             //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
+
+            SQLMethods.InsertEntityData(ID, BirthDate, SexId, ColorId);
+            if (string.IsNullOrEmpty(textBox3.Text))
+            {
+                SQLMethods.InsertDeathData(ID, DeathDate);
+            }
+            if (!string.IsNullOrEmpty(textBox5.Text))
+            {
+                SQLMethods.InsertParentData(ID, MotherId);
+            }
+            foreach(string FatherId in FatherIds)
+            {
+                SQLMethods.InsertParentData(ID, FatherId);
+            }
 
             resetFields();
         }
