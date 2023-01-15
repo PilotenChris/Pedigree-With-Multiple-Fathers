@@ -247,10 +247,10 @@ public partial class UC_Insert : UserControl
         L_ErrorMessageField.Text = string.Empty;
     }
 
-    private bool ValidateString(string str, Label lab, TextBox box, bool BEmpty = false)
+    private bool ValidateString(string str, Label lab, TextBox box, bool Empty = false)
     {
         // Check if string is empty or not allowed to be empty
-        if (string.IsNullOrEmpty(str) && !BEmpty)
+        if (string.IsNullOrEmpty(str) && !Empty)
         {
             box.Focus();
             ErrorMessage("The input at '" + lab.Text + "' cannot be empty");

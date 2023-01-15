@@ -62,7 +62,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(610, 672);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(950, 672);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer1
@@ -73,7 +73,7 @@
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(3, 39);
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Size = new System.Drawing.Size(604, 630);
+            this.splitContainer1.Size = new System.Drawing.Size(944, 630);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 99999;
             this.splitContainer1.TabStop = false;
@@ -95,8 +95,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.b_ToggleView);
-            this.splitContainer2.Size = new System.Drawing.Size(604, 30);
-            this.splitContainer2.SplitterDistance = 396;
+            this.splitContainer2.Size = new System.Drawing.Size(944, 30);
+            this.splitContainer2.SplitterDistance = 618;
             this.splitContainer2.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -109,7 +109,7 @@
             this.flowLayoutPanel1.Controls.Add(this.b_Print);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(393, 26);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(615, 26);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // b_Insert
@@ -167,7 +167,7 @@
             // b_ToggleView
             // 
             this.b_ToggleView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.b_ToggleView.Location = new System.Drawing.Point(103, 3);
+            this.b_ToggleView.Location = new System.Drawing.Point(221, 3);
             this.b_ToggleView.Name = "b_ToggleView";
             this.b_ToggleView.Size = new System.Drawing.Size(98, 23);
             this.b_ToggleView.TabIndex = 0;
@@ -179,7 +179,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(634, 689);
+            this.ClientSize = new System.Drawing.Size(974, 689);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(650, 600);
             this.Name = "Form1";

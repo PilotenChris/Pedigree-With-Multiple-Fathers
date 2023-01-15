@@ -39,7 +39,8 @@ namespace IDK1
 
         private void b_Delete_Click(object sender, EventArgs e)
         {
-
+            UC_Delete uc = new UC_Delete();
+            UC_ATP_Insert(uc);
             updateColor(2);
         }
         
