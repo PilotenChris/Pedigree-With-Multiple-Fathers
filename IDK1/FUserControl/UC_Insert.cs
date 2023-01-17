@@ -124,22 +124,30 @@ public partial class UC_Insert : UserControl
                 }
             }
             //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
+            if (string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(ID)))
+            {
+                SQLMethods.InsertEntityData(ID, BirthDate, SexId, ColorId);
+                if (!string.IsNullOrEmpty(textBox3.Text))
+                {
+                    SQLMethods.InsertDeathData(ID, DeathDate);
+                }
+                if (!string.IsNullOrEmpty(textBox5.Text))
+                {
+                    SQLMethods.InsertParentData(ID, MotherId);
+                }
+                foreach (string FatherId in FatherIds)
+                {
+                    SQLMethods.InsertParentData(ID, FatherId);
+                }
 
-            SQLMethods.InsertEntityData(ID, BirthDate, SexId, ColorId);
-            if (!string.IsNullOrEmpty(textBox3.Text))
-            {
-                SQLMethods.InsertDeathData(ID, DeathDate);
+                resetFields();
             }
-            if (!string.IsNullOrEmpty(textBox5.Text))
+            else
             {
-                SQLMethods.InsertParentData(ID, MotherId);
+                TB_ID.Focus();
+                ErrorMessage("ID already exists.");
             }
-            foreach(string FatherId in FatherIds)
-            {
-                SQLMethods.InsertParentData(ID, FatherId);
-            }
-
-            resetFields();
+            
         }
     }
 

@@ -334,7 +334,6 @@ partial class UC_Update
             this.textBox3.PlaceholderText = "DD/MM/YYYY";
             this.textBox3.Size = new System.Drawing.Size(155, 23);
             this.textBox3.TabIndex = 1;
-            this.textBox3.Text = "2/2/2000";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -371,7 +370,6 @@ partial class UC_Update
             this.textBox2.PlaceholderText = "DD/MM/YYYY";
             this.textBox2.Size = new System.Drawing.Size(155, 23);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "1/1/1999";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
@@ -429,7 +427,6 @@ partial class UC_Update
             this.TB_ID.Name = "TB_ID";
             this.TB_ID.Size = new System.Drawing.Size(155, 23);
             this.TB_ID.TabIndex = 1;
-            this.TB_ID.Text = "42";
             this.TB_ID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_ID.TextChanged += new System.EventHandler(this.TB_ID_TextChanged);
             // 

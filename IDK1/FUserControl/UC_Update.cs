@@ -71,7 +71,7 @@ public partial class UC_Update : UserControl
     {
         TB_ID.Focus();
         //Validate Parent fields
-        if (ValidateString(TB_ID.Text, L_ID, TB_ID, false) && // ID
+        if (ValidateString(TB_ID.Text, L_ID, TB_ID, false, false) && // ID
             ValidateString(textBox5.Text, label5, textBox5, true) && //F
             ValidateString(textBox6.Text, label6, textBox6, true) && //M
             IsValidDate(textBox2.Text, textBox2) && // Birth date
@@ -247,7 +247,7 @@ public partial class UC_Update : UserControl
         L_ErrorMessageField.Text = string.Empty;
     }
 
-    private bool ValidateString(string str, Label lab, TextBox box, bool Empty = false)
+    private bool ValidateString(string str, Label lab, TextBox box, bool Empty = false, bool FirstIsNumber = true)
     {
         // Check if string is empty or not allowed to be empty
         if (string.IsNullOrEmpty(str) && !Empty)
@@ -262,10 +262,21 @@ public partial class UC_Update : UserControl
             return true;
         }
         // Check if first character is valid
-        if (str[0] != 'F' && str[0] != 'M' && str[0] != 'U' && !char.IsNumber(str[0]))
+        if (str[0] != 'F' && str[0] != 'M' && str[0] != 'U' && (!char.IsNumber(str[0]) && FirstIsNumber))
         {
             box.Focus();
-            ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (F, M, or U) or a number.");
+            string errMessBuilder = "The first character of the '" + lab.Text + "' field must be a letter (F, M, or U)";
+            if (FirstIsNumber)
+            {
+                errMessBuilder += " or a number.";
+            }
+            ErrorMessage(errMessBuilder);
+            return false;
+        }
+        else if (!FirstIsNumber)
+        {
+            box.Focus();
+            ErrorMessage("The first character cannot be a number.");
             return false;
         }
         // Check if string has a number if first character is valid
@@ -293,7 +304,8 @@ public partial class UC_Update : UserControl
 
     private void TB_ID_TextChanged(object sender, EventArgs e)
     {
-        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text))
+        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) && 
+            !string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text)))
         {
             string id = TB_ID.Text;
             resetFields();
