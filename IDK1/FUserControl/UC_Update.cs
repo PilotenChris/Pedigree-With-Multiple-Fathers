@@ -309,8 +309,9 @@ public partial class UC_Update : UserControl
         {
             string id = TB_ID.Text;
             resetFields();
+            TB_ID.Text = id;
             comboBox2.SelectedIndex = SQLMethods.GetSexFromEntity(id);
-            textBox3.Text = SQLMethods.GetBirthFromEntity(id);
+            textBox2.Text = SQLMethods.GetBirthFromEntity(id);
             textBox3.Text = SQLMethods.GetDeathFromEntity(id);
             comboBox1.SelectedIndex = SQLMethods.GetColorFromEntity(id);
             textBox5.Text = SQLMethods.GetMotherFromEntity(id);
