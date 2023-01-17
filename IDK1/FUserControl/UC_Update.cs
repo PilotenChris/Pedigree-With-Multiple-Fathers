@@ -290,4 +290,20 @@ public partial class UC_Update : UserControl
         }
         return true;
     }
+
+    private void TB_ID_TextChanged(object sender, EventArgs e)
+    {
+        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text))
+        {
+            string id = TB_ID.Text;
+            resetFields();
+            comboBox2.SelectedIndex = SQLMethods.GetSexFromEntity(id);
+            textBox3.Text = SQLMethods.GetBirthFromEntity(id);
+            textBox3.Text = SQLMethods.GetDeathFromEntity(id);
+            comboBox1.SelectedIndex = SQLMethods.GetColorFromEntity(id);
+            textBox5.Text = SQLMethods.GetMotherFromEntity(id);
+            ArrayList fatherdata = SQLMethods.GetFatherFromEntity(id);
+            listBox1.Items.AddRange(fatherdata.ToArray());
+        }
+    }
 }

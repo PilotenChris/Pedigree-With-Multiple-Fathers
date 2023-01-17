@@ -83,7 +83,7 @@ internal class SQLMethods
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
         // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Entity (ID, Birth, Sex, Color) VALUES ('@ID','@Date','@Sex','@Color');";
+        sqlite_cmd.CommandText = "INSERT INTO Entity (ID, Birth, Sex, Color) VALUES (@ID,@Date,@Sex,@Color);";
         sqlite_cmd.Parameters.AddWithValue("@ID", ID);
         sqlite_cmd.Parameters.AddWithValue("@Date", Date);
         sqlite_cmd.Parameters.AddWithValue("@Sex", Sex);
@@ -98,7 +98,7 @@ internal class SQLMethods
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
         // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Death (ID, Death) VALUES ('@ID','@Date');";
+        sqlite_cmd.CommandText = "INSERT INTO Death (ID, Death) VALUES (@ID,@Date);";
         sqlite_cmd.Parameters.AddWithValue("@ID", ID);
         sqlite_cmd.Parameters.AddWithValue("@Date", Date);
         sqlite_cmd.ExecuteNonQuery();
@@ -111,11 +111,40 @@ internal class SQLMethods
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
         // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Parent (ChildID, ParentID) VALUES ('@CID','@PID');";
+        sqlite_cmd.CommandText = "INSERT INTO Parent (ChildID, ParentID) VALUES (@CID,@PID);";
         sqlite_cmd.Parameters.AddWithValue("@CID", CID);
         sqlite_cmd.Parameters.AddWithValue("@PID", PID);
         sqlite_cmd.ExecuteNonQuery();
         sqlite_conn.Close();
+    }
+
+    public static string? GetIDFromEntity(string ID)
+    {
+        // Create a connection to the SQLite database
+        SQLiteConnection sqlite_conn = CreateConnection();
+
+        // Declare a SQLiteDataReader object
+        SQLiteDataReader sqlite_datareader;
+
+        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+        sqlite_cmd.CommandText = "SELECT ID FROM Entity WHERE ID = @ID";
+        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+        // Execute the command and store the resulting data
+        sqlite_datareader = sqlite_cmd.ExecuteReader();
+
+        if (sqlite_datareader.Read())
+        {
+            string entityID = sqlite_datareader.GetString(0);
+            // Close the database connection
+            sqlite_conn.Close();
+            return entityID;
+        }
+        else
+        {
+            sqlite_conn.Close();
+            return null;
+        }
     }
 
     public static int GetSexFromEntity(string ID) {

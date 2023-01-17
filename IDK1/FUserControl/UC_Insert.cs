@@ -78,8 +78,13 @@ public partial class UC_Insert : UserControl
             IsValidDate(textBox3.Text, textBox3, true) // Death date
             )
         {
-            ErrorMessage("Success");
-            
+
+            if (!string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text))) // Check if ID exists already
+            {
+                ErrorMessage("ID already exists.");
+                return;
+            }
+
             string ID;
             int SexId = comboBox2.SelectedIndex + 1;
             string BirthDate = textBox2.Text;
