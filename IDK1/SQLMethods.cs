@@ -118,8 +118,7 @@ internal class SQLMethods
         sqlite_conn.Close();
     }
 
-    public static string? GetIDFromEntity(string ID)
-    {
+    public static string? GetIDFromEntity(string ID) {
         // Create a connection to the SQLite database
         SQLiteConnection sqlite_conn = CreateConnection();
 
@@ -153,20 +152,26 @@ internal class SQLMethods
 
         // Declare a SQLiteDataReader object
         SQLiteDataReader sqlite_datareader;
-
+        Debug.WriteLine(ID + " Test");
         //
         SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Sex FROM Entity WHERE ID = @ID";
+        sqlite_cmd.CommandText = "SELECT Entity.Sex FROM Entity WHERE ID = @ID";
         sqlite_cmd.Parameters.AddWithValue("@ID", ID);
 
         // Execute the command and store the resulting data
         sqlite_datareader = sqlite_cmd.ExecuteReader();
-        int sex = sqlite_datareader.GetInt32(0);
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        return sex;
+        if (sqlite_datareader.Read())
+        {
+            int sex = sqlite_datareader.GetInt32(0);
+            sqlite_conn.Close();
+            return sex-1;
+        }
+        else
+        {
+            // Close the database connection
+            sqlite_conn.Close();
+            return -1;
+        }
     }
 
     public static string GetBirthFromEntity(string ID) {
@@ -183,12 +188,18 @@ internal class SQLMethods
 
         // Execute the command and store the resulting data
         sqlite_datareader = sqlite_cmd.ExecuteReader();
-        string birth = sqlite_datareader.GetString(0);
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        return birth;
+        if (sqlite_datareader.Read())
+        {
+            string birth = sqlite_datareader.GetString(0);
+            sqlite_conn.Close();
+            return birth;
+        }
+        else
+        {
+            // Close the database connection
+            sqlite_conn.Close();
+            return null;
+        }
     }
 
     public static string GetDeathFromEntity(string ID) {
@@ -205,12 +216,18 @@ internal class SQLMethods
 
         // Execute the command and store the resulting data
         sqlite_datareader = sqlite_cmd.ExecuteReader();
-        string death = sqlite_datareader.GetString(0);
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        return death;
+        if (sqlite_datareader.Read())
+        {
+            string death = sqlite_datareader.GetString(0);
+            sqlite_conn.Close();
+            return death;
+        }
+        else
+        {
+            // Close the database connection
+            sqlite_conn.Close();
+            return null;
+        }
     }
 
     public static int GetColorFromEntity(string ID) {
@@ -227,12 +244,18 @@ internal class SQLMethods
 
         // Execute the command and store the resulting data
         sqlite_datareader = sqlite_cmd.ExecuteReader();
-        int color = sqlite_datareader.GetInt32(0);
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        return color;
+        if (sqlite_datareader.Read())
+        {
+            int color = sqlite_datareader.GetInt32(0);
+            sqlite_conn.Close();
+            return color - 1;
+        }
+        else
+        {
+            // Close the database connection
+            sqlite_conn.Close();
+            return -1;
+        }
     }
 
     public static string GetMotherFromEntity(string ID) {
@@ -249,12 +272,18 @@ internal class SQLMethods
 
         // Execute the command and store the resulting data
         sqlite_datareader = sqlite_cmd.ExecuteReader();
-        string mother = sqlite_datareader.GetString(0);
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        return mother;
+        if (sqlite_datareader.Read())
+        {
+            string mother = sqlite_datareader.GetString(0);
+            sqlite_conn.Close();
+            return mother;
+        }
+        else
+        {
+            // Close the database connection
+            sqlite_conn.Close();
+            return null;
+        }
     }
 
     public static ArrayList GetFatherFromEntity(string ID)
