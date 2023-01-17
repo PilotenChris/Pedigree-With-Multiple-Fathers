@@ -150,7 +150,7 @@ public partial class UC_Update : UserControl
             }
             else if (c.GetType() == typeof(ComboBox))
             {
-                ((ComboBox)c).SelectedIndex = 1;
+                ((ComboBox)c).SelectedIndex = 0;
             }
         }
     }
@@ -308,8 +308,6 @@ public partial class UC_Update : UserControl
             !string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text)))
         {
             string id = TB_ID.Text;
-            resetFields();
-            TB_ID.Text = id;
             comboBox2.SelectedIndex = SQLMethods.GetSexFromEntity(id);
             textBox2.Text = SQLMethods.GetBirthFromEntity(id);
             textBox3.Text = SQLMethods.GetDeathFromEntity(id);
@@ -318,5 +316,6 @@ public partial class UC_Update : UserControl
             ArrayList fatherdata = SQLMethods.GetFatherFromEntity(id);
             listBox1.Items.AddRange(fatherdata.ToArray());
         }
+        else if (string.IsNullOrEmpty(TB_ID.Text)) { resetFields(); }
     }
 }
