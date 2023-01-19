@@ -243,7 +243,7 @@ public partial class UC_Update : UserControl
     // Stop timer and remove error message
     private void RemoveErrorMessage(object sender, EventArgs e)
     {
-        timer1.Stop();
+        if (timer1.Enabled) timer1.Stop();
         L_ErrorMessageField.Text = string.Empty;
     }
 
@@ -302,19 +302,24 @@ public partial class UC_Update : UserControl
         return true;
     }
 
+    string preValue = "";
+
     private void TB_ID_TextChanged(object sender, EventArgs e)
     {
-        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) && 
-            !string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text)))
+        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) && preValue != TB_ID.Text)
         {
-            string id = TB_ID.Text;
-            comboBox2.SelectedIndex = SQLMethods.GetSexFromEntity(id);
-            textBox2.Text = SQLMethods.GetBirthFromEntity(id);
-            textBox3.Text = SQLMethods.GetDeathFromEntity(id);
-            comboBox1.SelectedIndex = SQLMethods.GetColorFromEntity(id);
-            textBox5.Text = SQLMethods.GetMotherFromEntity(id);
-            ArrayList fatherdata = SQLMethods.GetFatherFromEntity(id);
-            listBox1.Items.AddRange(fatherdata.ToArray());
+            if (!string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text)))
+            {
+                string id = TB_ID.Text;
+                preValue = id;
+                comboBox2.SelectedIndex = SQLMethods.GetSexFromEntity(id);
+                textBox2.Text = SQLMethods.GetBirthFromEntity(id);
+                textBox3.Text = SQLMethods.GetDeathFromEntity(id);
+                comboBox1.SelectedIndex = SQLMethods.GetColorFromEntity(id);
+                textBox5.Text = SQLMethods.GetMotherFromEntity(id);
+                ArrayList fatherdata = SQLMethods.GetFatherFromEntity(id);
+                listBox1.Items.AddRange(fatherdata.ToArray());
+            }
         }
         else if (string.IsNullOrEmpty(TB_ID.Text)) { resetFields(); }
     }

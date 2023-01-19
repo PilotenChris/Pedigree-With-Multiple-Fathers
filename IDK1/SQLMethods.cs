@@ -23,324 +23,320 @@ internal class SQLMethods
     }
     public static ArrayList GetSexData() {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
+        using (SQLiteConnection sqlite_conn = CreateConnection())
+        {
+            // Declare a SQLiteDataReader object and an ArrayList
+            SQLiteDataReader sqlite_datareader;
+            ArrayList sexData = new ArrayList();
 
-        // Declare a SQLiteDataReader object and an ArrayList
-        SQLiteDataReader sqlite_datareader;
-        ArrayList sexData = new ArrayList();
+            // Create a command to select all rows from the "Sex" table
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT * FROM Sex";
 
-        // Create a command to select all rows from the "Sex" table
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT * FROM Sex";
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
 
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // Loop through each row in the data reader
+            while (sqlite_datareader.Read())
+            {
+                // Get the value in the second column of the current row and add the value to the sexData ArrayList
+                sexData.Add(sqlite_datareader.GetString(1));
+            }
 
-        // Loop through each row in the data reader
-        while (sqlite_datareader.Read()) {
-            // Get the value in the second column of the current row and add the value to the sexData ArrayList
-            sexData.Add(sqlite_datareader.GetString(1));
+            // Return the ArrayList
+            return sexData;
         }
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        // Return the ArrayList
-        return sexData;
     }
 
     public static ArrayList GetColorData() {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
+        using (SQLiteConnection sqlite_conn = CreateConnection())
+        {
+            // Declare a SQLiteDataReader object and an ArrayList
+            SQLiteDataReader sqlite_datareader;
+            ArrayList colorData = new ArrayList();
 
-        // Declare a SQLiteDataReader object and an ArrayList
-        SQLiteDataReader sqlite_datareader;
-        ArrayList colorData = new ArrayList();
+            // Create a command to select all rows from the "Sex" table
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT * FROM Color";
 
-        // Create a command to select all rows from the "Sex" table
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT * FROM Color";
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
 
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-
-        // Loop through each row in the data reader
-        while (sqlite_datareader.Read()) {
-            // Get the value in the second column of the current row and add the value to the sexData ArrayList
-            colorData.Add(sqlite_datareader.GetString(1));
+            // Loop through each row in the data reader
+            while (sqlite_datareader.Read())
+            {
+                // Get the value in the second column of the current row and add the value to the sexData ArrayList
+                colorData.Add(sqlite_datareader.GetString(1));
+            }
+            return colorData;
         }
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        // Return the ArrayList
-        return colorData;
     }
 
     public static void InsertEntityData(string ID, string Date, int Sex, int Color) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+        using (SQLiteConnection sqlite_conn = CreateConnection())
+        {
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
-        // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Entity (ID, Birth, Sex, Color) VALUES (@ID,@Date,@Sex,@Color);";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-        sqlite_cmd.Parameters.AddWithValue("@Date", Date);
-        sqlite_cmd.Parameters.AddWithValue("@Sex", Sex);
-        sqlite_cmd.Parameters.AddWithValue("@Color", Color);
-        sqlite_cmd.ExecuteNonQuery();
-        sqlite_conn.Close();
+            // Insert data into Entity
+            sqlite_cmd.CommandText = "INSERT INTO Entity (ID, Birth, Sex, Color) VALUES (@ID,@Date,@Sex,@Color);";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+            sqlite_cmd.Parameters.AddWithValue("@Date", Date);
+            sqlite_cmd.Parameters.AddWithValue("@Sex", Sex);
+            sqlite_cmd.Parameters.AddWithValue("@Color", Color);
+            sqlite_cmd.ExecuteNonQuery();
+        }
     }
 
     public static void InsertDeathData(string ID, string Date) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+        using (SQLiteConnection sqlite_conn = CreateConnection())
+        {
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
-        // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Death (ID, Death) VALUES (@ID,@Date);";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-        sqlite_cmd.Parameters.AddWithValue("@Date", Date);
-        sqlite_cmd.ExecuteNonQuery();
-        sqlite_conn.Close();
+            // Insert data into Entity
+            sqlite_cmd.CommandText = "INSERT INTO Death (ID, Death) VALUES (@ID,@Date);";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+            sqlite_cmd.Parameters.AddWithValue("@Date", Date);
+            sqlite_cmd.ExecuteNonQuery();
+        }
     }
 
     public static void InsertParentData(string CID, string PID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+        using (SQLiteConnection sqlite_conn = CreateConnection())
+        {
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
 
-        // Insert data into Entity
-        sqlite_cmd.CommandText = "INSERT INTO Parent (ChildID, ParentID) VALUES (@CID,@PID);";
-        sqlite_cmd.Parameters.AddWithValue("@CID", CID);
-        sqlite_cmd.Parameters.AddWithValue("@PID", PID);
-        sqlite_cmd.ExecuteNonQuery();
-        sqlite_conn.Close();
+            // Insert data into Entity
+            sqlite_cmd.CommandText = "INSERT INTO Parent (ChildID, ParentID) VALUES (@CID,@PID);";
+            sqlite_cmd.Parameters.AddWithValue("@CID", CID);
+            sqlite_cmd.Parameters.AddWithValue("@PID", PID);
+            sqlite_cmd.ExecuteNonQuery();
+        }
     }
 
     public static string? GetIDFromEntity(string ID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object
-        SQLiteDataReader sqlite_datareader;
-
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT ID FROM Entity WHERE ID = @ID";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-
-        if (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            string entityID = sqlite_datareader.GetString(0);
-            // Close the database connection
-            sqlite_conn.Close();
-            return entityID;
+            // Declare a SQLiteDataReader object
+            SQLiteDataReader sqlite_datareader;
+
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT ID FROM Entity WHERE ID = @ID";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+
+            if (sqlite_datareader.Read())
+            {
+                string entityID = sqlite_datareader.GetString(0);
+                // Close the database connection
+                return entityID;
+            }
+            else
+            {
+                return null;
+            }
         }
-        else
-        {
-            sqlite_conn.Close();
-            return null;
-        }
+
+        
     }
 
     public static int GetSexFromEntity(string ID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object
-        SQLiteDataReader sqlite_datareader;
-        Debug.WriteLine(ID + " Test");
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Entity.Sex FROM Entity WHERE ID = @ID";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-        if (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            int sex = sqlite_datareader.GetInt32(0);
-            sqlite_conn.Close();
-            return sex-1;
+            // Declare a SQLiteDataReader object
+            SQLiteDataReader sqlite_datareader;
+            Debug.WriteLine(ID + " Test");
+            //
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Entity.Sex FROM Entity WHERE ID = @ID";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            if (sqlite_datareader.Read())
+            {
+                int sex = sqlite_datareader.GetInt32(0);
+                return sex - 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
-        else
-        {
-            // Close the database connection
-            sqlite_conn.Close();
-            return -1;
-        }
+
+          
     }
 
     public static string GetBirthFromEntity(string ID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object
-        SQLiteDataReader sqlite_datareader;
-
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Birth FROM Entity WHERE ID = @ID";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-        if (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            string birth = sqlite_datareader.GetString(0);
-            sqlite_conn.Close();
-            return birth;
+            // Declare a SQLiteDataReader object
+            SQLiteDataReader sqlite_datareader;
+
+            //
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Birth FROM Entity WHERE ID = @ID";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            if (sqlite_datareader.Read())
+            {
+                string birth = sqlite_datareader.GetString(0);
+                return birth;
+            }
+            else
+            {
+                // Close the database connection
+                return null;
+            }
         }
-        else
-        {
-            // Close the database connection
-            sqlite_conn.Close();
-            return null;
-        }
+
+            
     }
 
     public static string GetDeathFromEntity(string ID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object
-        SQLiteDataReader sqlite_datareader;
-
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Death FROM Death WHERE ID = @ID";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-        if (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            string death = sqlite_datareader.GetString(0);
-            sqlite_conn.Close();
-            return death;
-        }
-        else
-        {
-            // Close the database connection
-            sqlite_conn.Close();
-            return null;
+            // Declare a SQLiteDataReader object
+            SQLiteDataReader sqlite_datareader;
+
+            //
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Death FROM Death WHERE ID = @ID";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            if (sqlite_datareader.Read())
+            {
+                string death = sqlite_datareader.GetString(0);
+                return death;
+            }
+            else
+            {
+                // Close the database connection
+                return null;
+            }
         }
     }
 
     public static int GetColorFromEntity(string ID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object
-        SQLiteDataReader sqlite_datareader;
-
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Color FROM Entity WHERE ID = @ID";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-        if (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            int color = sqlite_datareader.GetInt32(0);
-            sqlite_conn.Close();
-            return color - 1;
-        }
-        else
-        {
-            // Close the database connection
-            sqlite_conn.Close();
-            return -1;
+            // Declare a SQLiteDataReader object
+            SQLiteDataReader sqlite_datareader;
+
+            //
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Color FROM Entity WHERE ID = @ID";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            if (sqlite_datareader.Read())
+            {
+                int color = sqlite_datareader.GetInt32(0);
+                return color - 1;
+            }
+            else
+            {
+                // Close the database connection
+                return -1;
+            }
         }
     }
 
     public static string GetMotherFromEntity(string ID) {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object
-        SQLiteDataReader sqlite_datareader;
-
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Parent.ParentID FROM Parent, Entity WHERE Parent.ChildID = @ID AND Parent.ParentID = Entity.ID AND Entity.Sex = 3";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-        if (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            string mother = sqlite_datareader.GetString(0);
-            sqlite_conn.Close();
-            return mother;
-        }
-        else
-        {
-            // Close the database connection
-            sqlite_conn.Close();
-            return null;
+            // Declare a SQLiteDataReader object
+            SQLiteDataReader sqlite_datareader;
+
+            //
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Parent.ParentID FROM Parent, Entity WHERE Parent.ChildID = @ID AND Parent.ParentID = Entity.ID AND Entity.Sex = 3";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            if (sqlite_datareader.Read())
+            {
+                string mother = sqlite_datareader.GetString(0);
+                return mother;
+            }
+            else
+            {
+                // Close the database connection
+                return null;
+            }
         }
     }
 
     public static ArrayList GetFatherFromEntity(string ID)
     {
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object and an ArrayList
-        SQLiteDataReader sqlite_datareader;
-        ArrayList fatherData = new ArrayList();
-
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT Parent.ParentID FROM Parent, Entity WHERE Parent.ChildID = @ID AND Parent.ParentID = Entity.ID AND Entity.Sex = 2";
-        sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-        // Loop through each row in the data reader
-        while (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
-            // Get the value in the second column of the current row and add the value to the sexData ArrayList
-            fatherData.Add(sqlite_datareader.GetString(0));
+            // Declare a SQLiteDataReader object and an ArrayList
+            SQLiteDataReader sqlite_datareader;
+            ArrayList fatherData = new ArrayList();
+
+            //
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Parent.ParentID FROM Parent, Entity WHERE Parent.ChildID = @ID AND Parent.ParentID = Entity.ID AND Entity.Sex = 2";
+            sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            // Loop through each row in the data reader
+            while (sqlite_datareader.Read())
+            {
+                // Get the value in the second column of the current row and add the value to the sexData ArrayList
+                fatherData.Add(sqlite_datareader.GetString(0));
+            }
+
+            return fatherData;
         }
 
-        // Close the database connection
-        sqlite_conn.Close();
-
-        return fatherData;
+            
     }
 
     public static ArrayList GetDatabase() {
         return null;
         // Create a connection to the SQLite database
-        SQLiteConnection sqlite_conn = CreateConnection();
-
-        // Declare a SQLiteDataReader object and an ArrayList
-        SQLiteDataReader sqlite_datareader;
-        ArrayList databaseData = new ArrayList();
-
-        //
-        SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-        sqlite_cmd.CommandText = "SELECT E.ID, E.Birth, M.ID, F.ID, S.Sex, E.Death, E.Color FROM Entity as E, Sex as S, Entity as M, Entity as F WHERE ...";
-
-        // Execute the command and store the resulting data
-        sqlite_datareader = sqlite_cmd.ExecuteReader();
-
-        // Loop through each row in the data reader
-        while (sqlite_datareader.Read())
+        using (SQLiteConnection sqlite_conn = CreateConnection())
         {
+            // Declare a SQLiteDataReader object and an ArrayList
+            SQLiteDataReader sqlite_datareader;
+            ArrayList databaseData = new ArrayList();
+
             //
-            databaseData.Add(sqlite_datareader.GetString(1));
+            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT E.ID, E.Birth, M.ID, F.ID, S.Sex, E.Death, E.Color FROM Entity as E, Sex as S, Entity as M, Entity as F WHERE ...";
+
+            // Execute the command and store the resulting data
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+
+            // Loop through each row in the data reader
+            while (sqlite_datareader.Read())
+            {
+                //
+                databaseData.Add(sqlite_datareader.GetString(1));
+            }
+
+            //return null;
         }
-
-        // Close the database connection
-        sqlite_conn.Close();
-
-        //return null;
     }
 }
