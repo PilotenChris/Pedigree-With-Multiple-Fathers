@@ -217,7 +217,7 @@ public partial class UC_Update : UserControl
     {
         // Use DateTime.TryParseExact method to validate the format of the input string
 #pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
-        if (!DateTime.TryParseExact(input, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+        if (!DateTime.TryParseExact(input, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
         {
             if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
@@ -304,7 +304,12 @@ public partial class UC_Update : UserControl
 
     private void TB_ID_TextChanged(object sender, EventArgs e)
     {
-        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) && 
+        
+    }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+        if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) &&
             !string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text)))
         {
             string id = TB_ID.Text;

@@ -334,7 +334,7 @@ partial class UC_Insert
             this.textBox3.PlaceholderText = "DD/MM/YYYY";
             this.textBox3.Size = new System.Drawing.Size(155, 23);
             this.textBox3.TabIndex = 1;
-            this.textBox3.Text = "2/2/2000";
+            this.textBox3.Text = "2000/2/2";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -371,7 +371,7 @@ partial class UC_Insert
             this.textBox2.PlaceholderText = "DD/MM/YYYY";
             this.textBox2.Size = new System.Drawing.Size(155, 23);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "1/1/1999";
+            this.textBox2.Text = "1999/1/1";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
