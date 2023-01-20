@@ -122,7 +122,7 @@ internal class SQLMethods
         InsertData("Parent", data);
     }
 
-    public static object GetDataFromEntity(string ID, string column)
+    public static object GetDataFromEntity(string ID, string column, bool isInt = false)
     {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection())
@@ -140,7 +140,7 @@ internal class SQLMethods
                 {
                     if (sqlite_datareader.Read())
                     {
-                        if (column == "Sex" || column == "Color")
+                        if (isInt)
                         {
                             int data = sqlite_datareader.GetInt32(0);
                             return data - 1;
@@ -197,7 +197,7 @@ internal class SQLMethods
 
     public static int GetSexFromEntity(string ID)
     {
-        return (int)GetDataFromEntity(ID, "Sex");
+        return (int)GetDataFromEntity(ID, "Sex", true);
     }
 
     public static string GetBirthFromEntity(string ID)
@@ -212,7 +212,7 @@ internal class SQLMethods
 
     public static int GetColorFromEntity(string ID)
     {
-        return (int)GetDataFromEntity(ID, "Color");
+        return (int)GetDataFromEntity(ID, "Color", true);
     }
 
     public static string GetMotherFromEntity(string ID)
