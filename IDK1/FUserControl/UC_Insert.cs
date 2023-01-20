@@ -78,13 +78,13 @@ public partial class UC_Insert : UserControl
             IsValidDate(textBox3.Text, textBox3, true) // Death date
             )
         {
-
+            Debug.WriteLine("testasdasdawftwegweg<asdgargERHer");
             if (!string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text))) // Check if ID exists already
             {
                 ErrorMessage("ID already exists.");
                 return;
             }
-
+            Debug.WriteLine("testasdasdawftwegweg<asdgargERHer");
             string ID;
             int SexId = comboBox2.SelectedIndex + 1;
             string BirthDate = textBox2.Text;
@@ -123,6 +123,7 @@ public partial class UC_Insert : UserControl
                     FatherIds.Add(item);
                 }
             }
+            Debug.WriteLine("testasdasdawftwegweg<asdgargERHer");
             //EVERY FIELD IS VALIDATED. JUST PUT IT TO THE DB OR SOMETHING IDK.
             if (string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(ID)))
             {
@@ -230,7 +231,7 @@ public partial class UC_Insert : UserControl
     {
         // Use DateTime.TryParseExact method to validate the format of the input string
 #pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
-        if (!DateTime.TryParseExact(input, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+        if (!DateTime.TryParseExact(input, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
         {
             if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
