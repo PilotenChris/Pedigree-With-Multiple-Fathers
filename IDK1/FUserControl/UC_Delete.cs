@@ -18,9 +18,14 @@ public partial class UC_Delete : UserControl
 
     private void b_DeleteData_Click(object sender, EventArgs e)
     {
+        ErrorMessage("Work in progress");
         if (ValidateString(TB_ID.Text, L_ID, TB_ID))
         {
-
+            if (string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text)))
+            {
+                ErrorMessage("Not Found");
+                return;
+            }
         }
     }
 

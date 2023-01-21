@@ -190,6 +190,7 @@ internal class SQLMethods
         }
     }
 
+    // Checks if it actually exists or not.
     public static string? GetIDFromEntity(string ID)
     {
         return (string?)GetDataFromEntity(ID, "ID");

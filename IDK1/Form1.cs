@@ -11,11 +11,23 @@ namespace IDK1
         {
             InitializeComponent();
             UC_ATP_Insert(new UC_Insert());
+            UC_Pedigree();
             updateColor(0);
         }
         public void UC_ATP_Insert(UserControl userControl)
         {
             var scpc = splitContainer1.Panel1.Controls;
+            userControl.Dock = DockStyle.Fill;
+            scpc.Clear();
+            scpc.Add(userControl);
+            userControl.BringToFront();
+            userControl.Focus();
+        }
+
+        public void UC_Pedigree()
+        {
+            var scpc = splitContainer1.Panel2.Controls;
+            var userControl = new UC_Pedigree();
             userControl.Dock = DockStyle.Fill;
             scpc.Clear();
             scpc.Add(userControl);
