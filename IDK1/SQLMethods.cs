@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace IDK1;
-internal class SQLMethods
-{
+internal class SQLMethods {
     public static readonly string dbpath = @"PedigreeDB.db";
     public static SQLiteConnection CreateConnection() {
         // Create a new database connection:
         SQLiteConnection sqlite_conn = new SQLiteConnection("Data Source=" + dbpath + ";foreign keys=true;Version=3;New=True;Compress=True;");
-        
+
         // Open the connection:
         try {
             sqlite_conn.Open();
@@ -79,7 +76,7 @@ internal class SQLMethods
 
                 // Execute command
                 sqlite_cmd.ExecuteNonQuery();
-            }  
+            }
         }
     }
 
@@ -133,9 +130,9 @@ internal class SQLMethods
                     else {
                         return null;
                     }
-                }  
+                }
             }
-                
+
         }
     }
 
@@ -157,9 +154,9 @@ internal class SQLMethods
                     }
                 }
 
-                
+
             }
-                
+
         }
     }
 
@@ -204,10 +201,10 @@ internal class SQLMethods
                         return null;
                     }
                 }
-                    
+
             }
-            
-        }  
+
+        }
     }
 
     public static ArrayList GetFatherFromEntity(string ID) {
@@ -234,10 +231,10 @@ internal class SQLMethods
                     return fatherData;
                 }
             }
-                
+
         }
 
-            
+
     }
 
     public static void UpdateBirth(string ID, string Date) {
@@ -341,8 +338,7 @@ internal class SQLMethods
     public static ArrayList GetDatabase() {
         return null;
         // Create a connection to the SQLite database
-        using (SQLiteConnection sqlite_conn = CreateConnection())
-        {
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
             // Declare a SQLiteDataReader object and an ArrayList
             SQLiteDataReader sqlite_datareader;
             ArrayList databaseData = new ArrayList();
@@ -355,8 +351,7 @@ internal class SQLMethods
             sqlite_datareader = sqlite_cmd.ExecuteReader();
 
             // Loop through each row in the data reader
-            while (sqlite_datareader.Read())
-            {
+            while (sqlite_datareader.Read()) {
                 //
                 databaseData.Add(sqlite_datareader.GetString(1));
             }
