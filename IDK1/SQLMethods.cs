@@ -281,12 +281,13 @@ internal class SQLMethods {
         }
     }
 
-    public static void UpdateParent(string CID, string PID) {
+    public static void UpdateParent(string CID, string PID, string OPID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
-                sqlite_cmd.CommandText = "UPDATE Parent SET ParentID = @PID WHERE ChildID = @CID";
+                sqlite_cmd.CommandText = "UPDATE Parent SET ParentID = @PID WHERE ChildID = @CID AND ParentID = @OPID";
                 sqlite_cmd.Parameters.AddWithValue("@CID", CID);
                 sqlite_cmd.Parameters.AddWithValue("@PID", PID);
+                sqlite_cmd.Parameters.AddWithValue("@OPID", OPID);
                 sqlite_cmd.ExecuteNonQuery();
             }
         }
