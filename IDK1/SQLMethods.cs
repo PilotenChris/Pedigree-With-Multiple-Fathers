@@ -196,8 +196,6 @@ internal class SQLMethods {
                         return mother;
                     }
                     else {
-                        // Close the database connection
-                        sqlite_conn.Close();
                         return null;
                     }
                 }
@@ -224,9 +222,6 @@ internal class SQLMethods {
                         // Get the value in the second column of the current row and add the value to the sexData ArrayList
                         fatherData.Add(sqlite_datareader.GetString(0));
                     }
-
-                    // Close the database connection
-                    sqlite_conn.Close();
 
                     return fatherData;
                 }
@@ -293,7 +288,6 @@ internal class SQLMethods {
         }
     }
 
-    // Death
     public static void DeleteDeath(string ID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -304,7 +298,6 @@ internal class SQLMethods {
         }
     }
 
-    // Parent
     public static void DeleteParent(string CID, string PID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -326,7 +319,6 @@ internal class SQLMethods {
         }
     }
 
-    // All
     public static void DeleteEntity(string ID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -344,6 +336,12 @@ internal class SQLMethods {
                 sqlite_cmd.ExecuteNonQuery();
             }
         }
+    }
+
+    public static async Task<string> FUCK() {
+        await Task.Delay(10000);
+        Debug.WriteLine("test");
+        return "test";
     }
 
     // Make IsParent return ArrayList of children

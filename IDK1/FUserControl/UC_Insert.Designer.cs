@@ -113,7 +113,7 @@ partial class UC_Insert
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.62749F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.62981F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.60522F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(239, 350);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(408, 350);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label6
@@ -124,16 +124,16 @@ partial class UC_Insert
             this.label6.Location = new System.Drawing.Point(3, 250);
             this.label6.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 15);
+            this.label6.Size = new System.Drawing.Size(117, 15);
             this.label6.TabIndex = 13;
             this.label6.Text = "Father/s";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(75, 283);
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.Location = new System.Drawing.Point(126, 283);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -143,28 +143,30 @@ partial class UC_Insert
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.b_DeleteFather);
-            this.splitContainer2.Size = new System.Drawing.Size(161, 64);
-            this.splitContainer2.SplitterDistance = 96;
+            this.splitContainer2.Size = new System.Drawing.Size(279, 64);
+            this.splitContainer2.SplitterDistance = 169;
             this.splitContainer2.TabIndex = 15;
             // 
             // listBox1
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.HorizontalScrollbar = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(-2, 3);
+            this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(95, 64);
+            this.listBox1.Size = new System.Drawing.Size(163, 64);
             this.listBox1.TabIndex = 4;
             // 
             // b_DeleteFather
             // 
-            this.b_DeleteFather.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_DeleteFather.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.b_DeleteFather.ForeColor = System.Drawing.Color.Black;
-            this.b_DeleteFather.Location = new System.Drawing.Point(5, 3);
+            this.b_DeleteFather.Location = new System.Drawing.Point(2, 3);
             this.b_DeleteFather.Name = "b_DeleteFather";
-            this.b_DeleteFather.Size = new System.Drawing.Size(52, 23);
+            this.b_DeleteFather.Size = new System.Drawing.Size(100, 23);
             this.b_DeleteFather.TabIndex = 5;
             this.b_DeleteFather.Text = "Delete";
             this.b_DeleteFather.UseVisualStyleBackColor = true;
@@ -176,9 +178,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.Controls.Add(this.splitContainer1);
-            this.panel7.Location = new System.Drawing.Point(75, 243);
+            this.panel7.Location = new System.Drawing.Point(126, 243);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(161, 34);
+            this.panel7.Size = new System.Drawing.Size(279, 34);
             this.panel7.TabIndex = 14;
             // 
             // splitContainer1
@@ -197,8 +199,8 @@ partial class UC_Insert
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.button1);
-            this.splitContainer1.Size = new System.Drawing.Size(161, 28);
-            this.splitContainer1.SplitterDistance = 98;
+            this.splitContainer1.Size = new System.Drawing.Size(279, 28);
+            this.splitContainer1.SplitterDistance = 169;
             this.splitContainer1.TabIndex = 0;
             // 
             // textBox6
@@ -209,7 +211,7 @@ partial class UC_Insert
             this.textBox6.Location = new System.Drawing.Point(3, 4);
             this.textBox6.Name = "textBox6";
             this.textBox6.PlaceholderText = "Unkown";
-            this.textBox6.Size = new System.Drawing.Size(92, 23);
+            this.textBox6.Size = new System.Drawing.Size(163, 23);
             this.textBox6.TabIndex = 1;
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -223,7 +225,7 @@ partial class UC_Insert
             this.button1.MaximumSize = new System.Drawing.Size(0, 23);
             this.button1.MinimumSize = new System.Drawing.Size(0, 23);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
@@ -237,7 +239,7 @@ partial class UC_Insert
             this.label5.Location = new System.Drawing.Point(3, 210);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 15);
+            this.label5.Size = new System.Drawing.Size(117, 15);
             this.label5.TabIndex = 11;
             this.label5.Text = "Mother";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -248,9 +250,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.Controls.Add(this.textBox5);
-            this.panel6.Location = new System.Drawing.Point(75, 203);
+            this.panel6.Location = new System.Drawing.Point(126, 203);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(161, 34);
+            this.panel6.Size = new System.Drawing.Size(279, 34);
             this.panel6.TabIndex = 12;
             // 
             // textBox5
@@ -261,7 +263,7 @@ partial class UC_Insert
             this.textBox5.Location = new System.Drawing.Point(3, 3);
             this.textBox5.Name = "textBox5";
             this.textBox5.PlaceholderText = "Unknown";
-            this.textBox5.Size = new System.Drawing.Size(155, 23);
+            this.textBox5.Size = new System.Drawing.Size(273, 23);
             this.textBox5.TabIndex = 1;
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -273,7 +275,7 @@ partial class UC_Insert
             this.label4.Location = new System.Drawing.Point(3, 170);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 15);
+            this.label4.Size = new System.Drawing.Size(117, 15);
             this.label4.TabIndex = 9;
             this.label4.Text = "Color";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -284,9 +286,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.Controls.Add(this.comboBox1);
-            this.panel5.Location = new System.Drawing.Point(75, 163);
+            this.panel5.Location = new System.Drawing.Point(126, 163);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(161, 34);
+            this.panel5.Size = new System.Drawing.Size(279, 34);
             this.panel5.TabIndex = 10;
             // 
             // comboBox1
@@ -297,7 +299,7 @@ partial class UC_Insert
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(3, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(154, 23);
+            this.comboBox1.Size = new System.Drawing.Size(272, 23);
             this.comboBox1.TabIndex = 0;
             // 
             // label3
@@ -308,7 +310,7 @@ partial class UC_Insert
             this.label3.Location = new System.Drawing.Point(3, 130);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 15);
+            this.label3.Size = new System.Drawing.Size(117, 15);
             this.label3.TabIndex = 7;
             this.label3.Text = "Death Date";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -319,9 +321,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.Controls.Add(this.textBox3);
-            this.panel4.Location = new System.Drawing.Point(75, 123);
+            this.panel4.Location = new System.Drawing.Point(126, 123);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(161, 34);
+            this.panel4.Size = new System.Drawing.Size(279, 34);
             this.panel4.TabIndex = 8;
             // 
             // textBox3
@@ -332,7 +334,7 @@ partial class UC_Insert
             this.textBox3.Location = new System.Drawing.Point(3, 3);
             this.textBox3.Name = "textBox3";
             this.textBox3.PlaceholderText = "YYYY/MM/DD";
-            this.textBox3.Size = new System.Drawing.Size(155, 23);
+            this.textBox3.Size = new System.Drawing.Size(273, 23);
             this.textBox3.TabIndex = 1;
             this.textBox3.Text = "2000/2/2";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -345,7 +347,7 @@ partial class UC_Insert
             this.label2.Location = new System.Drawing.Point(3, 90);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 15);
+            this.label2.Size = new System.Drawing.Size(117, 15);
             this.label2.TabIndex = 5;
             this.label2.Text = "Birth Date";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -356,9 +358,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Location = new System.Drawing.Point(75, 83);
+            this.panel3.Location = new System.Drawing.Point(126, 83);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(161, 34);
+            this.panel3.Size = new System.Drawing.Size(279, 34);
             this.panel3.TabIndex = 6;
             // 
             // textBox2
@@ -369,7 +371,7 @@ partial class UC_Insert
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.PlaceholderText = "YYYY/MM/DD";
-            this.textBox2.Size = new System.Drawing.Size(155, 23);
+            this.textBox2.Size = new System.Drawing.Size(273, 23);
             this.textBox2.TabIndex = 1;
             this.textBox2.Text = "1999/1/1";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -382,7 +384,7 @@ partial class UC_Insert
             this.label1.Location = new System.Drawing.Point(3, 50);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 15);
+            this.label1.Size = new System.Drawing.Size(117, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "Sex";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -393,9 +395,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.comboBox2);
-            this.panel2.Location = new System.Drawing.Point(75, 43);
+            this.panel2.Location = new System.Drawing.Point(126, 43);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(161, 34);
+            this.panel2.Size = new System.Drawing.Size(279, 34);
             this.panel2.TabIndex = 4;
             // 
             // comboBox2
@@ -406,7 +408,7 @@ partial class UC_Insert
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(3, 4);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(154, 23);
+            this.comboBox2.Size = new System.Drawing.Size(272, 23);
             this.comboBox2.TabIndex = 1;
             // 
             // panel1
@@ -415,9 +417,9 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.TB_ID);
-            this.panel1.Location = new System.Drawing.Point(75, 3);
+            this.panel1.Location = new System.Drawing.Point(126, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(161, 34);
+            this.panel1.Size = new System.Drawing.Size(279, 34);
             this.panel1.TabIndex = 2;
             // 
             // TB_ID
@@ -427,7 +429,7 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TB_ID.Location = new System.Drawing.Point(3, 3);
             this.TB_ID.Name = "TB_ID";
-            this.TB_ID.Size = new System.Drawing.Size(155, 23);
+            this.TB_ID.Size = new System.Drawing.Size(273, 23);
             this.TB_ID.TabIndex = 1;
             this.TB_ID.Text = "42";
             this.TB_ID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -440,7 +442,7 @@ partial class UC_Insert
             this.L_ID.Location = new System.Drawing.Point(3, 10);
             this.L_ID.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.L_ID.Name = "L_ID";
-            this.L_ID.Size = new System.Drawing.Size(66, 15);
+            this.L_ID.Size = new System.Drawing.Size(117, 15);
             this.L_ID.TabIndex = 0;
             this.L_ID.Text = "ID";
             this.L_ID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -452,7 +454,7 @@ partial class UC_Insert
             this.b_InsertData.ForeColor = System.Drawing.Color.Black;
             this.b_InsertData.Location = new System.Drawing.Point(3, 356);
             this.b_InsertData.Name = "b_InsertData";
-            this.b_InsertData.Size = new System.Drawing.Size(233, 23);
+            this.b_InsertData.Size = new System.Drawing.Size(402, 23);
             this.b_InsertData.TabIndex = 2;
             this.b_InsertData.Text = "Insert";
             this.b_InsertData.UseVisualStyleBackColor = true;
@@ -465,7 +467,7 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Right)));
             this.L_ErrorMessageField.Location = new System.Drawing.Point(3, 0);
             this.L_ErrorMessageField.Name = "L_ErrorMessageField";
-            this.L_ErrorMessageField.Size = new System.Drawing.Size(227, 100);
+            this.L_ErrorMessageField.Size = new System.Drawing.Size(396, 100);
             this.L_ErrorMessageField.TabIndex = 3;
             // 
             // panel8
@@ -475,7 +477,7 @@ partial class UC_Insert
             this.panel8.Controls.Add(this.L_ErrorMessageField);
             this.panel8.Location = new System.Drawing.Point(3, 385);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(233, 100);
+            this.panel8.Size = new System.Drawing.Size(402, 100);
             this.panel8.TabIndex = 4;
             // 
             // UC_Insert
@@ -489,7 +491,7 @@ partial class UC_Insert
             this.ForeColor = System.Drawing.Color.White;
             this.MinimumSize = new System.Drawing.Size(239, 0);
             this.Name = "UC_Insert";
-            this.Size = new System.Drawing.Size(239, 639);
+            this.Size = new System.Drawing.Size(408, 639);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);

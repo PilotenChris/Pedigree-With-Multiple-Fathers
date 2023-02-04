@@ -175,6 +175,7 @@
             this.b_Dummy.TabIndex = 1;
             this.b_Dummy.Text = "Dummy";
             this.b_Dummy.UseVisualStyleBackColor = true;
+            this.b_Dummy.Click += new System.EventHandler(this.b_Dummy_Click);
             // 
             // b_ToggleView
             // 
