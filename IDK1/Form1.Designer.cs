@@ -36,6 +36,7 @@
             this.b_Update = new System.Windows.Forms.Button();
             this.b_Delete = new System.Windows.Forms.Button();
             this.b_Print = new System.Windows.Forms.Button();
+            this.b_Dummy = new System.Windows.Forms.Button();
             this.b_ToggleView = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -94,6 +95,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.b_Dummy);
             this.splitContainer2.Panel2.Controls.Add(this.b_ToggleView);
             this.splitContainer2.Size = new System.Drawing.Size(944, 30);
             this.splitContainer2.SplitterDistance = 618;
@@ -164,6 +166,16 @@
             this.b_Print.Text = "Print";
             this.b_Print.UseVisualStyleBackColor = true;
             // 
+            // b_Dummy
+            // 
+            this.b_Dummy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_Dummy.Location = new System.Drawing.Point(140, 3);
+            this.b_Dummy.Name = "b_Dummy";
+            this.b_Dummy.Size = new System.Drawing.Size(75, 23);
+            this.b_Dummy.TabIndex = 1;
+            this.b_Dummy.Text = "Dummy";
+            this.b_Dummy.UseVisualStyleBackColor = true;
+            // 
             // b_ToggleView
             // 
             this.b_ToggleView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -208,5 +220,6 @@
         private Button b_Delete;
         private Button b_Print;
         private Button b_ToggleView;
+        private Button b_Dummy;
     }
 }
