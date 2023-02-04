@@ -308,9 +308,19 @@ internal class SQLMethods {
     public static void DeleteParent(string CID, string PID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
-                sqlite_cmd.CommandText = "DELETE FROM Death WHERE ChildID = @CID AND ParentID = @PID";
+                sqlite_cmd.CommandText = "DELETE FROM Parent WHERE ChildID = @CID AND ParentID = @PID";
                 sqlite_cmd.Parameters.AddWithValue("@CID", CID);
                 sqlite_cmd.Parameters.AddWithValue("@PID", PID);
+                sqlite_cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static void DeleteAllParents(string CID) {
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "DELETE FROM Parent WHERE ChildID = @CID";
+                sqlite_cmd.Parameters.AddWithValue("@CID", CID);
                 sqlite_cmd.ExecuteNonQuery();
             }
         }
@@ -335,6 +345,8 @@ internal class SQLMethods {
             }
         }
     }
+
+    // Make IsParent return ArrayList of children
 
     public static ArrayList GetDatabase() {
         return null;
