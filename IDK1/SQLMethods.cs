@@ -219,7 +219,7 @@ internal class SQLMethods {
                 using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
                     // Loop through each row in the data reader
                     while (sqlite_datareader.Read()) {
-                        // Get the value in the second column of the current row and add the value to the sexData ArrayList
+                        // Get the value in the first column of the current row and add the value to the fatherData ArrayList
                         fatherData.Add(sqlite_datareader.GetString(0));
                     }
 
@@ -345,6 +345,28 @@ internal class SQLMethods {
     }
 
     // Make IsParent return ArrayList of children
+    public static ArrayList IsParent(string ID) {
+        // Create a connection to the SQLite database
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            ArrayList childData = new ArrayList();
+
+            // x
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "SELECT Parent.ChildID FROM Parent, Entity WHERE ";
+                sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+
+                // Execute the command and store the resulting data
+                using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
+                    while (sqlite_datareader.Read()) {
+                        // Get the value in the first column of the current row and add the value to the childData ArrayList
+                        childData.Add(sqlite_datareader.GetString(0));
+                    }
+
+                    return childData;
+                }
+            }
+        }
+    }
 
     public static ArrayList GetDatabase() {
         return null;
