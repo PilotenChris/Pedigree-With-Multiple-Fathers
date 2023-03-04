@@ -345,14 +345,14 @@ internal class SQLMethods {
     }
 
     // Make IsParent return ArrayList of children
-    public static ArrayList IsParent(string ID) {
+    public static ArrayList GetChildren(string ID) {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             ArrayList childData = new ArrayList();
 
             // x
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
-                sqlite_cmd.CommandText = "SELECT Parent.ChildID FROM Parent, Entity WHERE ";
+                sqlite_cmd.CommandText = "SELECT Parent.ChildID FROM Parent, Entity WHERE Parent.parentID = @ID";
                 sqlite_cmd.Parameters.AddWithValue("@ID", ID);
 
                 // Execute the command and store the resulting data
@@ -366,6 +366,14 @@ internal class SQLMethods {
                 }
             }
         }
+    }
+
+    public static ArrayList GetParents(string ID) {
+        // Create a connection to the SQLite database
+        ArrayList parentData = new ArrayList();
+        parentData = GetFatherFromEntity(ID);
+        parentData.Add(GetMotherFromEntity(ID));
+        return parentData;
     }
 
     public static ArrayList GetDatabase() {
