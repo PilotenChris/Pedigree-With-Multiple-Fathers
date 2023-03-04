@@ -370,8 +370,7 @@ internal class SQLMethods {
 
     public static ArrayList GetParents(string ID) {
         // Create a connection to the SQLite database
-        ArrayList parentData = new ArrayList();
-        parentData = GetFatherFromEntity(ID);
+        ArrayList parentData = GetFatherFromEntity(ID); 
         parentData.Add(GetMotherFromEntity(ID));
         return parentData;
     }
