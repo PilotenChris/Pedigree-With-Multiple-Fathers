@@ -276,6 +276,16 @@ internal class SQLMethods {
         }
     }
 
+    public static void DeleteDeath(string ID) {
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "DELETE FROM Death WHERE ID = @ID";
+                sqlite_cmd.Parameters.AddWithValue("@ID", ID);
+                sqlite_cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
     public static void UpdateParent(string CID, string PID, string OPID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -288,17 +298,7 @@ internal class SQLMethods {
         }
     }
 
-    public static void DeleteDeath(string ID) {
-        using (SQLiteConnection sqlite_conn = CreateConnection()) {
-            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
-                sqlite_cmd.CommandText = "DELETE FROM Death WHERE ID = @ID";
-                sqlite_cmd.Parameters.AddWithValue("@ID", ID);
-                sqlite_cmd.ExecuteNonQuery();
-            }
-        }
-    }
-
-    public static void DeleteParent(string CID, string PID) {
+    public static void DeleteParentChildLink(string CID, string PID) {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "DELETE FROM Parent WHERE ChildID = @CID AND ParentID = @PID";
@@ -313,6 +313,16 @@ internal class SQLMethods {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "DELETE FROM Parent WHERE ChildID = @CID";
+                sqlite_cmd.Parameters.AddWithValue("@CID", CID);
+                sqlite_cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public static void DeleteAllChildrenLinks(string CID) {
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "DELETE FROM Parent WHERE ParentID = @CID";
                 sqlite_cmd.Parameters.AddWithValue("@CID", CID);
                 sqlite_cmd.ExecuteNonQuery();
             }

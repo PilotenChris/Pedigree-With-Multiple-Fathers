@@ -1,4 +1,6 @@
-﻿namespace IDK1.FUserControl;
+﻿using System.Collections;
+
+namespace IDK1.FUserControl;
 public partial class UC_Delete : UserControl {
     public UC_Delete() {
         InitializeComponent();
@@ -11,9 +13,25 @@ public partial class UC_Delete : UserControl {
                 ErrorMessage("Not Found");
                 return;
             }
-            SQLMethods.DeleteEntity(TB_ID.Text);
+            ArrayList Parents = SQLMethods.GetParents(TB_ID.Text);
+            ArrayList Children = SQLMethods.GetChildren(TB_ID.Text);
+            if (Parents.Count > 0 || Children.Count > 0) {
+                if (WarnUserAboutAssociatedLinks(TB_ID.Text, (Parents.Count + Children.Count))) {
+                    SQLMethods.DeleteAllChildrenLinks(TB_ID.Text);
+                    SQLMethods.DeleteEntity(TB_ID.Text);
+                }
+            }
+            //SQLMethods.DeleteEntity(TB_ID.Text);
             resetFields();
         }
+    }
+
+    private bool WarnUserAboutAssociatedLinks(string entityName, int numLinks) {
+        string message = $"Are you sure you want to delete all {numLinks} links associated with {entityName}?\nThis will potentially split pedigree trees in half";
+        bool result = Utils.ShowDialog(message, "Confirmation");
+
+        // Return the user's choice
+        return result;
     }
 
     private System.Windows.Forms.Timer timer1 = new();
