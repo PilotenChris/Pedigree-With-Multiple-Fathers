@@ -461,4 +461,64 @@ internal class SQLMethods {
             }
         }
     }
+
+
+    public static void InsertDummy() {
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            
+
+            // Insert Colors
+            string[] colors = { "Light Blue", "Light Yellow", "Light Green", "Light Grey", "Light Orange" };
+            
+
+            // Insert Sexes
+            string[] sexes = { "Unknown", "Male", "Female" };
+            
+
+            // Insert Entities
+            Random random = new Random();
+            DateTime startDate = new DateTime(1999, 1, 1);
+            DateTime endDate = DateTime.Today;
+
+            for (int i = 1; i <= 100; i++) {
+                int sexId = random.Next(1, 4);
+                int colorId = random.Next(1, 6);
+                string entityId = $"{sexes[sexId - 1][0]}{i}";
+
+                DateTime birthDate = startDate.AddDays(random.Next((endDate - startDate).Days));
+                string birthDateString = birthDate.ToString("yyyy/MM/dd");
+
+                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Entity (ID, Birth, Sex, Color) VALUES ('{entityId}', '{birthDateString}', {sexId}, {colorId})", sqlite_conn)) {
+                    sqlite_cmd.ExecuteNonQuery();
+                }
+
+                // Insert Death
+                if (random.NextDouble() > 0.7) // 30% chance of having a death record
+                {
+                    DateTime deathDate = birthDate.AddDays(random.Next((endDate - birthDate).Days));
+                    string deathDateString = deathDate.ToString("yyyy/MM/dd");
+
+                    using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Death (ID, Death) VALUES ('{entityId}', '{deathDateString}')", sqlite_conn)) {
+                        sqlite_cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Insert Parents
+                if (random.NextDouble() > 0.3) // 50% chance of having parent records
+                {
+                    for (int j = 1; j <= 2; j++) {
+                        string parentId = $"{sexes[random.Next(1, 4) - 1][0]}{random.Next(1, 11)}";
+                        if (parentId != entityId) // Ensure the parent is not the same as the child
+                        {
+                            using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT OR IGNORE INTO Parent (ChildID, ParentID) VALUES ('{entityId}', '{parentId}')", sqlite_conn)) {
+                                sqlite_cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 }
