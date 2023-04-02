@@ -385,11 +385,16 @@ internal class SQLMethods {
         return parentData;
     }
 
-    public static ArrayList GetEntityDatabase() {
+    public static async Task<ArrayList> GetDatabase() {
+        ArrayList databaseData = new ArrayList() { await GetEntityDatabase(), await GetDeathDatabase(), await GetParentDatabase() };
+        return databaseData;
+    }
+
+    public static async Task<List<(string, string, string, string)>> GetEntityDatabase() {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             // Declare a SQLiteDataReader object and an ArrayList
-            ArrayList databaseEntityData = new ArrayList();
+            List<(string, string, string, string)> databaseEntityData = new List<(string, string, string, string)>();
 
             //
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -400,10 +405,7 @@ internal class SQLMethods {
                     // Loop through each row in the data reader
                     while (sqlite_datareader.Read()) {
                         // Get the value in the first column of the current row and add the value to the fatherData ArrayList
-                        databaseEntityData.Add(sqlite_datareader.GetString(0));
-                        databaseEntityData.Add(sqlite_datareader.GetString(1));
-                        databaseEntityData.Add(sqlite_datareader.GetString(2));
-                        databaseEntityData.Add(sqlite_datareader.GetString(3));
+                        databaseEntityData.Add((sqlite_datareader.GetString(0), sqlite_datareader.GetString(1), sqlite_datareader.GetString(2), sqlite_datareader.GetString(3)));
                     }
 
                     return databaseEntityData;
@@ -412,11 +414,11 @@ internal class SQLMethods {
         }
     }
 
-    public static ArrayList GetDeathDatabase() {
+    public static async Task<List<(string, string)>> GetDeathDatabase() {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             // Declare a SQLiteDataReader object and an ArrayList
-            ArrayList databaseDeathData = new ArrayList();
+            List<(string, string)> databaseDeathData = new List<(string, string)>();
 
             //
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -427,8 +429,7 @@ internal class SQLMethods {
                     // Loop through each row in the data reader
                     while (sqlite_datareader.Read()) {
                         // Get the value in the first column of the current row and add the value to the fatherData ArrayList
-                        databaseDeathData.Add(sqlite_datareader.GetString(0));
-                        databaseDeathData.Add(sqlite_datareader.GetString(1));
+                        databaseDeathData.Add((sqlite_datareader.GetString(0), sqlite_datareader.GetString(1)));
                     }
 
                     return databaseDeathData;
@@ -437,11 +438,11 @@ internal class SQLMethods {
         }
     }
 
-    public static ArrayList GetParentDatabase() {
+    public static async Task<List<(string, string)>> GetParentDatabase() {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             // Declare a SQLiteDataReader object and an ArrayList
-            ArrayList databaseParentData = new ArrayList();
+            List<(string, string)> databaseParentData = new List<(string, string)>();
 
             //
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
@@ -452,8 +453,7 @@ internal class SQLMethods {
                     // Loop through each row in the data reader
                     while (sqlite_datareader.Read()) {
                         // Get the value in the first column of the current row and add the value to the fatherData ArrayList
-                        databaseParentData.Add(sqlite_datareader.GetString(0));
-                        databaseParentData.Add(sqlite_datareader.GetString(1));
+                        databaseParentData.Add((sqlite_datareader.GetString(0), sqlite_datareader.GetString(1)));
                     }
 
                     return databaseParentData;

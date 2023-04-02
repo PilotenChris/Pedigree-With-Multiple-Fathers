@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Data.SQLite;
 using System.Diagnostics;
 
@@ -9,13 +10,11 @@ namespace IDK1
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main() {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            if (!File.Exists(SQLMethods.dbpath))
-            {
+            if (!File.Exists(SQLMethods.dbpath)) {
                 // Creates the database if it doesn't exist
                 SQLiteConnection sqlite_conn = SQLMethods.CreateConnection();
                 CreateTable(sqlite_conn);
@@ -24,9 +23,18 @@ namespace IDK1
             }
             Application.Run(new Form1());
             //Debug.WriteLine(string.Join(",",(string[])SQLMethods.GetSexData().ToArray(typeof(string))));
+            //TestDatabaseAsync();
         }
 
-        
+        static async Task TestDatabaseAsync() {
+            ArrayList databaseData = await SQLMethods.GetDatabase();
+
+            // Iterate through the ArrayLists in databaseData
+            foreach (IList list in databaseData) {
+                Debug.WriteLine(string.Join(",", list.Cast<object>().Select(x => x.ToString()).ToArray()));
+            }
+
+        }
 
         static void CreateTable(SQLiteConnection conn) {
             // Create a connection to the SQLite database
