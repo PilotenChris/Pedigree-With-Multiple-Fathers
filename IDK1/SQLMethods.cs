@@ -465,55 +465,83 @@ internal class SQLMethods {
 
     public static void InsertDummy() {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
-            
+            // Provided Dummy Data with death dates
+            var dummyData = new List<string[]> {
+                new[] {"M1", "2000-02-01", "Unknown", "Unknown", "1", "2008-04-01"},
+                new[] {"M2", "2000-04-01", "Unknown", "Unknown", "1", "2008-04-01"},
+                new[] {"F3", "1999-06-01", "Unknown", "Unknown", "2", "2018-01-05"},
+                new[] {"F5", "2003-01-01", "F3", "M2", "2", "2012-10-08"},
+                new[] {"M9", "2004-12-01", "F40", "M1", "1", "2007-09-15"},
+                new[] {"M10", "2004-12-01", "F40", "M1", "1", "2007-09-15"},
+                new[] {"M14", "2004-06-01", "F3", "M2", "1", "2014-05-23"},
+                new[] {"M15", "2006-06-01", "F5", "M1", "1", "2010-02-17"},
+                new[] {"F17", "2006-06-01", "F5", "M1", "2", "2012-10-08"},
+                new[] {"M18", "2008-01-01", "F4", "M2", "1", "2010-05-24"},
+                new[] {"M19", "2008-01-01", "F4", "M2", "1", "2010-05-24"},
+                new[] {"F21", "2008-01-01", "F4", "M2", "2", "2017-10-29"},
+                new[] {"M23", "2008-01-01", "F11", "Unknown", "1", "2012-10-08"},
+                new[] {"F24", "2008-01-01", "F13", "Unknown", "2", "2013-11-02"},
+                new[] {"M29", "2008-01-01", "F13", "Unknown", "1", "2012-10-08"},
+                new[] {"M30", "2008-01-01", "F11", "Unknown", "1", "2013-01-25"},
+                new[] {"F31", "2008-01-01", "F11", "Unknown", "2", "2013-10-23"},
+                new[] {"F32", "2008-01-01", "F11", "Unknown", "2", "2013-10-23"},
+                new[] {"F34", "2008-12-01", "F4", "M1", "2", "2015-07-23"},
+                new[] {"M37", "2009-01-01", "F21", "M7", "1", "2014-05-16"},
+                new[] {"F39", "2009-01-01", "F21", "M7", "2", "2017-07-22"},
+                new[] {"M41", "2009-02-01", "F5", "M7", "1", "2011-06-26"},
+                new[] {"M42", "2009-02-01", "F5", "M7", "1", "2011-06-26"},
+                new[] {"M43", "2010-01-01", "F5", "M7", "1", "2014-05-17"},
+                new[] {"M44", "2010-01-01", "F5", "M7", "1", "2012-09-12"},
+                new[] {"F45", "2010-01-01", "F5", "M7", "2", "2012-07-26"},
+                new[] {"F46", "2010-01-01", "F5", "M7", "2", "2012-07-26"},
+                new[] {"F47", "2010-01-01", "F5", "M7", "2", "2012-10-08"},
+                new[] {"M48", "2010-06-01", "F5", "M7", "1", "2014-01-21"},
+                new[] {"M49", "2010-06-01", "F5", "M7", "1", "2014-01-21"},
+                new[] {"M50", "2010-06-01", "F13", "M16", "1", "2014-01-28"},
+                new[] {"M53", "2010-06-01", "F20", "M7", "1", "2014-05-16"},
+                new[] {"F54", "2010-06-01", "F20", "M7", "2", "2011-12-13"},
+                new[] {"F55", "2010-06-01", "F20", "M7", "2", "2011-12-13"},
+                new[] {"F56", "2010-06-01", "F20", "M7", "2", "2011-12-13"},
+                new[] {"F57", "2010-06-01", "F20", "M7", "2", "2011-12-13"},
+                new[] { "M92", "2014/01/05", "F39", "M14/M25/M26", "Male", "2015/01/05" },
+                new[] { "M93", "2014/01/05", "F39", "M14/M25/M26", "Male", "2017/07/22" },
+                new[] { "F94", "2014/01/05", "F39", "M14/M25/M26", "Female", "2016/10/25" },
+                new[] { "M105", "2014/01/06", "F34", "M25/M26", "Male", "2015/07/23" },
+                new[] { "M106", "2014/01/06", "F34", "M25/M26", "Male", "2015/07/23" },
+                new[] { "M107", "2014/01/06", "F34", "M25/M26", "Male", "2015/07/23" }
+            };
 
-            // Insert Colors
-            string[] colors = { "Light Blue", "Light Yellow", "Light Green", "Light Grey", "Light Orange" };
-            
+            // Inserting Dummy Data
+            foreach (var entry in dummyData) {
+                string entityID = entry[0];
+                DateTime birth = DateTime.Parse(entry[1]);
+                string motherID = entry[2];
+                string[] fatherIDs = entry[3].Split('/');
+                string sex = entry[4];
+                DateTime? death = string.IsNullOrWhiteSpace(entry[5]) ? (DateTime?)null : DateTime.Parse(entry[5]);
 
-            // Insert Sexes
-            string[] sexes = { "Unknown", "Male", "Female" };
-            
-
-            // Insert Entities
-            Random random = new Random();
-            DateTime startDate = new DateTime(1999, 1, 1);
-            DateTime endDate = DateTime.Today;
-
-            for (int i = 1; i <= 100; i++) {
-                int sexId = random.Next(1, 4);
-                int colorId = random.Next(1, 6);
-                string entityId = $"{sexes[sexId - 1][0]}{i}";
-
-                DateTime birthDate = startDate.AddDays(random.Next((endDate - startDate).Days));
-                string birthDateString = birthDate.ToString("yyyy/MM/dd");
-
-                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Entity (ID, Birth, Sex, Color) VALUES ('{entityId}', '{birthDateString}', {sexId}, {colorId})", sqlite_conn)) {
+                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Entity (ID, Birth, Sex) VALUES ('{entityID}', '{birth.ToString("yyyy-MM-dd")}', '{sex}')", sqlite_conn)) {
                     sqlite_cmd.ExecuteNonQuery();
                 }
 
-                // Insert Death
-                if (random.NextDouble() > 0.7) // 30% chance of having a death record
-                {
-                    DateTime deathDate = birthDate.AddDays(random.Next((endDate - birthDate).Days));
-                    string deathDateString = deathDate.ToString("yyyy/MM/dd");
-
-                    using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Death (ID, Death) VALUES ('{entityId}', '{deathDateString}')", sqlite_conn)) {
+                if (motherID != "Unknown") {
+                    using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Parent (ChildID, ParentID) VALUES ('{entityID}', '{motherID}')", sqlite_conn)) {
                         sqlite_cmd.ExecuteNonQuery();
                     }
                 }
 
-                // Insert Parents
-                if (random.NextDouble() > 0.3) // 50% chance of having parent records
-                {
-                    for (int j = 1; j <= 2; j++) {
-                        string parentId = $"{sexes[random.Next(1, 4) - 1][0]}{random.Next(1, 11)}";
-                        if (parentId != entityId) // Ensure the parent is not the same as the child
-                        {
-                            using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT OR IGNORE INTO Parent (ChildID, ParentID) VALUES ('{entityId}', '{parentId}')", sqlite_conn)) {
-                                sqlite_cmd.ExecuteNonQuery();
-                            }
+                foreach (string fatherID in fatherIDs) {
+                    if (fatherID != "Unknown") {
+                        using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Parent (ChildID, ParentID) VALUES ('{entityID}', '{fatherID}')", sqlite_conn)) {
+                            sqlite_cmd.ExecuteNonQuery();
                         }
+                    }
+                }
+
+                // Insert death date if it exists
+                if (death != null) {
+                    using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Death (ID, Death) VALUES ('{entityID}', '{death.Value.ToString("yyyy-MM-dd")}')", sqlite_conn)) {
+                        sqlite_cmd.ExecuteNonQuery();
                     }
                 }
             }
