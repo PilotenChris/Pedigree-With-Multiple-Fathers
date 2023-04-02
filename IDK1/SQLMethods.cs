@@ -475,8 +475,8 @@ internal class SQLMethods {
                 new[] { "M6", "2003/01/01", "F3", "M2", "Male", "2007/01/03" },
                 new[] { "M7", "2003/01/01", "F3", "M2", "Male", "2014/03/16" },
                 new[] { "M8", "2003/01/01", "F3", "M2", "Male", "2007/01/03" },
-                new[] {"M9", "2004-12-01", "F40", "M1", "Male", "2007-09-15"},
-                new[] {"M10", "2004-12-01", "F40", "M1", "Male", "2007-09-15"},
+                new[] {"M9", "2004-12-01", "F4", "M1", "Male", "2007-09-15"},
+                new[] {"M10", "2004-12-01", "F4", "M1", "Male", "2007-09-15"},
                 new[] { "F11", "2004/01/06", "F3", "M2", "Female", "2016/06/13" },
                 new[] { "F12", "2004/01/06", "F3", "M2", "Female", "2012/06/09" },
                 new[] { "F13", "2004/01/06", "F3", "M2", "Female", "2021/01/13" },
@@ -531,7 +531,6 @@ internal class SQLMethods {
                 new[] { "M107", "2014/01/06", "F34", "M25/M26", "Male", "2015/07/23" }
             };
 
-            // Inserting Dummy Data
             foreach (var entry in dummyData) {
                 string entityID = entry[0];
                 DateTime birth = DateTime.Parse(entry[1]);
@@ -540,7 +539,17 @@ internal class SQLMethods {
                 string sex = entry[4];
                 DateTime? death = string.IsNullOrWhiteSpace(entry[5]) ? (DateTime?)null : DateTime.Parse(entry[5]);
 
-                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Entity (ID, Birth, Sex) VALUES ('{entityID}', '{birth.ToString("yyyy-MM-dd")}', '{sex}')", sqlite_conn)) {
+                int sexId;
+                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"SELECT ID FROM Sex WHERE Sex = '{sex}'", sqlite_conn)) {
+                    sexId = Convert.ToInt32(sqlite_cmd.ExecuteScalar());
+                }
+
+                int colorId;
+                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"SELECT ID FROM Color ORDER BY RANDOM() LIMIT 1", sqlite_conn)) {
+                    colorId = Convert.ToInt32(sqlite_cmd.ExecuteScalar());
+                }
+
+                using (SQLiteCommand sqlite_cmd = new SQLiteCommand($"INSERT INTO Entity (ID, Birth, Sex, Color) VALUES ('{entityID}', '{birth.ToString("yyyy-MM-dd")}', {sexId}, {colorId})", sqlite_conn)) {
                     sqlite_cmd.ExecuteNonQuery();
                 }
 
