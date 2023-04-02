@@ -385,28 +385,80 @@ internal class SQLMethods {
         return parentData;
     }
 
-    public static ArrayList GetDatabase() {
-        return null;
+    public static ArrayList GetEntityDatabase() {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             // Declare a SQLiteDataReader object and an ArrayList
-            SQLiteDataReader sqlite_datareader;
-            ArrayList databaseData = new ArrayList();
+            ArrayList databaseEntityData = new ArrayList();
 
             //
-            SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT E.ID, E.Birth, M.ID, F.ID, S.Sex, E.Death, E.Color FROM Entity as E, Sex as S, Entity as M, Entity as F WHERE ...";
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "SELECT Entity.ID, Entity.Birth, Sex.Sex, Color.Color FROM Entity, Sex, Color WHERE Entity.Sex = Sex.ID AND Entity.Color = Color.ID";
 
-            // Execute the command and store the resulting data
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
+                // Execute the command and store the resulting data
+                using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
+                    // Loop through each row in the data reader
+                    while (sqlite_datareader.Read()) {
+                        // Get the value in the first column of the current row and add the value to the fatherData ArrayList
+                        databaseEntityData.Add(sqlite_datareader.GetString(0));
+                        databaseEntityData.Add(sqlite_datareader.GetString(1));
+                        databaseEntityData.Add(sqlite_datareader.GetString(2));
+                        databaseEntityData.Add(sqlite_datareader.GetString(3));
+                    }
 
-            // Loop through each row in the data reader
-            while (sqlite_datareader.Read()) {
-                //
-                databaseData.Add(sqlite_datareader.GetString(1));
+                    return databaseEntityData;
+                }
             }
+        }
+    }
 
-            //return null;
+    public static ArrayList GetDeathDatabase() {
+        // Create a connection to the SQLite database
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            // Declare a SQLiteDataReader object and an ArrayList
+            ArrayList databaseDeathData = new ArrayList();
+
+            //
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "SELECT * FROM Death";
+
+                // Execute the command and store the resulting data
+                using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
+                    // Loop through each row in the data reader
+                    while (sqlite_datareader.Read()) {
+                        // Get the value in the first column of the current row and add the value to the fatherData ArrayList
+                        databaseDeathData.Add(sqlite_datareader.GetString(0));
+                        databaseDeathData.Add(sqlite_datareader.GetString(1));
+                    }
+
+                    return databaseDeathData;
+                }
+            }
+        }
+    }
+
+    public static ArrayList GetParentDatabase() {
+        // Create a connection to the SQLite database
+        using (SQLiteConnection sqlite_conn = CreateConnection()) {
+            // Declare a SQLiteDataReader object and an ArrayList
+            ArrayList databaseParentData = new ArrayList();
+
+            //
+            using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
+                sqlite_cmd.CommandText = "SELECT * FROM Parent";
+
+                // Execute the command and store the resulting data
+                using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
+                    // Loop through each row in the data reader
+                    while (sqlite_datareader.Read()) {
+                        // Get the value in the first column of the current row and add the value to the fatherData ArrayList
+                        databaseParentData.Add(sqlite_datareader.GetString(0));
+                        databaseParentData.Add(sqlite_datareader.GetString(1));
+                    }
+
+                    return databaseParentData;
+                }
+            }
         }
     }
 }
