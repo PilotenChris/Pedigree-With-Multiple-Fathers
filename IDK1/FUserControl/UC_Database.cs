@@ -20,6 +20,8 @@ public partial class UC_Database : UserControl {
         // Create a new DataGridView control and add it to the user control
         var dataGridView = new DataGridView();
         dataGridView.ReadOnly= true;
+        dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        
         dataGridView.Dock = DockStyle.Fill;
         this.Controls.Add(dataGridView);
 

@@ -12,8 +12,8 @@ namespace IDK1
         public Form1()
         {
             InitializeComponent();
-            //UC_ATP_Insert(new UC_Insert());
-            UC_ATP_Insert(new UC_Delete());
+            UC_ATP_Insert(new UC_Insert());
+            //UC_ATP_Insert(new UC_Delete());
             toggleUCPD();
             updateColor(0);
         }
