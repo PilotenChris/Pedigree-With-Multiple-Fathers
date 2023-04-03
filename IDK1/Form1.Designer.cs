@@ -186,6 +186,7 @@
             this.b_ToggleView.TabIndex = 0;
             this.b_ToggleView.Text = "button5";
             this.b_ToggleView.UseVisualStyleBackColor = true;
+            this.b_ToggleView.Click += new System.EventHandler(this.b_ToggleView_Click);
             // 
             // Form1
             // 

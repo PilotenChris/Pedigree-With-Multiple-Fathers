@@ -463,7 +463,7 @@ internal class SQLMethods {
     }
 
 
-    public static void InsertDummy() {
+    public static async void InsertDummy() {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             // Provided Dummy Data with death dates
             var dummyData = new List<string[]> {

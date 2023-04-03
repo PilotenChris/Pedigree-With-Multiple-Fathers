@@ -61,6 +61,7 @@ public partial class UC_Update : UserControl {
     private void TB_ID_TextChanged(object sender, EventArgs e) {
         if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) && PV_ID != TB_ID.Text) {
             if (!string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text))) {
+                listBox1.Items.Clear();
                 PV_Parents.Clear();
                 string id = TB_ID.Text;
                 PV_ID = id;

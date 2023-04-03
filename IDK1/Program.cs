@@ -22,7 +22,7 @@ namespace IDK1
                 sqlite_conn.Close();
             }
             Application.Run(new Form1());
-            //Debug.WriteLine(string.Join(",",(string[])SQLMethods.GetSexData().ToArray(typeof(string))));
+            //Debug.WriteLine(string.Join(",", (string[])SQLMethods.GetSexData().ToArray(typeof(string))));
             //TestDatabaseAsync();
         }
 

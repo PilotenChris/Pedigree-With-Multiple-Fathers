@@ -2,17 +2,19 @@ using System.Diagnostics;
 using System.ServiceProcess;
 using System.Windows.Forms;
 using IDK1.FUserControl;
+using PedigreeMF.FUserControl;
 
 namespace IDK1
 {
     public partial class Form1 : Form
     {
+        bool tog = false;
         public Form1()
         {
             InitializeComponent();
             //UC_ATP_Insert(new UC_Insert());
             UC_ATP_Insert(new UC_Delete());
-            UC_Pedigree();
+            toggleUCPD();
             updateColor(0);
         }
         public void UC_ATP_Insert(UserControl userControl)
@@ -25,10 +27,31 @@ namespace IDK1
             userControl.Focus();
         }
 
+        public void toggleUCPD() {
+            if (tog) {
+                tog = false;
+                UC_Pedigree();
+            }
+            else {
+                tog = true;
+                UC_Database();
+            }
+        }
+
         public void UC_Pedigree()
         {
             var scpc = splitContainer1.Panel2.Controls;
             var userControl = new UC_Pedigree();
+            userControl.Dock = DockStyle.Fill;
+            scpc.Clear();
+            scpc.Add(userControl);
+            userControl.BringToFront();
+            userControl.Focus();
+        }
+
+        public void UC_Database() {
+            var scpc = splitContainer1.Panel2.Controls;
+            var userControl = new UC_Database();
             userControl.Dock = DockStyle.Fill;
             scpc.Clear();
             scpc.Add(userControl);
@@ -80,5 +103,9 @@ namespace IDK1
         }
 
         private void b_Dummy_Click(object sender, EventArgs e) => SQLMethods.InsertDummy();
+
+        private void b_ToggleView_Click(object sender, EventArgs e) {
+            toggleUCPD();
+        }
     }
 }
