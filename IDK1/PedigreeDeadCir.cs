@@ -1,7 +1,6 @@
-﻿public class PedigreeLiveSqu : PedigreeFig {
-    private int width = 20;
-    private int height = 20;
-    public PedigreeLiveSqu(int x, int y, string id) : base(x, y, id) {
+﻿public class PedigreeDeadCir : PedigreeFig {
+    private int radius = 10;
+    public PedigreeDeadCir(int x, int y, string id) : base(x, y, id) {
         setConnectionPX(x);
         setConnectionPY(y);
     }
@@ -13,15 +12,14 @@
     public override string getId() { return id; }
     public override int getX() { return x; }
     public override int getY() { return y; }
-    public override int getRadius() => throw new NotImplementedException();
-    public override int getWidth() { return width; }
-    public override int getHeight() { return height; }
-    public override void setConnectionPX(int x) { connectionPX = x + (getWidth() / 2); }
-    public override void setConnectionPY(int y) { connectionPY = y + getHeight(); }
+    public override int getRadius() { return radius; }
+    public override int getWidth() => throw new NotImplementedException();
+    public override int getHeight() => throw new NotImplementedException();
+    public override void setConnectionPX(int x) { connectionPX = x; }
+    public override void setConnectionPY(int y) { connectionPY = y + getRadius(); }
     public override int getDSX() => throw new NotImplementedException();
     public override int getDSY() => throw new NotImplementedException();
     public override int getDEX() => throw new NotImplementedException();
     public override int getDEY() => throw new NotImplementedException();
-    public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height; }
-
+    public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Radius: " + radius; }
 }

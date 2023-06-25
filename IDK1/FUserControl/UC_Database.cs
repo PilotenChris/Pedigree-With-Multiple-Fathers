@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using IDK1;
+﻿using IDK1;
 
 namespace PedigreeMF.FUserControl;
 public partial class UC_Database : UserControl {
@@ -19,9 +10,9 @@ public partial class UC_Database : UserControl {
     private async void GenerateTable() {
         // Create a new DataGridView control and add it to the user control
         var dataGridView = new DataGridView();
-        dataGridView.ReadOnly= true;
+        dataGridView.ReadOnly = true;
         dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-        
+
         dataGridView.Dock = DockStyle.Fill;
         this.Controls.Add(dataGridView);
 
@@ -36,7 +27,7 @@ public partial class UC_Database : UserControl {
 
         // Add rows to the DataGridView based on the data in the list
         foreach (var data in await SQLMethods.GetEntityDatabase()) {
-            dataGridView.Rows.Add(data.Item1, data.Item2, SQLMethods.GetDeathFromEntity(data.Item1), data.Item3, SQLMethods.GetMotherFromEntity(data.Item1), 
+            dataGridView.Rows.Add(data.Item1, data.Item2, SQLMethods.GetDeathFromEntity(data.Item1), data.Item3, SQLMethods.GetMotherFromEntity(data.Item1),
                 string.Join(",", (string[])SQLMethods.GetFatherFromEntity(data.Item1).ToArray(typeof(string))), data.Item4);
         }
     }

@@ -137,7 +137,7 @@ public partial class UC_Update : UserControl {
         }
     }
 
-    
+
 
     List<Control> controls = new List<Control>();
     private void resetFields() {
@@ -280,5 +280,5 @@ public partial class UC_Update : UserControl {
         return true;
     }
 
-    
+
 }

@@ -2,10 +2,8 @@ using System.Collections;
 using System.Data.SQLite;
 using System.Diagnostics;
 
-namespace IDK1
-{
-    internal static class Program
-    {
+namespace IDK1 {
+    internal static class Program {
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -46,7 +44,7 @@ namespace IDK1
             string Sql2 = "CREATE TABLE IF NOT EXISTS Entity(ID VARCHAR(10) NOT NULL, Birth DATE NOT NULL, Sex INTEGER NOT NULL, Color INTEGER NOT NULL, PRIMARY KEY(ID), FOREIGN KEY (Color) REFERENCES Color(ID), FOREIGN KEY (Sex) REFERENCES Sex(ID))";
             string Sql3 = "CREATE TABLE IF NOT EXISTS Parent(ChildID VARCHAR(10) NOT NULL, ParentID VARCHAR(10), PRIMARY KEY(ChildID, ParentID), FOREIGN KEY (ChildID) REFERENCES Entity(ID), FOREIGN KEY (ParentID) REFERENCES Entity(ID))";
             string Sql4 = "CREATE TABLE IF NOT EXISTS Death(ID VARCHAR(10) NOT NULL, Death DATE NOT NULL, PRIMARY KEY(ID), FOREIGN KEY(ID) REFERENCES Entity(ID))";
-            
+
             // Execute each of the SQL statements
             sqlite_cmd.CommandText = Sql;
             sqlite_cmd.ExecuteNonQuery();

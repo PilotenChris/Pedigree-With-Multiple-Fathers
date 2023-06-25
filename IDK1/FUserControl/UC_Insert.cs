@@ -238,7 +238,7 @@ public partial class UC_Insert : UserControl {
         // Check if first character is valid
         if (!allowed.Contains(str.ToUpper()[0]) && !char.IsNumber(str[0])) {
             box.Focus();
-            ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (" + string.Join(", ",allowed.ToCharArray()) + ") or a number.");
+            ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (" + string.Join(", ", allowed.ToCharArray()) + ") or a number.");
             return false;
         }
         // Check if string has a number if first character is valid
