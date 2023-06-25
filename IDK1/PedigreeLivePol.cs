@@ -10,7 +10,9 @@
 
     public override int getConnectionPX() { return connectionPX; }
     public override int getConnectionPY() { return connectionPY; }
-    public override List<(int xc, int yc)> getCoords() => throw new NotImplementedException();
+    public override List<(int xc, int yc)> getCoords() {
+        return coords;
+    }
     public override void setCoords(int connPX, int connPY) {
         coords = new List<(int xc, int yc)> {
             (connPX,connPY),(connPX + (getWidth() / 2),connPY + (getHeight() / 2)),(connPX + getWidth(),connPY),(connPX - (getWidth() / 2),connPY - (getHeight() / 2))
