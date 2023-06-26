@@ -2,12 +2,14 @@
     protected int x;
     protected int y;
     protected string id;
+    protected int birth;
     protected int connectionPX;
     protected int connectionPY;
-    public PedigreeFig(int x, int y, string id) {
+    public PedigreeFig(int x, int y, string id, int brith) {
         this.x = x;
         this.y = y;
         this.id = id;
+        this.birth = brith;
     }
     public abstract int getX();
     public abstract int getY();

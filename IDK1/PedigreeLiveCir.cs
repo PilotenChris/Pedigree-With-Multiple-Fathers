@@ -1,6 +1,6 @@
 ﻿public class PedigreeLiveCir : PedigreeFig {
     private int radius = 10;
-    public PedigreeLiveCir(int x, int y, string id) : base(x, y, id) {
+    public PedigreeLiveCir(int x, int y, string id, int brith) : base(x, y, id, brith) {
         setConnectionPX(x);
         setConnectionPY(y);
     }

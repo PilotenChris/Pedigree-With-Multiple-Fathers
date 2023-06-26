@@ -2,7 +2,7 @@
     private int width = 20;
     private int height = 20;
     private List<(int xc, int yc)> coords;
-    public PedigreeLivePol(int x, int y, string id) : base(x, y, id) {
+    public PedigreeLivePol(int x, int y, string id, int brith) : base(x, y, id, brith) {
         setConnectionPX(x);
         setConnectionPY(y);
         setCoords(getConnectionPX(), getConnectionPY());

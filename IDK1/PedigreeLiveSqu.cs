@@ -1,7 +1,7 @@
 ﻿public class PedigreeLiveSqu : PedigreeFig {
     private int width = 20;
     private int height = 20;
-    public PedigreeLiveSqu(int x, int y, string id) : base(x, y, id) {
+    public PedigreeLiveSqu(int x, int y, string id, int brith) : base(x, y, id, brith) {
         setConnectionPX(x);
         setConnectionPY(y);
     }
