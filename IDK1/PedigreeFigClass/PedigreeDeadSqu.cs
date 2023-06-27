@@ -1,7 +1,9 @@
-﻿public class PedigreeLiveSqu : PedigreeFig {
+﻿using System.Collections;
+
+public class PedigreeDeadSqu : PedigreeFig {
     private int width = 20;
     private int height = 20;
-    public PedigreeLiveSqu(int x, int y, string id, int brith) : base(x, y, id, brith) {
+    public PedigreeDeadSqu(int x, int y, string id, int birth, string mother, ArrayList father) : base(x, y, id, birth, mother, father) {
         setConnectionPX(x);
         setConnectionPY(y);
     }
@@ -13,6 +15,14 @@
     public override string getId() { return id; }
     public override int getX() { return x; }
     public override int getY() { return y; }
+    public override void setX(int x) {
+        setConnectionPX(x);
+        this.x = x;
+    }
+    public override void setY(int y) {
+        setConnectionPY(y);
+        this.y = y;
+    }
     public override int getRadius() => throw new NotImplementedException();
     public override int getWidth() { return width; }
     public override int getHeight() { return height; }

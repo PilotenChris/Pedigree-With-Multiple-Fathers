@@ -1,6 +1,8 @@
-﻿public class PedigreeDeadCir : PedigreeFig {
+﻿using System.Collections;
+
+public class PedigreeDeadCir : PedigreeFig {
     private int radius = 10;
-    public PedigreeDeadCir(int x, int y, string id, int brith) : base(x, y, id, brith) {
+    public PedigreeDeadCir(int x, int y, string id, int birth, string mother, ArrayList father) : base(x, y, id, birth, mother, father) {
         setConnectionPX(x);
         setConnectionPY(y);
     }
@@ -12,6 +14,14 @@
     public override string getId() { return id; }
     public override int getX() { return x; }
     public override int getY() { return y; }
+    public override void setX(int x) {
+        setConnectionPX(x);
+        this.x = x;
+    }
+    public override void setY(int y) {
+        setConnectionPY(y);
+        this.y = y;
+    }
     public override int getRadius() { return radius; }
     public override int getWidth() => throw new NotImplementedException();
     public override int getHeight() => throw new NotImplementedException();

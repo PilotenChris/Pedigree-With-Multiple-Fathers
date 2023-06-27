@@ -1,8 +1,10 @@
-﻿public class PedigreeLivePol : PedigreeFig {
+﻿using System.Collections;
+
+public class PedigreeLivePol : PedigreeFig {
     private int width = 20;
     private int height = 20;
     private List<(int xc, int yc)> coords;
-    public PedigreeLivePol(int x, int y, string id, int brith) : base(x, y, id, brith) {
+    public PedigreeLivePol(int x, int y, string id, int birth, string mother, ArrayList father) : base(x, y, id, birth, mother, father) {
         setConnectionPX(x);
         setConnectionPY(y);
         setCoords(getConnectionPX(), getConnectionPY());
@@ -28,6 +30,14 @@
     public override int getHeight() { return height; }
     public override int getX() => throw new NotImplementedException();
     public override int getY() => throw new NotImplementedException();
+    public override void setX(int x) {
+        setConnectionPX(x);
+        this.x = x;
+    }
+    public override void setY(int y) {
+        setConnectionPY(y);
+        this.y = y;
+    }
     public override void setConnectionPX(int x) { connectionPX = x + (getWidth() / 2); }
     public override void setConnectionPY(int y) { connectionPY = y + (getHeight() / 2); }
     public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Coords: " + coords; }

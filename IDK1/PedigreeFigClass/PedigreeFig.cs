@@ -1,18 +1,26 @@
-﻿public abstract class PedigreeFig {
+﻿using System.Collections;
+
+public abstract class PedigreeFig {
     protected int x;
     protected int y;
     protected string id;
     protected int birth;
+    protected string mother;
+    protected ArrayList father;
     protected int connectionPX;
     protected int connectionPY;
-    public PedigreeFig(int x, int y, string id, int brith) {
+    public PedigreeFig(int x, int y, string id, int birth, string mother, ArrayList father) {
         this.x = x;
         this.y = y;
         this.id = id;
-        this.birth = brith;
+        this.birth = birth;
+        this.mother = mother;
+        this.father = father;
     }
     public abstract int getX();
     public abstract int getY();
+    public abstract void setX(int x);
+    public abstract void setY(int y);
     public abstract string getId();
     public abstract int getConnectionPX();
     public abstract int getConnectionPY();
