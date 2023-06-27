@@ -2,7 +2,7 @@
 
 public class PedigreeCir : PedigreeFig {
     private int radius = 10;
-    public PedigreeLiveCir(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
+    public PedigreeCir(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
     }

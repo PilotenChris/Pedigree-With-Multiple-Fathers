@@ -4,7 +4,7 @@ public class PedigreePol : PedigreeFig {
     private int width = 20;
     private int height = 20;
     private List<(int xc, int yc)> coords;
-    public PedigreeLivePol(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
+    public PedigreePol(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
         setCoords(getConnectionPX(), getConnectionPY());
