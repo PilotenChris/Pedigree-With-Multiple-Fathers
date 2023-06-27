@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 
-public class PedigreeDeadPol : PedigreeFig {
+public class PedigreePol : PedigreeFig {
     private int width = 20;
     private int height = 20;
     private List<(int xc, int yc)> coords;
-    public PedigreeDeadPol(int x, int y, string id, int birth, string mother, ArrayList father) : base(x, y, id, birth, mother, father) {
+    public PedigreeLivePol(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
         setCoords(getConnectionPX(), getConnectionPY());

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-public class PedigreeDeadCir : PedigreeFig {
+public class PedigreeCir : PedigreeFig {
     private int radius = 10;
-    public PedigreeDeadCir(int x, int y, string id, int birth, string mother, ArrayList father) : base(x, y, id, birth, mother, father) {
+    public PedigreeLiveCir(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
     }

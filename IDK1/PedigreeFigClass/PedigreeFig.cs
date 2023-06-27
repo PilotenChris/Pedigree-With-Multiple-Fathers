@@ -7,15 +7,19 @@ public abstract class PedigreeFig {
     protected int birth;
     protected string mother;
     protected ArrayList father;
+    protected Boolean death;
+    protected Color color;
     protected int connectionPX;
     protected int connectionPY;
-    public PedigreeFig(int x, int y, string id, int birth, string mother, ArrayList father) {
+    public PedigreeFig(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) {
         this.x = x;
         this.y = y;
         this.id = id;
         this.birth = birth;
         this.mother = mother;
         this.father = father;
+        this.death = death;
+        this.color = color;
     }
     public abstract int getX();
     public abstract int getY();
