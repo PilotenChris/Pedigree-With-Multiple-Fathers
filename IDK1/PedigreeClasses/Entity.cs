@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IDK1;
 
 namespace PedigreeMF.PedigreeClasses;
 internal class Entity {
@@ -27,5 +28,9 @@ internal class Entity {
     }
     public Color FigColor {
         get; set;
+    }
+
+    public override string ToString() {
+        return "id " + Id + ", BirthYear " + BirthYear + ", Death " + Death + ", Sex " + Sex + ", Mother " + Mother + " Fathers (" + string.Join(",", (string[])Fathers.ToArray(typeof(string))) + "), Color " + FigColor.ToString(); 
     }
 }

@@ -33,6 +33,6 @@ public class PedigreeCir : PedigreeFig {
     public override int getDEY() => throw new NotImplementedException();
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
-        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Radius: " + radius + ", Mother: " + mother + ", Father/s: " + fathersString + ", Death: " + death + ", Color: " + color; 
+        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Radius: " + radius + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
     }
 }

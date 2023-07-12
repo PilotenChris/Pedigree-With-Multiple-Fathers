@@ -27,44 +27,61 @@ public partial class UC_Pedigree : UserControl {
         //    }
         //}
         foreach (var data in await SQLMethods.GetEntityDatabase()) {
+            string? tdeath = SQLMethods.GetDeathFromEntity(data.Item1);
+            ArrayList tfathers = new ArrayList() { string.Join(",", (string[])SQLMethods.GetFatherFromEntity(data.Item1).ToArray(typeof(string))) };
+            string? tmothers = SQLMethods.GetMotherFromEntity(data.Item1);
             Entity entity = new Entity() {
                 Id = data.Item1,
                 BirthYear = DateTime.Parse(data.Item2).Year,
-                Death = SQLMethods.GetDeathFromEntity(data.Item1),
+                Death = tdeath,
                 Sex = data.Item3,
-                Mother = SQLMethods.GetMotherFromEntity(data.Item1),
-                Fathers = new ArrayList(),
-                FigColor = Color.Blue
+                Mother = tmothers,
+                Fathers = tfathers,
+                FigColor = ChangeColor(data.Item4),
             };
 
             entities.Add(entity);
+            // Debug.WriteLine(entity.ToString());
         }
+        Debug.WriteLine(entities);
     }
 
     private async void UpdatePedigreeFig() {
         foreach (var data in entities) {
             if (data.Sex == SEX1) {
-                if (data.Death.Length > 0) {
-                    pedigreeTab.Add(new PedigreePol(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor));
+                if (data.Death != null) {
+                    PedigreePol pedigreePol = new PedigreePol(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
+                    pedigreeTab.Add(pedigreePol);
+                    //Debug.WriteLine(pedigreePol.ToString());
                 }
                 else {
-                    pedigreeTab.Add(new PedigreePol(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor));
+                    PedigreePol pedigreePol = new PedigreePol(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
+                    pedigreeTab.Add(pedigreePol);
+                    //Debug.WriteLine(pedigreePol.ToString());
                 }
             }
             else if (data.Sex == SEX2) {
-                if (data.Death.Length > 0) {
-                    pedigreeTab.Add(new PedigreeSqu(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor));
+                if (data.Death != null) {
+                    PedigreeSqu pedigreeSqu = new PedigreeSqu(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
+                    pedigreeTab.Add(pedigreeSqu);
+                    //Debug.WriteLine(pedigreeSqu.ToString());
                 }
                 else {
-                    pedigreeTab.Add(new PedigreeSqu(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor));
+                    PedigreeSqu pedigreeSqu = new PedigreeSqu(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
+                    pedigreeTab.Add(pedigreeSqu);
+                    //Debug.WriteLine(pedigreeSqu.ToString());
                 }
             }
             else if (data.Sex == SEX3) {
-                if (data.Death.Length > 0) {
-                    pedigreeTab.Add(new PedigreeCir(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor));
+                if (data.Death != null) {
+                    PedigreeCir pedigreeCir = new PedigreeCir(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
+                    pedigreeTab.Add(pedigreeCir);
+                    //Debug.WriteLine(pedigreeCir.ToString());
                 }
                 else {
-                    pedigreeTab.Add(new PedigreeCir(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor));
+                    PedigreeCir pedigreeCir = new PedigreeCir(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
+                    pedigreeTab.Add(pedigreeCir);
+                    //Debug.WriteLine(pedigreeCir.ToString());
                 }
             }
         }

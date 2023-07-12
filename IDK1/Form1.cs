@@ -9,6 +9,7 @@ namespace IDK1 {
             UC_ATP_Insert(new UC_Insert());
             //UC_ATP_Insert(new UC_Delete());
             toggleUCPD();
+            toggleUCPD();
             updateColor(0);
         }
         public void UC_ATP_Insert(UserControl userControl) {
