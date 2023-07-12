@@ -31,5 +31,5 @@ public class PedigreeCir : PedigreeFig {
     public override int getDSY() => throw new NotImplementedException();
     public override int getDEX() => throw new NotImplementedException();
     public override int getDEY() => throw new NotImplementedException();
-    public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Radius: " + radius; }
+    public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Radius: " + radius + ", Mother: " + mother + ", Father/s: " + father + ", Death: " + death + ", Color: " + color; }
 }
