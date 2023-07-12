@@ -32,6 +32,9 @@ public class PedigreeSqu : PedigreeFig {
     public override int getDSY() => throw new NotImplementedException();
     public override int getDEX() => throw new NotImplementedException();
     public override int getDEY() => throw new NotImplementedException();
-    public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Mother: " + mother + ", Father/s: " + father + ", Death: " + death + ", Color: " + color; }
+    public override string ToString() {
+        string fathersString = string.Join(",", father.Cast<string>());
+        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Mother: " + mother + ", Father/s: " + fathersString + ", Death: " + death + ", Color: " + color; 
+    }
 
 }

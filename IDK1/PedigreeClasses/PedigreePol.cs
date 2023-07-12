@@ -40,6 +40,9 @@ public class PedigreePol : PedigreeFig {
     }
     public override void setConnectionPX(int x) { connectionPX = x + (getWidth() / 2); }
     public override void setConnectionPY(int y) { connectionPY = y + (getHeight() / 2); }
-    public override string ToString() { return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Coords: " + coords + ", Mother: " + mother + ", Father/s: " + father + ", Death: " + death + ", Color: " + color; }
+    public override string ToString() {
+        string fathersString = string.Join(",", father.Cast<string>());
+        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Coords: " + coords + ", Mother: " + mother + ", Father/s: " + fathersString + ", Death: " + death + ", Color: " + color; 
+    }
 
 }
