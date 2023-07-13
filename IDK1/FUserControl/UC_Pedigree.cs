@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PedigreeMF.PedigreeClasses;
 
@@ -9,10 +10,12 @@ public partial class UC_Pedigree : UserControl {
     private readonly string SEX1 = "Unknown";
     private readonly string SEX2 = "Male";
     private readonly string SEX3 = "Female";
+    private PictureBox pictureBox1 = new PictureBox();
     public UC_Pedigree() {
         InitializeComponent();
         UpdateEntities();
         UpdatePedigreeFig();
+        Canvas();
     }
     private List<PedigreeFig> pedigreeTab = new List<PedigreeFig>();
 
@@ -86,6 +89,34 @@ public partial class UC_Pedigree : UserControl {
             }
         }
         Debug.WriteLine(pedigreeTab.Count);
+    }
+
+    private void Canvas() {
+        pictureBox1.Paint += PictureBox1_Paint;
+
+        pictureBox1.Dock = DockStyle.Fill;
+        pictureBox1.BackColor = Color.FromArgb(0,64,64,64);
+
+        panel1.Controls.Add(pictureBox1);
+    }
+
+    private void PictureBox1_Paint(object sender, PaintEventArgs e) {
+        e.Graphics.Clear(Parent.BackColor);
+        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+        foreach (PedigreeFig pedigreeFig in pedigreeTab) {
+            if (pedigreeFig is PedigreeCir) {
+                PedigreeCir pedigreeCir = (PedigreeCir)pedigreeFig;
+                //if ()
+                e.Graphics.DrawEllipse(Pens.Red, new Rectangle(pedigreeCir.getConnectionPX(), pedigreeCir.getConnectionPY(), pedigreeCir.getRadius(), pedigreeCir.getRadius()));
+            } else if (pedigreeFig is PedigreeSqu) {
+                PedigreeSqu pedigreeSqu = (PedigreeSqu)pedigreeFig;
+                e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(pedigreeSqu.getConnectionPX(), pedigreeSqu.getConnectionPY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
+            } else if (pedigreeFig is PedigreePol) {
+                PedigreePol pedigreePol = (PedigreePol)pedigreeFig;
+                e.Graphics.DrawPolygon();
+            }
+        }
     }
 
     private static Color ChangeColor(string color) {

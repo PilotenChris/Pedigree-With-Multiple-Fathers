@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 
 public class PedigreeCir : PedigreeFig {
-    private int radius = 10;
+    private int radius = 30;
     public PedigreeCir(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
