@@ -11,6 +11,9 @@ public partial class UC_Pedigree : UserControl {
     private readonly string SEX2 = "Male";
     private readonly string SEX3 = "Female";
     private PictureBox pictureBox1 = new PictureBox();
+    private int minYear;
+    private int maxYear;
+    private readonly int penWidth = 2;
     public UC_Pedigree() {
         InitializeComponent();
         UpdateEntities();
@@ -18,6 +21,7 @@ public partial class UC_Pedigree : UserControl {
         Canvas();
     }
     private List<PedigreeFig> pedigreeTab = new List<PedigreeFig>();
+    private List<PedigreeYear> pedigreeYears = new List<PedigreeYear>();
 
     private List<Entity> entities = new();
     private async void UpdateEntities() {
@@ -89,32 +93,54 @@ public partial class UC_Pedigree : UserControl {
             }
         }
         Debug.WriteLine(pedigreeTab.Count);
+        YearPedigreeEntity();
     }
 
     private void Canvas() {
         pictureBox1.Paint += PictureBox1_Paint;
 
         pictureBox1.Dock = DockStyle.Fill;
-        pictureBox1.BackColor = Color.FromArgb(0,64,64,64);
+        //pictureBox1.BackColor = Color.FromArgb(0,64,64,64);
+        pictureBox1.BackColor = Color.LightGray;
 
         panel1.Controls.Add(pictureBox1);
     }
 
     private void PictureBox1_Paint(object sender, PaintEventArgs e) {
-        e.Graphics.Clear(Parent.BackColor);
+        //e.Graphics.Clear(Parent.BackColor);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
         foreach (PedigreeFig pedigreeFig in pedigreeTab) {
             if (pedigreeFig is PedigreeCir) {
                 PedigreeCir pedigreeCir = (PedigreeCir)pedigreeFig;
                 //if ()
-                e.Graphics.DrawEllipse(Pens.Red, new Rectangle(pedigreeCir.getConnectionPX(), pedigreeCir.getConnectionPY(), pedigreeCir.getRadius(), pedigreeCir.getRadius()));
+                e.Graphics.DrawEllipse(new Pen(pedigreeCir.GetColor(), penWidth), new Rectangle(pedigreeCir.getConnectionPX(), pedigreeCir.getConnectionPY(), pedigreeCir.getRadius(), pedigreeCir.getRadius()));
             } else if (pedigreeFig is PedigreeSqu) {
                 PedigreeSqu pedigreeSqu = (PedigreeSqu)pedigreeFig;
-                e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(pedigreeSqu.getConnectionPX(), pedigreeSqu.getConnectionPY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
+                e.Graphics.DrawRectangle(new Pen(pedigreeSqu.GetColor(), penWidth), new Rectangle(pedigreeSqu.getConnectionPX(), pedigreeSqu.getConnectionPY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
             } else if (pedigreeFig is PedigreePol) {
-                PedigreePol pedigreePol = (PedigreePol)pedigreeFig;
-                e.Graphics.DrawPolygon();
+                //PedigreePol pedigreePol = (PedigreePol)pedigreeFig;
+                //e.Graphics.DrawPolygon();
+            }
+        }
+    }
+
+    private void YearPedigreeEntity() {
+        List<int> birthYears = pedigreeTab.Select(fig => fig.getBirth()).Distinct().ToList();
+        
+        // Finds the min and max Year from the entites in the Pedigree
+        if (birthYears.Count > 0) {
+            minYear = birthYears.Min();
+            maxYear = birthYears.Max();
+        } else {
+            Debug.WriteLine("No birth years found.");
+        }
+        
+        // Makes a list of the years as objects for the Pedigree
+        for (int year = minYear; year <= maxYear; year++) {
+            pedigreeYears.Add(new PedigreeYear(0, 0, year, false));
+            if (year != maxYear) {
+                pedigreeYears.Add(new PedigreeYear(0, 0, year + 1, true));
             }
         }
     }

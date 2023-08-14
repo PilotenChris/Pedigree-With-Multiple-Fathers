@@ -26,10 +26,13 @@ public class PedigreePol : PedigreeFig {
     public override int getDSY() => throw new NotImplementedException();
     public override string getId() => throw new NotImplementedException();
     public override int getRadius() => throw new NotImplementedException();
+    public override int getBirth() { return birth; }
+    public override Boolean getDeath() { return death; }
     public override int getWidth() { return width; }
     public override int getHeight() { return height; }
     public override int getX() => throw new NotImplementedException();
     public override int getY() => throw new NotImplementedException();
+    public override Color GetColor() { return color; }
     public override void setX(int x) {
         setConnectionPX(x);
         this.x = x;
@@ -42,7 +45,8 @@ public class PedigreePol : PedigreeFig {
     public override void setConnectionPY(int y) { connectionPY = y + (getHeight() / 2); }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
-        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Coords: " + coords + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
+        string coordsString = string.Join(",", coords.Cast<string>());
+        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Coords: " + coordsString + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
     }
 
 }

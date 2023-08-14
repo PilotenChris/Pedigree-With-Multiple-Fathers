@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
 public class PedigreeSqu : PedigreeFig {
-    private int width = 20;
-    private int height = 20;
+    private int width = 50;
+    private int height = 50;
     public PedigreeSqu(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
@@ -24,6 +24,8 @@ public class PedigreeSqu : PedigreeFig {
         this.y = y;
     }
     public override int getRadius() => throw new NotImplementedException();
+    public override int getBirth() { return birth; }
+    public override Boolean getDeath() { return death; }
     public override int getWidth() { return width; }
     public override int getHeight() { return height; }
     public override void setConnectionPX(int x) { connectionPX = x + (getWidth() / 2); }
@@ -32,6 +34,7 @@ public class PedigreeSqu : PedigreeFig {
     public override int getDSY() => throw new NotImplementedException();
     public override int getDEX() => throw new NotImplementedException();
     public override int getDEY() => throw new NotImplementedException();
+    public override Color GetColor() {  return color; }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
         return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 

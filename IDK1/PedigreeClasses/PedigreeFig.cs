@@ -32,9 +32,12 @@ public abstract class PedigreeFig {
     public abstract void setConnectionPY(int py);
     public abstract List<(int xc, int yc)> getCoords();
     public abstract void setCoords(int connPX, int connPY);
+    public abstract int getBirth();
+    public abstract Boolean getDeath();
     public abstract int getRadius();
     public abstract int getWidth();
     public abstract int getHeight();
+    public abstract Color GetColor();
     public abstract int getDSX();
     public abstract int getDSY();
     public abstract int getDEX();
