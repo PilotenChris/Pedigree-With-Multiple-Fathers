@@ -11,9 +11,11 @@ public abstract class PedigreeFig {
     protected Color color;
     protected int connectionPX;
     protected int connectionPY;
-    public PedigreeFig(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) {
+    protected int measurement;
+    public PedigreeFig(int x, int y, int measurement, string id, int birth, string mother, ArrayList father, Boolean death, Color color) {
         this.x = x;
         this.y = y;
+        this.measurement = measurement;
         this.id = id;
         this.birth = birth;
         this.mother = mother;
@@ -37,7 +39,7 @@ public abstract class PedigreeFig {
     public abstract int getRadius();
     public abstract int getWidth();
     public abstract int getHeight();
-    public abstract Color GetColor();
+    public abstract Color getColor();
     public abstract int getDSX();
     public abstract int getDSY();
     public abstract int getDEX();

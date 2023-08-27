@@ -14,6 +14,8 @@ public partial class UC_Pedigree : UserControl {
     private int minYear;
     private int maxYear;
     private readonly int penWidth = 2;
+    private readonly int measurement = 50;
+    private readonly int spaceBetweenFig = 10;
     public UC_Pedigree() {
         InitializeComponent();
         UpdateEntities();
@@ -57,36 +59,36 @@ public partial class UC_Pedigree : UserControl {
         foreach (var data in entities) {
             if (data.Sex == SEX1) {
                 if (data.Death != null) {
-                    PedigreePol pedigreePol = new PedigreePol(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
+                    PedigreePol pedigreePol = new PedigreePol(1, 1, measurement, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
                     pedigreeTab.Add(pedigreePol);
                     //Debug.WriteLine(pedigreePol.ToString());
                 }
                 else {
-                    PedigreePol pedigreePol = new PedigreePol(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
+                    PedigreePol pedigreePol = new PedigreePol(1, 1, measurement, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
                     pedigreeTab.Add(pedigreePol);
                     //Debug.WriteLine(pedigreePol.ToString());
                 }
             }
             else if (data.Sex == SEX2) {
                 if (data.Death != null) {
-                    PedigreeSqu pedigreeSqu = new PedigreeSqu(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
+                    PedigreeSqu pedigreeSqu = new PedigreeSqu(1, 1, measurement, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
                     pedigreeTab.Add(pedigreeSqu);
                     //Debug.WriteLine(pedigreeSqu.ToString());
                 }
                 else {
-                    PedigreeSqu pedigreeSqu = new PedigreeSqu(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
+                    PedigreeSqu pedigreeSqu = new PedigreeSqu(1, 1, measurement, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
                     pedigreeTab.Add(pedigreeSqu);
                     //Debug.WriteLine(pedigreeSqu.ToString());
                 }
             }
             else if (data.Sex == SEX3) {
                 if (data.Death != null) {
-                    PedigreeCir pedigreeCir = new PedigreeCir(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
+                    PedigreeCir pedigreeCir = new PedigreeCir(1, 1, measurement, data.Id, data.BirthYear, data.Mother, data.Fathers, true, data.FigColor);
                     pedigreeTab.Add(pedigreeCir);
                     //Debug.WriteLine(pedigreeCir.ToString());
                 }
                 else {
-                    PedigreeCir pedigreeCir = new PedigreeCir(1, 1, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
+                    PedigreeCir pedigreeCir = new PedigreeCir(1, 1, measurement, data.Id, data.BirthYear, data.Mother, data.Fathers, false, data.FigColor);
                     pedigreeTab.Add(pedigreeCir);
                     //Debug.WriteLine(pedigreeCir.ToString());
                 }
@@ -113,14 +115,23 @@ public partial class UC_Pedigree : UserControl {
         foreach (PedigreeFig pedigreeFig in pedigreeTab) {
             if (pedigreeFig is PedigreeCir) {
                 PedigreeCir pedigreeCir = (PedigreeCir)pedigreeFig;
-                //if ()
-                e.Graphics.DrawEllipse(new Pen(pedigreeCir.GetColor(), penWidth), new Rectangle(pedigreeCir.getConnectionPX(), pedigreeCir.getConnectionPY(), pedigreeCir.getRadius(), pedigreeCir.getRadius()));
+                e.Graphics.DrawEllipse(new Pen(pedigreeCir.getColor(), penWidth), new Rectangle(pedigreeCir.getX(), pedigreeCir.getY(), pedigreeCir.getRadius(), pedigreeCir.getRadius()));
+                if (pedigreeCir.getDeath()) {
+                    e.Graphics.DrawLine(new Pen(pedigreeCir.getColor(), penWidth), pedigreeCir.getDSX(), pedigreeCir.getDSY(), pedigreeCir.getDEX(), pedigreeCir.getDEY());
+                }
             } else if (pedigreeFig is PedigreeSqu) {
                 PedigreeSqu pedigreeSqu = (PedigreeSqu)pedigreeFig;
-                e.Graphics.DrawRectangle(new Pen(pedigreeSqu.GetColor(), penWidth), new Rectangle(pedigreeSqu.getConnectionPX(), pedigreeSqu.getConnectionPY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
+                e.Graphics.DrawRectangle(new Pen(pedigreeSqu.getColor(), penWidth), new Rectangle(pedigreeSqu.getX(), pedigreeSqu.getY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
+                if (pedigreeSqu.getDeath()) {
+                    e.Graphics.DrawLine(new Pen(pedigreeSqu.getColor(), penWidth), pedigreeSqu.getDSX(), pedigreeSqu.getDSY(), pedigreeSqu.getDEX(), pedigreeSqu.getDEY());
+                }
             } else if (pedigreeFig is PedigreePol) {
-                //PedigreePol pedigreePol = (PedigreePol)pedigreeFig;
-                //e.Graphics.DrawPolygon();
+                PedigreePol pedigreePol = (PedigreePol)pedigreeFig;
+                Point[] points = pedigreePol.getCoords().Select(coord => new Point(coord.xc, coord.yc)).ToArray();
+                e.Graphics.DrawPolygon(new Pen(pedigreePol.getColor(), penWidth), points);
+                if (pedigreePol.getDeath()) {
+                    e.Graphics.DrawLine(new Pen(pedigreePol.getColor(), penWidth), pedigreePol.getDSX(), pedigreePol.getDSY(), pedigreePol.getDEX(), pedigreePol.getDEY());
+                }
             }
         }
     }

@@ -3,7 +3,7 @@
 public class PedigreeSqu : PedigreeFig {
     private int width = 50;
     private int height = 50;
-    public PedigreeSqu(int x, int y, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, id, birth, mother, father, death, color) {
+    public PedigreeSqu(int x, int y, int measurement, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, measurement, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
     }
@@ -17,27 +17,25 @@ public class PedigreeSqu : PedigreeFig {
     public override int getY() { return y; }
     public override void setX(int x) {
         setConnectionPX(x);
-        this.x = x;
     }
     public override void setY(int y) {
         setConnectionPY(y);
-        this.y = y;
     }
-    public override int getRadius() => throw new NotImplementedException();
+    public override int getRadius() { return measurement; }
     public override int getBirth() { return birth; }
     public override Boolean getDeath() { return death; }
-    public override int getWidth() { return width; }
-    public override int getHeight() { return height; }
+    public override int getWidth() { return measurement; }
+    public override int getHeight() { return measurement; }
     public override void setConnectionPX(int x) { connectionPX = x + (getWidth() / 2); }
     public override void setConnectionPY(int y) { connectionPY = y + getHeight(); }
-    public override int getDSX() => throw new NotImplementedException();
-    public override int getDSY() => throw new NotImplementedException();
-    public override int getDEX() => throw new NotImplementedException();
-    public override int getDEY() => throw new NotImplementedException();
-    public override Color GetColor() {  return color; }
+    public override int getDSX() { return getX() + getWidth(); }
+    public override int getDSY() { return getY(); }
+    public override int getDEX() { return getX(); }
+    public override int getDEY() { return getY() + getHeight(); }
+    public override Color getColor() {  return color; }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
-        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + width + ", Height: " + height + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
+        return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + measurement + ", Height: " + measurement + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
     }
 
 }
