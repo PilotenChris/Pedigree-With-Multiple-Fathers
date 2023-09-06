@@ -67,7 +67,7 @@ namespace IDK1 {
             sqlite_cmd.ExecuteNonQuery();
 
             // Insert five rows into the "Color" table
-            sqlite_cmd.CommandText = "INSERT INTO Color (Color) VALUES ('Light Blue'),('Light Yellow'),('Light Green'),('Light Grey'),('Light Orange');";
+            sqlite_cmd.CommandText = "INSERT INTO Color (Color) VALUES ('Blue'),('Yellow'),('Green'),('Grey'),('Orange');";
             sqlite_cmd.ExecuteNonQuery();
         }
     }

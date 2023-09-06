@@ -11,6 +11,7 @@ public class PedigreePol : PedigreeFig {
     public override int getConnectionPX() { return connectionPX; }
     public override int getConnectionPY() { return connectionPY; }
     public override List<(int xc, int yc)> getCoords() {
+        setCoords(getConnectionPX(), getConnectionPY());
         return coords;
     }
     public override void setCoords(int connPX, int connPY) {
@@ -36,12 +37,16 @@ public class PedigreePol : PedigreeFig {
     public override Color getColor() { return color; }
     public override void setX(int x) {
         setConnectionPX(x);
+        this.x = x;
     }
     public override void setY(int y) {
         setConnectionPY(y);
+        this.y = y;
     }
     public override void setConnectionPX(int x) { connectionPX = x + (getWidth() / 2); }
     public override void setConnectionPY(int y) { connectionPY = y + (getHeight() / 2); }
+    public override string getMother() { return mother; }
+    public override ArrayList getFather() { return father; }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
         string coordsString = string.Join(",", coords.Cast<string>());

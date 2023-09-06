@@ -44,5 +44,7 @@ public abstract class PedigreeFig {
     public abstract int getDSY();
     public abstract int getDEX();
     public abstract int getDEY();
+    public abstract string getMother();
+    public abstract ArrayList getFather();
     public override abstract string ToString();
 }

@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 
 public class PedigreeSqu : PedigreeFig {
-    private int width = 50;
-    private int height = 50;
     public PedigreeSqu(int x, int y, int measurement, string id, int birth, string mother, ArrayList father, Boolean death, Color color) : base(x, y, measurement, id, birth, mother, father, death, color) {
         setConnectionPX(x);
         setConnectionPY(y);
@@ -17,9 +15,11 @@ public class PedigreeSqu : PedigreeFig {
     public override int getY() { return y; }
     public override void setX(int x) {
         setConnectionPX(x);
+        this.x = x;
     }
     public override void setY(int y) {
         setConnectionPY(y);
+        this.y = y;
     }
     public override int getRadius() { return measurement; }
     public override int getBirth() { return birth; }
@@ -33,6 +33,8 @@ public class PedigreeSqu : PedigreeFig {
     public override int getDEX() { return getX(); }
     public override int getDEY() { return getY() + getHeight(); }
     public override Color getColor() {  return color; }
+    public override string getMother() { return mother; }
+    public override ArrayList getFather() { return father; }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
         return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + measurement + ", Height: " + measurement + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 

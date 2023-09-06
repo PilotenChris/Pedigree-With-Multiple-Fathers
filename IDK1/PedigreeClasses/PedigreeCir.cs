@@ -15,9 +15,11 @@ public class PedigreeCir : PedigreeFig {
     public override int getY() { return y; }
     public override void setX(int x) {
         setConnectionPX(x);
+        this.x = x;
     }
     public override void setY(int y) {
         setConnectionPY(y);
+        this.y = y;
     }
     public override int getRadius() { return measurement; }
     public override int getWidth() { return measurement; }
@@ -31,6 +33,8 @@ public class PedigreeCir : PedigreeFig {
     public override int getDEX() { return getX(); }
     public override int getDEY() { return getY() + getRadius(); }
     public override Color getColor() { return color; }
+    public override string getMother() { return mother; }
+    public override ArrayList getFather() { return father; }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
         return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Radius: " + measurement + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
