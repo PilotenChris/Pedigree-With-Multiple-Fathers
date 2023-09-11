@@ -24,7 +24,7 @@ public class PedigreeCir : PedigreeFig {
     public override int getRadius() { return measurement; }
     public override int getWidth() { return measurement; }
     public override int getHeight() { return measurement; }
-    public override void setConnectionPX(int x) { connectionPX = x; }
+    public override void setConnectionPX(int x) { connectionPX = x + (getRadius()/2); }
     public override void setConnectionPY(int y) { connectionPY = y + getRadius(); }
     public override int getBirth() { return birth; }
     public override Boolean getDeath() { return death; }

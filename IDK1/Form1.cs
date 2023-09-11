@@ -4,6 +4,7 @@ using PedigreeMF.FUserControl;
 namespace IDK1 {
     public partial class Form1 : Form {
         bool tog = false;
+        private UC_Pedigree userControl2 = new UC_Pedigree();
         public Form1() {
             InitializeComponent();
             UC_ATP_Insert(new UC_Insert());
@@ -34,12 +35,11 @@ namespace IDK1 {
 
         public void UC_Pedigree() {
             var scpc = splitContainer1.Panel2.Controls;
-            var userControl = new UC_Pedigree();
-            userControl.Dock = DockStyle.Fill;
+            userControl2.Dock = DockStyle.Fill;
             scpc.Clear();
-            scpc.Add(userControl);
-            userControl.BringToFront();
-            userControl.Focus();
+            scpc.Add(userControl2);
+            userControl2.BringToFront();
+            userControl2.Focus();
         }
 
         public void UC_Database() {
@@ -92,6 +92,19 @@ namespace IDK1 {
 
         private void b_ToggleView_Click(object sender, EventArgs e) {
             toggleUCPD();
+        }
+
+        private void b_Print_Click(object sender, EventArgs e) {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
+                saveFileDialog.Filter = "PNG Image|*.png";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                    string filePath = saveFileDialog.FileName;
+
+                    userControl2.SaveCanvasAsPNG(filePath);
+
+                    MessageBox.Show("Canvas saved as PNG successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

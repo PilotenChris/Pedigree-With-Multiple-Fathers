@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PedigreeMF.PedigreeClasses;
@@ -14,8 +16,10 @@ public partial class UC_Pedigree : UserControl {
     private int minYear;
     private int maxYear;
     private readonly int penWidth = 3;
-    private readonly int measurement = 50;
+    private readonly int measurement = 75;
     private readonly int spaceBetweenFig = 20;
+    private int canvasHeight;
+    private int canvasWidth;
     public UC_Pedigree() {
         InitializeComponent();
         UpdateEntities();
@@ -49,7 +53,7 @@ public partial class UC_Pedigree : UserControl {
         Debug.WriteLine(entities);
     }
 
-    private async void InitiatePedigreeFig() {
+    private void InitiatePedigreeFig() {
         foreach (var data in entities) {
             if (data.Sex == SEX1) {
                 if (data.Death != null) {
@@ -98,24 +102,30 @@ public partial class UC_Pedigree : UserControl {
         pictureBox1.Dock = DockStyle.Fill;
         pictureBox1.BackColor = Color.LightGray;
 
+
+        panel1.AutoScroll = true;
+        panel1.AutoScrollMinSize = new Size(canvasWidth, canvasHeight);
+
         panel1.Controls.Add(pictureBox1);
     }
 
     private void PictureBox1_Paint(object sender, PaintEventArgs e) {
-        //e.Graphics.Clear(Parent.BackColor);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
         // Draws out the Years on the canvas
         foreach (PedigreeYear pedigreeYear in pedigreeYears) {
             if (!pedigreeYear.getSpaceYear()) {
-                e.Graphics.FillRectangle(new SolidBrush(pedigreeYear.getColor()), new Rectangle(pedigreeYear.getX(), pedigreeYear.getY(), pedigreeYear.getWidth(), pedigreeYear.getHeight() + (pedigreeYear.getHeight()/2)));
-                DrawCenteredText(e.Graphics, pedigreeYear.getYear()+"", new Rectangle(pedigreeYear.getX(), pedigreeYear.getY(), pedigreeYear.getWidth(), pedigreeYear.getHeight()));
-            } else if (pedigreeYear.getSpaceYear()) {
+                e.Graphics.FillRectangle(new SolidBrush(pedigreeYear.getColor()), new Rectangle(pedigreeYear.getX(), pedigreeYear.getY(), pedigreeYear.getWidth(), pedigreeYear.getHeight() + (pedigreeYear.getHeight() / 2)));
+                DrawCenteredText(e.Graphics, pedigreeYear.getYear() + "", new Rectangle(pedigreeYear.getX(), pedigreeYear.getY(), pedigreeYear.getWidth(), pedigreeYear.getHeight()));
+            }
+            else if (pedigreeYear.getSpaceYear()) {
                 e.Graphics.FillRectangle(new SolidBrush(pedigreeYear.getColor()), new Rectangle(pedigreeYear.getX(), pedigreeYear.getY(), pedigreeYear.getWidth(), pedigreeYear.getHeight() + (pedigreeYear.getHeight() / 2)));
             }
         }
 
-        // Draws out the entities on the canvas
+        
+
+        // Draws out the entities on the canvas with their ID in the center
         foreach (PedigreeFig pedigreeFig in pedigreeTab) {
             if (pedigreeFig is PedigreeCir) {
                 PedigreeCir pedigreeCir = (PedigreeCir)pedigreeFig;
@@ -124,14 +134,16 @@ public partial class UC_Pedigree : UserControl {
                     e.Graphics.DrawLine(new Pen(pedigreeCir.getColor(), penWidth), pedigreeCir.getDSX(), pedigreeCir.getDSY(), pedigreeCir.getDEX(), pedigreeCir.getDEY());
                 }
                 DrawCenteredText(e.Graphics, pedigreeCir.getId(), new Rectangle(pedigreeCir.getX(), pedigreeCir.getY(), pedigreeCir.getRadius(), pedigreeCir.getRadius()));
-            } else if (pedigreeFig is PedigreeSqu) {
+            }
+            else if (pedigreeFig is PedigreeSqu) {
                 PedigreeSqu pedigreeSqu = (PedigreeSqu)pedigreeFig;
                 e.Graphics.DrawRectangle(new Pen(pedigreeSqu.getColor(), penWidth), new Rectangle(pedigreeSqu.getX(), pedigreeSqu.getY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
                 if (pedigreeSqu.getDeath()) {
                     e.Graphics.DrawLine(new Pen(pedigreeSqu.getColor(), penWidth), pedigreeSqu.getDSX(), pedigreeSqu.getDSY(), pedigreeSqu.getDEX(), pedigreeSqu.getDEY());
                 }
                 DrawCenteredText(e.Graphics, pedigreeSqu.getId(), new Rectangle(pedigreeSqu.getX(), pedigreeSqu.getY(), pedigreeSqu.getWidth(), pedigreeSqu.getHeight()));
-            } else if (pedigreeFig is PedigreePol) {
+            }
+            else if (pedigreeFig is PedigreePol) {
                 PedigreePol pedigreePol = (PedigreePol)pedigreeFig;
                 Point[] points = pedigreePol.getCoords().Select(coord => new Point(coord.xc, coord.yc)).ToArray();
                 e.Graphics.DrawPolygon(new Pen(pedigreePol.getColor(), penWidth), points);
@@ -145,15 +157,16 @@ public partial class UC_Pedigree : UserControl {
 
     private void YearPedigreeEntity() {
         List<int> birthYears = pedigreeTab.Select(fig => fig.getBirth()).Distinct().ToList();
-        
+
         // Finds the min and max Year from the entites in the Pedigree
         if (birthYears.Count > 0) {
             minYear = birthYears.Min();
             maxYear = birthYears.Max();
-        } else {
+        }
+        else {
             Debug.WriteLine("No birth years found.");
         }
-        
+
         // Clear the list of all the years (and spaceYears)
         pedigreeYears.Clear();
         // Makes a list of the years as objects for the Pedigree
@@ -165,6 +178,8 @@ public partial class UC_Pedigree : UserControl {
         }
         UpdatePedigreeFig();
     }
+
+    
 
     private void UpdatePedigreeFig() {
         // Clear the grid of Pedigree figures
@@ -202,7 +217,7 @@ public partial class UC_Pedigree : UserControl {
         }
 
         // Set's the right x and y coords for the PedigreeYear objects
-        for (int i = 0; i < pedigreeYears.Count; i++) { 
+        for (int i = 0; i < pedigreeYears.Count; i++) {
             int xPosition = 0;
             int yPosition;
             PedigreeYear pedigreeYear = pedigreeYears[i];
@@ -214,7 +229,7 @@ public partial class UC_Pedigree : UserControl {
         // Set's the right x and y coords for the PedigreeFig objects
         for (int i = 0; i < pedigreeGrid.Count; i++) {
             int xPosition = measurement + spaceBetweenFig;
-            int yPosition = i * (measurement + (measurement*2));
+            int yPosition = i * (measurement + (measurement * 2));
 
             foreach (PedigreeFig pedigreeFig in pedigreeGrid[i]) {
                 pedigreeFig.setX(xPosition);
@@ -224,6 +239,7 @@ public partial class UC_Pedigree : UserControl {
                 xPosition += measurement + spaceBetweenFig;
             }
         }
+        SetCanvasSize();
     }
 
     private void DrawCenteredText(Graphics g, string text, Rectangle bounds) {
@@ -231,9 +247,45 @@ public partial class UC_Pedigree : UserControl {
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
 
-            Font font = new Font(Font.FontFamily, measurement/4, FontStyle.Bold);
+            Font font = new Font(Font.FontFamily, measurement / 4, FontStyle.Bold);
 
             g.DrawString(text, font, Brushes.Black, bounds, stringFormat);
+        }
+    }
+
+    private void SetCanvasSize() {
+        int maxYV = int.MinValue;
+        int maxXV = int.MinValue;
+
+        foreach (PedigreeYear pedigreeYear in pedigreeYears) {
+            int yearHeight = pedigreeYear.getY() + pedigreeYear.getHeight() + (measurement / 2);
+            if (yearHeight > maxYV) {
+                maxYV = yearHeight;
+            }
+        }
+
+        foreach (PedigreeFig pedigreeFig in pedigreeTab) {
+            int figWidth = pedigreeFig.getX() + pedigreeFig.getWidth() + (measurement / 2);
+            if (figWidth > maxXV) {
+                maxXV = figWidth;
+            }
+        }
+
+        canvasWidth = maxXV;
+        canvasHeight = maxYV;
+    }
+
+    public void SaveCanvasAsPNG(string filePath) {
+        using (Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height)) { 
+
+            using (Graphics g = Graphics.FromImage(bitmap)) {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                g.Clear(Color.White);
+                pictureBox1.DrawToBitmap(bitmap, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+            }
+            bitmap.Save(filePath, ImageFormat.Png);
         }
     }
 
@@ -254,9 +306,9 @@ public partial class UC_Pedigree : UserControl {
 
     private static Color ChangeColor(string color) {
         switch (color) {
-            case "Blue": 
+            case "Blue":
                 return Color.Blue;
-            case "Yellow": 
+            case "Yellow":
                 return Color.Yellow;
             case "Green":
                 return Color.Green;
