@@ -25,10 +25,12 @@ namespace IDK1 {
         public void toggleUCPD() {
             if (tog) {
                 tog = false;
+                b_ToggleView.Text = "Database";
                 UC_Pedigree();
             }
             else {
                 tog = true;
+                b_ToggleView.Text = "Pedigree";
                 UC_Database();
             }
         }
