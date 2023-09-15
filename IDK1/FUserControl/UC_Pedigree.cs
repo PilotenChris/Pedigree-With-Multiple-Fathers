@@ -241,6 +241,11 @@ public partial class UC_Pedigree : UserControl {
                             averageX += spaceBetweenFig;
                         }
 
+                        // Ensure that the averageX is not too close to existing values in parentGroupAverages
+                        while (IsCloseToExistingValue(parentGroupAverages, averageX, 10)) {
+                            averageX += 15;
+                        }
+
                         // Ensure that the calculated average X coordinate is unique among parent groups
                         while (parentGroupAverages.ContainsValue(averageX)) {
                             averageX += spaceBetweenFig;
@@ -415,6 +420,16 @@ public partial class UC_Pedigree : UserControl {
 
             g.DrawString(text, font, Brushes.Black, bounds, stringFormat);
         }
+    }
+
+    // Helper function to check if the value is too close to existing values in the dictionary
+    private bool IsCloseToExistingValue(Dictionary<string, int> dictionary, int value, int minDistance) {
+        foreach (int existingValue in dictionary.Values) {
+            if (Math.Abs(existingValue - value) < minDistance) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void SetCanvasSize() {
