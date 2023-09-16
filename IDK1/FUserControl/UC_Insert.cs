@@ -32,7 +32,7 @@ public partial class UC_Insert : UserControl {
 
     // Event handler for Father Add button
     private void button1_Click(object sender, EventArgs e) {
-        if (ValidateString(textBox6.Text, label6, textBox6, false, "M")) {
+        if (ValidateString(textBox6.Text, label6, textBox6, false, "M") & ValidateString(textBox5.Text, label5, textBox5, false, "F")) {
             listBox1.Items.Add(textBox6.Text);
             textBox6.Clear();
         }
@@ -61,7 +61,7 @@ public partial class UC_Insert : UserControl {
         //Validate Parent fields
         if (ValidateString(TB_ID.Text, L_ID, TB_ID, false) && // ID
             ValidateString(textBox5.Text, label5, textBox5, true) && //F
-            ValidateString(textBox6.Text, label6, textBox6, true) && //M
+            (ValidateString(textBox6.Text, label6, textBox6, true) && ValidateString(textBox5.Text, label5, textBox5, false, showErrorOnFailure: false) || string.IsNullOrEmpty(textBox6.Text) && listBox1.Items.Count == 0) && //M
             IsValidDate(textBox2.Text, textBox2) && // Birth date
             IsValidDate(textBox3.Text, textBox3, true) // Death date
             ) {
@@ -197,7 +197,7 @@ public partial class UC_Insert : UserControl {
     private bool IsValidDate(string input, TextBox box, bool bEmpty = false) {
         // Use DateTime.TryParseExact method to validate the format of the input string
 #pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
-        if (!DateTime.TryParseExact(input, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
+        if (!DateTime.TryParseExact(input, "yyyy-M-d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
             if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
             ErrorMessage($"{input} is not a valid date.");
@@ -205,6 +205,17 @@ public partial class UC_Insert : UserControl {
         }
         else return true;
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
+    }
+
+    private bool ValidateMotherNotEmptyIfFather() {
+        if (string.IsNullOrEmpty(textBox6.Text) && listBox1.Items.Count == 0) {
+            return true;
+        }
+        else {
+            ErrorMessage("You cannot add a father without a Mother");
+            textBox5.Focus();
+            return false;
+        }
     }
 
     private System.Windows.Forms.Timer timer1 = new();
@@ -224,11 +235,13 @@ public partial class UC_Insert : UserControl {
         L_ErrorMessageField.Text = string.Empty;
     }
 
-    private bool ValidateString(string str, Label lab, TextBox box, bool Empty = false, string allowed = "FMU") {
+    private bool ValidateString(string str, Label lab, TextBox box, bool Empty = false, string allowed = "FMU", bool showErrorOnFailure = true) {
         // Check if string is empty or not allowed to be empty
         if (string.IsNullOrEmpty(str) && !Empty) {
             box.Focus();
-            ErrorMessage("The input at '" + lab.Text + "' cannot be empty");
+            if (showErrorOnFailure) {
+                ErrorMessage("The input at '" + lab.Text + "' cannot be empty");
+            }
             return false;
         }
         // Check if string is empty and allowed to be empty
@@ -238,14 +251,18 @@ public partial class UC_Insert : UserControl {
         // Check if first character is valid
         if (!allowed.Contains(str.ToUpper()[0]) && !char.IsNumber(str[0])) {
             box.Focus();
-            ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (" + string.Join(", ", allowed.ToCharArray()) + ") or a number.");
+            if (showErrorOnFailure){
+                ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (" + string.Join(", ", allowed.ToCharArray()) + ") or a number.");
+            }
             return false;
         }
         // Check if string has a number if first character is valid
         if (!char.IsDigit(str[0])) {
             if (str.Length <= 1) {
                 box.Focus();
-                ErrorMessage(lab.Text + " Field must have a number.");
+                if (showErrorOnFailure){
+                    ErrorMessage(lab.Text + " Field must have a number.");
+                }
                 return false;
             }
         }
@@ -253,7 +270,9 @@ public partial class UC_Insert : UserControl {
         for (int i = 1; i < str.Length; i++) {
             if (!char.IsNumber(str[i])) {
                 box.Focus();
-                ErrorMessage("The characters following the first one in this field must be numeric: " + lab.Text);
+                if (showErrorOnFailure){
+                    ErrorMessage("The characters following the first one in this field must be numeric: " + lab.Text);
+                }
                 return false;
             }
         }
