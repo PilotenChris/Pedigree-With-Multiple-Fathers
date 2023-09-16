@@ -31,7 +31,7 @@
             b_Update = new Button();
             b_Delete = new Button();
             b_Print = new Button();
-            b_Dummy = new Button();
+            //b_Dummy = new Button();
             b_ToggleView = new Button();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -86,7 +86,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(b_Dummy);
+            //splitContainer2.Panel2.Controls.Add(b_Dummy);
             splitContainer2.Panel2.Controls.Add(b_ToggleView);
             splitContainer2.Size = new Size(944, 30);
             splitContainer2.SplitterDistance = 618;
@@ -159,6 +159,7 @@
             // 
             // b_Dummy
             // 
+            /*
             b_Dummy.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             b_Dummy.Location = new Point(140, 3);
             b_Dummy.Name = "b_Dummy";
@@ -167,6 +168,7 @@
             b_Dummy.Text = "Dummy";
             b_Dummy.UseVisualStyleBackColor = true;
             b_Dummy.Click += b_Dummy_Click;
+            */
             // 
             // b_ToggleView
             // 
@@ -212,6 +214,6 @@
         private Button b_Delete;
         private Button b_Print;
         private Button b_ToggleView;
-        private Button b_Dummy;
+        //private Button b_Dummy;
     }
 }

@@ -24,4 +24,7 @@ public class PedigreeYear {
     public int getHeight() { return measurement; }
     public Boolean getSpaceYear() { return spaceYear; }
     public Color getColor() { return color; }
+    public override string ToString() {
+        return "X: " + x + ", Y: " + y + ", Year: " + year + ", Width: " + measurement + ", Height: " + measurement + ", Space Year: " + spaceYear + ", Color: " + color;
+    }
 }

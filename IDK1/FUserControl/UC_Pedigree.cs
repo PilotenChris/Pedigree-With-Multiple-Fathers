@@ -396,7 +396,7 @@ public partial class UC_Pedigree : UserControl {
         // Set's the right x and y coords for the PedigreeFig objects
         for (int i = 0; i < pedigreeGrid.Count; i++) {
             int xPosition = measurement + spaceBetweenFig;
-            int yPosition = i * (measurement + (measurement * 2));
+            int yPosition = i * (measurement + ((measurement * 2)-1));
 
             foreach (PedigreeFig pedigreeFig in pedigreeGrid[i]) {
                 pedigreeFig.setX(xPosition);
