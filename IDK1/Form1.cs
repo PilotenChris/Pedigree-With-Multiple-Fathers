@@ -4,7 +4,6 @@ using PedigreeMF.FUserControl;
 namespace IDK1 {
     public partial class Form1 : Form {
         bool tog = false;
-        private UC_Pedigree userControl2 = new UC_Pedigree();
         public Form1() {
             InitializeComponent();
             UC_ATP_Insert(new UC_Insert());
@@ -36,6 +35,7 @@ namespace IDK1 {
         }
 
         public void UC_Pedigree() {
+            UC_Pedigree userControl2 = new UC_Pedigree();
             var scpc = splitContainer1.Panel2.Controls;
             userControl2.Dock = DockStyle.Fill;
             scpc.Clear();
@@ -97,6 +97,7 @@ namespace IDK1 {
         }
 
         private void b_Print_Click(object sender, EventArgs e) {
+            UC_Pedigree userControl2 = new UC_Pedigree();
             using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
                 saveFileDialog.Filter = "PNG Image|*.png";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK) {

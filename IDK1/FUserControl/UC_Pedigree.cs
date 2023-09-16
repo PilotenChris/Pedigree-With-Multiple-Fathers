@@ -140,19 +140,19 @@ public partial class UC_Pedigree : UserControl {
         // Loop through pedigree figures to draw connections and calculate averages
         foreach (PedigreeFig pedigreeFig in pedigreeTab) {
             // Construct a unique key for the parent group based on birth, mother, and fathers
-            string parentGroupKey = $"{pedigreeFig.getBirth()}_{pedigreeFig.getMother()}_{string.Join(",", pedigreeFig.getFather())}";
-
+            string parentGroupKey = $"{pedigreeFig.getBirth()}_{pedigreeFig.getMother()}_{string.Join(",", pedigreeFig.getFather().Cast<string>())}";
+            
             // Calculate the middle point for this parent group if not already calculated
             if (!childMiddlePoints.ContainsKey(parentGroupKey)) {
                 // Calculate the middle point by averaging ConnectionPX values of children in the group
-                int middleX = (int)pedigreeTab.Where(child => $"{child.getBirth()}_{child.getMother()}_{string.Join(",", child.getFather())}" == parentGroupKey)
+                int middleX = (int)pedigreeTab.Where(child => $"{child.getBirth()}_{child.getMother()}_{string.Join(",", child.getFather().Cast<string>())}" == parentGroupKey)
                     .Select(child => child.getConnectionPX()).Average();
                 childMiddlePoints[parentGroupKey] = middleX;
             }
 
             // Check if the current pedigree figure has parents (mother or more than one father)
             if (pedigreeFig.getMother() != null || pedigreeFig.getFather().Count > 1) {
-
+                
                 // Draw lines from children to their group's middle point
                 // Check if the pedigree figure is a polygonal shape
                 if (pedigreeFig is PedigreePol) {
@@ -175,7 +175,7 @@ public partial class UC_Pedigree : UserControl {
                 List<int> fatherAXId = new List<int>();
                 List<int> fatherAYId = new List<int>();
                 ArrayList fathers = new ArrayList();
-
+                
                 // Check if the parent group's average X coordinate is already calculated
                 if (parentGroupAverages.ContainsKey(parentGroupKey)) {
                     // Retrieve the existing average X coordinate
@@ -358,9 +358,9 @@ public partial class UC_Pedigree : UserControl {
             int birthYear = pedigreeFig.getBirth();
             string mother = pedigreeFig.getMother();
             ArrayList fathers = pedigreeFig.getFather();
-
+            
             // Create a key based on birth year, mother, and fathers
-            string key = $"{birthYear}_{mother}_{string.Join(",", fathers)}";
+            string key = $"{birthYear}_{mother}_{string.Join(",", fathers.Cast<string>())}";
 
             // Check if the key already exists in the dictionary
             if (!entityGroups.ContainsKey(key)) {

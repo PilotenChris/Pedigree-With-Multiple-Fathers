@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text;
 
 public class PedigreePol : PedigreeFig {
     private List<(int xc, int yc)> coords;
@@ -49,7 +50,11 @@ public class PedigreePol : PedigreeFig {
     public override ArrayList getFather() { return father; }
     public override string ToString() {
         string fathersString = string.Join(",", father.Cast<string>());
-        string coordsString = string.Join(",", coords.Cast<string>());
+        StringBuilder coordsBuilder = new StringBuilder();
+        foreach (var coord in coords) {
+            coordsBuilder.Append($"({coord.xc},{coord.yc}),");
+        }
+        string coordsString = coordsBuilder.ToString().TrimEnd(',');
         return "X: " + x + ", Y: " + y + ", Id: " + id + ", CPX: " + connectionPX + ", CPY: " + connectionPY + ", Width: " + measurement + ", Height: " + measurement + ", Coords: " + coordsString + ", Mother: " + mother + ", Father/s: (" + fathersString + "), Death: " + death + ", Color: " + color; 
     }
 
