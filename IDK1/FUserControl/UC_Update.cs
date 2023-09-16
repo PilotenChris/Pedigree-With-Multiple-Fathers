@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Drawing.Drawing2D;
 using System.Globalization;
+using PedigreeMF.FUserControl;
 #pragma warning disable IDE0007 // Use implicit type
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 namespace IDK1.FUserControl;
@@ -133,7 +134,16 @@ public partial class UC_Update : UserControl {
             foreach (string FatherId in FatherIds) {
                 SQLMethods.InsertParentData(ID, FatherId);
             }
-            resetFields();
+            //resetFields();
+
+
+            // Cast the parent to Form1
+            Form1 parentForm = (this.Parent as Form1);
+
+            if (parentForm != null) {
+                // Re-create UC_Database and replace the existing one
+                parentForm.UC_Database();
+            }
         }
     }
 
@@ -208,7 +218,7 @@ public partial class UC_Update : UserControl {
     private bool IsValidDate(string input, TextBox box, bool bEmpty = false) {
         // Use DateTime.TryParseExact method to validate the format of the input string
 #pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
-        if (!DateTime.TryParseExact(input, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
+        if (!DateTime.TryParseExact(input, "yyyy-M-d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
             if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
             ErrorMessage($"{input} is not a valid date.");
@@ -256,11 +266,11 @@ public partial class UC_Update : UserControl {
             ErrorMessage(errMessBuilder);
             return false;
         }
-        else if (!FirstIsNumber) {
-            box.Focus();
-            ErrorMessage("The first character cannot be a number.");
-            return false;
-        }
+        //else if (!FirstIsNumber) {
+        //    box.Focus();
+        //    ErrorMessage("The first character cannot be a number.");
+        //    return false;
+        //}
         // Check if string has a number if first character is valid
         if (!(str[0] != 'F' && str[0] != 'M' && str[0] != 'U')) {
             if (str.Length <= 1) {

@@ -333,10 +333,10 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(3, 3);
             this.textBox3.Name = "textBox3";
-            this.textBox3.PlaceholderText = "YYYY/MM/DD";
+            this.textBox3.PlaceholderText = "YYYY-MM-DD";
             this.textBox3.Size = new System.Drawing.Size(273, 23);
             this.textBox3.TabIndex = 1;
-            this.textBox3.Text = "2000/2/2";
+            this.textBox3.Text = "2000-2-2";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -370,10 +370,10 @@ partial class UC_Insert
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.PlaceholderText = "YYYY/MM/DD";
+            this.textBox2.PlaceholderText = "YYYY-MM-DD";
             this.textBox2.Size = new System.Drawing.Size(273, 23);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "1999/1/1";
+            this.textBox2.Text = "1999-1-1";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
