@@ -60,6 +60,15 @@ public partial class UC_Update : UserControl {
     ArrayList PV_Parents = new ArrayList();
 
     private void TB_ID_TextChanged(object sender, EventArgs e) {
+
+        // Convert the text to uppercase
+        string upperCaseText = TB_ID.Text.ToUpper();
+        // Set the TextBox's text to the uppercase version
+        TB_ID.Text = upperCaseText;
+        // Set the cursor position to the end of the text
+        TB_ID.SelectionStart = upperCaseText.Length;
+
+
         if (ValidateString(TB_ID.Text, L_ID, TB_ID, true) && !string.IsNullOrEmpty(TB_ID.Text) && PV_ID != TB_ID.Text) {
             if (!string.IsNullOrEmpty(SQLMethods.GetIDFromEntity(TB_ID.Text))) {
                 listBox1.Items.Clear();

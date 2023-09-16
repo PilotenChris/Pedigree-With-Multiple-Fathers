@@ -278,4 +278,26 @@ public partial class UC_Insert : UserControl {
         }
         return true;
     }
+
+    private void TB_ID_TextChanged(object sender, EventArgs e) {
+        if (TB_ID.Text.Length > 0) {
+            // Convert the text to uppercase
+            string upperCaseText = TB_ID.Text.ToUpper();
+            // Set the TextBox's text to the uppercase version
+            TB_ID.Text = upperCaseText;
+            // Set the cursor position to the end of the text
+            TB_ID.SelectionStart = upperCaseText.Length;
+
+            // smart select the intended sex
+            if (TB_ID.Text[0] == 'M') {
+                comboBox2.SelectedIndex = comboBox2.Items.IndexOf("Male");
+            }
+            else if (TB_ID.Text[0] == 'F') {
+                comboBox2.SelectedIndex = comboBox2.Items.IndexOf("Female");
+            }
+            else if (TB_ID.Text[0] == 'U') {
+                comboBox2.SelectedIndex = comboBox2.Items.IndexOf("Unknown");
+            }
+        }
+    }
 }

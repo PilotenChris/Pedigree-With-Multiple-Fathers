@@ -430,6 +430,7 @@ partial class UC_Insert
             this.TB_ID.Size = new System.Drawing.Size(273, 23);
             this.TB_ID.TabIndex = 1;
             this.TB_ID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_ID.TextChanged += new System.EventHandler(this.TB_ID_TextChanged);
             // 
             // L_ID
             // 
