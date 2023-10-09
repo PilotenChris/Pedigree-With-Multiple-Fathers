@@ -22,6 +22,7 @@ public partial class UC_Pedigree : UserControl {
     private int canvasWidth;
     private Color bgColor = Color.LightGray;
     private Color pngBgColor = Color.White;
+    private Color lineColor = Color.Black;
     public UC_Pedigree() {
         InitializeComponent();
         UpdateEntities();
@@ -156,10 +157,10 @@ public partial class UC_Pedigree : UserControl {
                 // Draw lines from children to their group's middle point
                 // Check if the pedigree figure is a polygonal shape
                 if (pedigreeFig is PedigreePol) {
-                    e.Graphics.DrawLine(new Pen(Color.Black, penWidth), pedigreeFig.getConnectionPX(), pedigreeFig.getConnectionPY() - (measurement / 2), childMiddlePoints[parentGroupKey], pedigreeFig.getConnectionPY() - measurement);
+                    e.Graphics.DrawLine(new Pen(lineColor, penWidth), pedigreeFig.getConnectionPX(), pedigreeFig.getConnectionPY() - (measurement / 2), childMiddlePoints[parentGroupKey], pedigreeFig.getConnectionPY() - measurement);
                 }
                 else {
-                    e.Graphics.DrawLine(new Pen(Color.Black, penWidth), pedigreeFig.getConnectionPX(), pedigreeFig.getConnectionPY() - measurement, childMiddlePoints[parentGroupKey], pedigreeFig.getConnectionPY() - ((measurement * 2) - (measurement / 2)));
+                    e.Graphics.DrawLine(new Pen(lineColor, penWidth), pedigreeFig.getConnectionPX(), pedigreeFig.getConnectionPY() - measurement, childMiddlePoints[parentGroupKey], pedigreeFig.getConnectionPY() - ((measurement * 2) - (measurement / 2)));
                 }
 
                 // Initialize variables for parent positions and maximum Y coordinate
@@ -257,7 +258,7 @@ public partial class UC_Pedigree : UserControl {
                         // Draw lines connecting the child to its parents
                         if (pedigreeFig.getMother() != null) {
                             // Draw a line from the mother to the average X coordinate
-                            e.Graphics.DrawLine(new Pen(Color.Black, penWidth), motherX, motherY, averageX, maxY + measurement);
+                            e.Graphics.DrawLine(new Pen(lineColor, penWidth), motherX, motherY, averageX, maxY + measurement);
                         }
                         if (pedigreeFig.getFather().Count > 0) {
                             // Draw lines from fathers to the average X coordinate
@@ -269,15 +270,15 @@ public partial class UC_Pedigree : UserControl {
 
                                     // Check if there are multiple fathers, and draw dotted lines if necessary
                                     if (fathers.Count > 1) {
-                                        DrawDottedLine(e.Graphics, new Pen(Color.Black, penWidth), fatherFX, fatherFY, averageX, maxY + measurement);
+                                        DrawDottedLine(e.Graphics, new Pen(lineColor, penWidth), fatherFX, fatherFY, averageX, maxY + measurement);
                                     } else {
-                                        e.Graphics.DrawLine(new Pen(Color.Black, penWidth), fatherFX, fatherFY, averageX, maxY + measurement);
+                                        e.Graphics.DrawLine(new Pen(lineColor, penWidth), fatherFX, fatherFY, averageX, maxY + measurement);
                                     }
                                 }
                             }
                         }
 
-                        e.Graphics.DrawLine(new Pen(Color.Black, penWidth), averageX, maxY + measurement, childMiddlePoints[parentGroupKey], parentY);
+                        e.Graphics.DrawLine(new Pen(lineColor, penWidth), averageX, maxY + measurement, childMiddlePoints[parentGroupKey], parentY);
                         
                     }
                 }
@@ -396,7 +397,7 @@ public partial class UC_Pedigree : UserControl {
         // Set's the right x and y coords for the PedigreeFig objects
         for (int i = 0; i < pedigreeGrid.Count; i++) {
             int xPosition = measurement + spaceBetweenFig;
-            int yPosition = i * (measurement + ((measurement * 2)-1));
+            int yPosition = (i * (measurement + ((measurement * 2)-1)))+2;
 
             foreach (PedigreeFig pedigreeFig in pedigreeGrid[i]) {
                 pedigreeFig.setX(xPosition);
@@ -495,18 +496,18 @@ public partial class UC_Pedigree : UserControl {
     private static Color ChangeColor(string color) {
         // Get color by name from Entity
         switch (color) {
-            case "Blue":
-                return Color.Blue;
-            case "Yellow":
-                return Color.Yellow;
             case "Green":
                 return Color.Green;
+            case "Yellow":
+                return Color.Yellow;
+            case "Blue":
+                return Color.Blue;
             case "Grey":
                 return Color.Gray;
-            case "Orange":
-                return Color.Orange;
+            case "Red":
+                return Color.Red;
             default:
-                return Color.Blue;
+                return Color.Green;
         }
     }
 }

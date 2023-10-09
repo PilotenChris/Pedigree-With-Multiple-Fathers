@@ -67,8 +67,12 @@ namespace IDK1 {
             sqlite_cmd.ExecuteNonQuery();
 
             // Insert five rows into the "Color" table
-            sqlite_cmd.CommandText = "INSERT INTO Color (Color) VALUES ('Blue'),('Yellow'),('Green'),('Grey'),('Orange');";
+            sqlite_cmd.CommandText = "INSERT INTO Color (Color) VALUES ('Green'),('Yellow'),('Blue'),('Grey'),('Red');";
             sqlite_cmd.ExecuteNonQuery();
         }
     }
+    /*
+     * (T[{vXD:8y+[]kP,DIt._=fQtA$t._:gP</JuOH?BDZ#}DEAD@>Ro"lOseWNq}'q'Fvtc;awR-y/t#W[m?BY!$Z*D>\J@S}]"#RImiMbp[kPyxOIayef;,DIi{ee@E')A*cp-Pg@uZDlHxc!</J¨gbS(qi{eMFTKiCrWyL=nIRxV@efmgf{p@(knBsVKdMbpMuEWpdK5hpbkA<cKiC/t#ef;W]IrqfwnST=N$X*A#FIV:Mbp*cp;miRBd{e$nUcvB@N#[$¨9VKd=TaS}]KDudXjRBQcjo#D?9:hIV:ps/{C;KwNDpVMFT"GvKzY\J@?(KcjoUwU
+     * m%*s[]t<,')AmYh-D}nAh')AZ.[!Txrcvps/ZVAjujz=l(j<U_x/y>JA/"GvEL<\J@fBuMFTa¨OY¨Sr<@OLchAzIRx=\qHFq*tYIV#Hypmwq
+     */
 }

@@ -6,9 +6,14 @@ using PedigreeMF.FUserControl;
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 namespace IDK1.FUserControl;
 public partial class UC_Update : UserControl {
-    public UC_Update() {
+
+    private Form1 parentForm;
+
+    public UC_Update(Form1 form) {
         // Initialize the user control
         InitializeComponent();
+
+        this.parentForm = form;
 
         listbox1Update();
 
@@ -111,7 +116,7 @@ public partial class UC_Update : UserControl {
                 else MotherId = textBox5.Text;
             }
             if (textBox6.Text.Length > 0) {
-                if (textBox6.Text.StartsWith("M")) {
+                if (!textBox6.Text.StartsWith("M")) {
                     FatherIds.Add("M" + textBox6.Text);
                 }
                 else {
@@ -131,7 +136,12 @@ public partial class UC_Update : UserControl {
             SQLMethods.UpdateSex(ID, comboBox2.SelectedIndex + 1);
             SQLMethods.UpdateBirth(ID, textBox2.Text);
             if (!string.IsNullOrEmpty(textBox3.Text)) {
-                SQLMethods.UpdateDeath(ID, textBox3.Text);
+                if (string.IsNullOrEmpty(SQLMethods.GetDeathFromEntity(ID))) {
+                    SQLMethods.InsertDeathData(ID, textBox3.Text);
+                }
+                else {
+                    SQLMethods.UpdateDeath(ID, textBox3.Text);
+                }
             }
             else SQLMethods.DeleteDeath(ID);
             SQLMethods.UpdateColor(ID, comboBox1.SelectedIndex + 1);
@@ -143,16 +153,9 @@ public partial class UC_Update : UserControl {
             foreach (string FatherId in FatherIds) {
                 SQLMethods.InsertParentData(ID, FatherId);
             }
-            //resetFields();
 
 
-            // Cast the parent to Form1
-            Form1 parentForm = (this.Parent as Form1);
-
-            if (parentForm != null) {
-                // Re-create UC_Database and replace the existing one
-                parentForm.UC_Database();
-            }
+            parentForm.updateScreenSelected();
         }
     }
 
@@ -227,10 +230,10 @@ public partial class UC_Update : UserControl {
     private bool IsValidDate(string input, TextBox box, bool bEmpty = false) {
         // Use DateTime.TryParseExact method to validate the format of the input string
 #pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
-        if (!DateTime.TryParseExact(input, "yyyy-M-d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
+        if (!DateTime.TryParseExact(input, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
             if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
-            ErrorMessage($"{input} is not a valid date.");
+            ErrorMessage($"{input} is not a valid date. Use format YYYY/MM/DD.");
             return false;
         }
         else return true;
@@ -299,5 +302,23 @@ public partial class UC_Update : UserControl {
         return true;
     }
 
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
+    }
+
+    private void UC_Update_Load(object sender, EventArgs e) {
+
+    }
+
+    private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e) {
+
+    }
+
+    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+
+    }
+
+    private void textBox2_TextChanged(object sender, EventArgs e) {
+
+    }
 }

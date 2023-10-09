@@ -59,6 +59,8 @@ internal class SQLMethods {
     public static void InsertData(string tableName, Dictionary<string, object> data) {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
+
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 // Prepare command text and parameters
                 StringBuilder commandText = new StringBuilder();
@@ -112,6 +114,7 @@ internal class SQLMethods {
             // Declare a SQLiteDataReader object
             SQLiteDataReader sqlite_datareader;
 
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT " + column + " FROM Entity WHERE ID = @ID";
                 sqlite_cmd.Parameters.AddWithValue("@ID", ID);
@@ -140,6 +143,7 @@ internal class SQLMethods {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
 
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT " + column + " FROM " + tableName + " WHERE ID = @ID";
                 sqlite_cmd.Parameters.AddWithValue("@ID", ID);
@@ -184,6 +188,8 @@ internal class SQLMethods {
     public static string GetMotherFromEntity(string ID) {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
+
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT Parent.ParentID FROM Parent, Entity WHERE Parent.ChildID = @ID AND Parent.ParentID = Entity.ID AND Entity.Sex = 3";
                 sqlite_cmd.Parameters.AddWithValue("@ID", ID);
@@ -210,7 +216,7 @@ internal class SQLMethods {
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             ArrayList fatherData = new ArrayList();
 
-            //
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT Parent.ParentID FROM Parent, Entity WHERE Parent.ChildID = @ID AND Parent.ParentID = Entity.ID AND Entity.Sex = 2";
                 sqlite_cmd.Parameters.AddWithValue("@ID", ID);
@@ -356,11 +362,12 @@ internal class SQLMethods {
 
     // Make IsParent return ArrayList of children
     public static ArrayList GetChildren(string ID) {
+
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
             ArrayList childData = new ArrayList();
 
-            // x
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT Parent.ChildID FROM Parent, Entity WHERE Parent.parentID = @ID";
                 sqlite_cmd.Parameters.AddWithValue("@ID", ID);
@@ -390,13 +397,14 @@ internal class SQLMethods {
         return databaseData;
     }
 
-    public static async Task<List<(string, string, string, string)>> GetEntityDatabase() {
+    public static async Task<List<(string, string, string, string)>> GetEntityDatabase() { // Needs comment fixes
+        
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
-            // Declare a SQLiteDataReader object and an ArrayList
+            // Declare a SQLiteDataReader object and an List
             List<(string, string, string, string)> databaseEntityData = new List<(string, string, string, string)>();
 
-            //
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT Entity.ID, Entity.Birth, Sex.Sex, Color.Color FROM Entity, Sex, Color WHERE Entity.Sex = Sex.ID AND Entity.Color = Color.ID";
 
@@ -417,13 +425,14 @@ internal class SQLMethods {
     public static async Task<List<(string, string)>> GetDeathDatabase() {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
-            // Declare a SQLiteDataReader object and an ArrayList
+            // Declare a List to store death data
             List<(string, string)> databaseDeathData = new List<(string, string)>();
 
-            //
+            // Declare a command to execute SQL queries
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT * FROM Death";
 
+                // Declare a SQLiteDataReader object
                 // Execute the command and store the resulting data
                 using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
                     // Loop through each row in the data reader
@@ -441,10 +450,10 @@ internal class SQLMethods {
     public static async Task<List<(string, string)>> GetParentDatabase() {
         // Create a connection to the SQLite database
         using (SQLiteConnection sqlite_conn = CreateConnection()) {
-            // Declare a SQLiteDataReader object and an ArrayList
+            // Declare a SQLiteDataReader object and an List
             List<(string, string)> databaseParentData = new List<(string, string)>();
 
-            //
+            // Prepare a SQLite command for the connection
             using (SQLiteCommand sqlite_cmd = sqlite_conn.CreateCommand()) {
                 sqlite_cmd.CommandText = "SELECT * FROM Parent";
 
@@ -452,7 +461,7 @@ internal class SQLMethods {
                 using (SQLiteDataReader sqlite_datareader = sqlite_cmd.ExecuteReader()) {
                     // Loop through each row in the data reader
                     while (sqlite_datareader.Read()) {
-                        // Get the value in the first column of the current row and add the value to the fatherData ArrayList
+                        // Get the value in the first column of the current row and add the value to the fatherData List
                         databaseParentData.Add((sqlite_datareader.GetString(0), sqlite_datareader.GetString(1)));
                     }
 

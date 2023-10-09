@@ -5,9 +5,14 @@ using System.Globalization;
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 namespace IDK1.FUserControl;
 public partial class UC_Insert : UserControl {
-    public UC_Insert() {
+
+    private Form1 parentForm;
+
+    public UC_Insert(Form1 form) {
         // Initialize the user control
         InitializeComponent();
+
+        this.parentForm = form;
 
         listbox1Update();
 
@@ -88,7 +93,7 @@ public partial class UC_Insert : UserControl {
                 else MotherId = textBox5.Text;
             }
             if (textBox6.Text.Length > 0) {
-                if (textBox6.Text.StartsWith("M")) {
+                if (!textBox6.Text.StartsWith("M")) {
                     FatherIds.Add("M" + textBox6.Text);
                 }
                 else {
@@ -123,7 +128,7 @@ public partial class UC_Insert : UserControl {
                 TB_ID.Focus();
                 ErrorMessage("ID already exists.");
             }
-
+            parentForm.updateScreenSelected();
         }
     }
 
@@ -135,7 +140,7 @@ public partial class UC_Insert : UserControl {
                 ((TextBox)c).Clear();
             }
             else if (c.GetType() == typeof(ComboBox)) {
-                ((ComboBox)c).SelectedIndex = 1;
+                ((ComboBox)c).SelectedIndex = 0;
             }
         }
         listBox1.Items.Clear();
@@ -197,10 +202,10 @@ public partial class UC_Insert : UserControl {
     private bool IsValidDate(string input, TextBox box, bool bEmpty = false) {
         // Use DateTime.TryParseExact method to validate the format of the input string
 #pragma warning disable IDE0059 // Unnecessary assignment of a value | breaks without
-        if (!DateTime.TryParseExact(input, "yyyy-M-d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
+        if (!DateTime.TryParseExact(input, "yyyy/M/d", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date)) {
             if (string.IsNullOrEmpty(input) && bEmpty) { return true; }
             box.Focus();
-            ErrorMessage($"{input} is not a valid date.");
+            ErrorMessage($"{input} is not a valid date. Use format YYYY/MM/DD.");
             return false;
         }
         else return true;
@@ -251,7 +256,7 @@ public partial class UC_Insert : UserControl {
         // Check if first character is valid
         if (!allowed.Contains(str.ToUpper()[0]) && !char.IsNumber(str[0])) {
             box.Focus();
-            if (showErrorOnFailure){
+            if (showErrorOnFailure) {
                 ErrorMessage("The first character of the '" + lab.Text + "' field must be a letter (" + string.Join(", ", allowed.ToCharArray()) + ") or a number.");
             }
             return false;
@@ -260,7 +265,7 @@ public partial class UC_Insert : UserControl {
         if (!char.IsDigit(str[0])) {
             if (str.Length <= 1) {
                 box.Focus();
-                if (showErrorOnFailure){
+                if (showErrorOnFailure) {
                     ErrorMessage(lab.Text + " Field must have a number.");
                 }
                 return false;
@@ -270,7 +275,7 @@ public partial class UC_Insert : UserControl {
         for (int i = 1; i < str.Length; i++) {
             if (!char.IsNumber(str[i])) {
                 box.Focus();
-                if (showErrorOnFailure){
+                if (showErrorOnFailure) {
                     ErrorMessage("The characters following the first one in this field must be numeric: " + lab.Text);
                 }
                 return false;
@@ -299,5 +304,17 @@ public partial class UC_Insert : UserControl {
                 comboBox2.SelectedIndex = comboBox2.Items.IndexOf("Unknown");
             }
         }
+    }
+
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
+
+    }
+
+    private void L_ErrorMessageField_Click(object sender, EventArgs e) {
+
+    }
+
+    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+
     }
 }

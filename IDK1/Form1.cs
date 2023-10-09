@@ -6,7 +6,7 @@ namespace IDK1 {
         bool tog = false;
         public Form1() {
             InitializeComponent();
-            UC_ATP_Insert(new UC_Insert());
+            UC_ATP_Insert(new UC_Insert(this));
             //UC_ATP_Insert(new UC_Delete());
             toggleUCPD();
             toggleUCPD();
@@ -34,6 +34,14 @@ namespace IDK1 {
             }
         }
 
+        public void updateScreenSelected() {
+            if (tog) {
+                UC_Database();
+            } else {
+                UC_Pedigree();
+            }
+        }
+
         public void UC_Pedigree() {
             UC_Pedigree userControl2 = new UC_Pedigree();
             var scpc = splitContainer1.Panel2.Controls;
@@ -55,19 +63,19 @@ namespace IDK1 {
         }
 
         private void b_Insert_Click(object sender, EventArgs e) {
-            UC_Insert uc = new UC_Insert();
+            UC_Insert uc = new UC_Insert(this);
             UC_ATP_Insert(uc);
             updateColor(0);
         }
 
         private void b_Update_Click(object sender, EventArgs e) {
-            UC_Update uc = new UC_Update();
+            UC_Update uc = new UC_Update(this);
             UC_ATP_Insert(uc);
             updateColor(1);
         }
 
         private void b_Delete_Click(object sender, EventArgs e) {
-            UC_Delete uc = new UC_Delete();
+            UC_Delete uc = new UC_Delete(this);
             UC_ATP_Insert(uc);
             updateColor(2);
         }

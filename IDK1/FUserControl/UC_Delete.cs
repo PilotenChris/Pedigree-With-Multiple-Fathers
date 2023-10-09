@@ -2,8 +2,12 @@
 
 namespace IDK1.FUserControl;
 public partial class UC_Delete : UserControl {
-    public UC_Delete() {
+
+    private Form1 parentForm;
+
+    public UC_Delete(Form1 form) {
         InitializeComponent();
+        this.parentForm = form;
     }
 
     private void b_DeleteData_Click(object sender, EventArgs e) {
@@ -24,6 +28,7 @@ public partial class UC_Delete : UserControl {
             //SQLMethods.DeleteEntity(TB_ID.Text);
             resetFields();
         }
+        parentForm.updateScreenSelected();
     }
 
     private bool WarnUserAboutAssociatedLinks(string entityName, int numLinks) {
