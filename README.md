@@ -47,7 +47,7 @@ This project was developed by the following team members:
 
 ## Issues
 
-If you encounter any issues with the application or have suggestions for improvements, please report them on our [issue tracker](https://github.com/PilotenChris/Pedigree-With-Multiple-Fathers) or creating a new topic in the repository’s discussion section.
+If you encounter any issues with the application or have suggestions for improvements, please report them on our [issue tracker](https://github.com/PilotenChris/Pedigree-With-Multiple-Fathers/issues) or creating a new topic in the repository’s discussion section.
 
 This app was originally developed with the specific use case of tracking lion lineage. We hope you find the Pedigree App to be a useful and valuable tool for understanding and exploring lineage information.
 
