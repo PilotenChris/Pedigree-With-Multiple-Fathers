@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This desktop application project, known as "Pedigree With Multiple Fathers," was initiated by Chris, who was approached by a friend in need of a specialized pedigree creation tool. Recognizing the unique requirements of this project, Chris collaborated with Jørn to bring this concept to life. Development commenced on 25 December 2022, with the goal of creating pedigrees that allow for individuals to have multiple potential fathers (distinguished by dotted lines) and organizing individuals based on year of birth. While adhering to this specific use case, the project also focuses on maintaining compatibility with standard pedigree formats.
+This desktop application project, known as "Pedigree With Multiple Fathers" was initiated by Chris, who was approached by a friend in need of a specialized pedigree creation tool. Recognizing the unique requirements of this project, Chris collaborated with Jørn to bring this concept to life. Development commenced on 25 December 2022, with the goal of creating pedigrees that allow for individuals to have multiple potential fathers (distinguished by dotted lines) and organizing individuals based on year of birth. While adhering to this specific use case, the project also focuses on maintaining compatibility with standard pedigree formats.
 
 ## Versions
 
