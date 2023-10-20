@@ -12,7 +12,7 @@ To cater to a broader audience, this project is available in two versions, each 
 
 ### Version 1.0
 
-- ID for each entity must begin with either 'M,' 'F,' or 'U,' depending on the sex of the individual.
+- ID for each entity must begin with either 'M', 'F', or 'U' depending on the sex of the individual.
 - If a numerical ID is entered, the application will automatically assign the appropriate letter based on the sex of the individual.
 - Has limit of 290 years for pedigrees (e.g. 2000-2290).
 - Individuals where only father(s) is known cannot be accounted for. There must be no parents, only a mother or both a mother and father(s).
@@ -20,7 +20,7 @@ To cater to a broader audience, this project is available in two versions, each 
 ### Version 2.0 (Work in progress)
 
 - Each individual must have a unique numerical ID.
-- Use of 'M,' 'F,' or 'U' as prefixes for IDs is not permitted.
+- Use of 'M', 'F', or 'U' as prefixes for IDs is not permitted.
 - Has limit of 290 years for pedigrees (e.g. 2000-2290).
 - Individuals where only father(s) is known cannot be accounted for. There must be no parents, only a mother or both a mother and father(s).
 
